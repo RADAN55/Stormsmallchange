@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Keystone Agenda Board</title>
+<meta name="description" content="Projector agenda board for the Storm Studio lesson “One Small Change — Keystone Habits” — EL Block, 90 minutes.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%8B%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Projector board — header strip (EQ + objectives), three segment columns (25 / 30 / 35 min), footer strip. Notebook skin to match the lesson page. */
+:root{
+  --bg:#f1f0ea; --surface:#ffffff; --fg:#111418; --muted:#525a66;
+  --accent:#ff4d2e; --accent-soft:#ffe3dc; --line:#111418;
+  --vocab:#0b6e62; --vocab-soft:#d9f2ec; --ok:#2e7d4f; --ok-soft:#d9f2ec; --now:#fff3a3;
+  --font-display:"Bricolage Grotesque","Public Sans",sans-serif; --font-ui:"Public Sans","Segoe UI",Arial,sans-serif; --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --shadow:5px 5px 0 var(--fg);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0f1115; --surface:#181b22; --fg:#ffffff; --muted:#c7ccd6; --line:#e8e8e8; --accent:#ff6a4d; --accent-soft:#4a2017;
+  --vocab:#4fd1c0; --vocab-soft:#123b36; --ok:#6fc48f; --ok-soft:#1f4a30; --now:#4a4210; --shadow:5px 5px 0 #e8e8e8; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0f1115; --surface:#181b22; --fg:#ffffff; --muted:#c7ccd6; --line:#e8e8e8; --accent:#ff6a4d; --accent-soft:#4a2017;
+  --vocab:#4fd1c0; --vocab-soft:#123b36; --ok:#6fc48f; --ok-soft:#1f4a30; --now:#4a4210; --shadow:5px 5px 0 #e8e8e8; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-ui);margin:0;line-height:1.35;
+  background-image:linear-gradient(color-mix(in srgb,var(--fg) 6%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--fg) 6%,transparent) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:1500px;margin:0 auto;padding:1rem max(16px,env(safe-area-inset-right,0px)) 2rem max(16px,env(safe-area-inset-left,0px));display:grid;gap:1.1rem}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap}
+.eyebrow{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--font-display);font-size:clamp(1.9rem,3.6vw,3rem);margin:.1rem 0 0;line-height:1;text-transform:uppercase;letter-spacing:-.02em}
+h1 .es{text-transform:none;font-size:.5em;font-weight:500;letter-spacing:0;font-family:var(--font-ui)}
+.clock{font-family:var(--font-mono);font-size:clamp(1.8rem,3.8vw,3.2rem);font-weight:700;color:#fff;background:var(--fg);padding:.1rem .6rem;border-radius:8px;line-height:1.2;display:inline-block}
+.date{font-size:.95rem;color:var(--muted);text-align:right;margin-top:.3rem;font-family:var(--font-mono)}
+.tools{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+button{font-family:var(--font-ui);font-size:.95rem;font-weight:700;cursor:pointer;border-radius:8px;border:2px solid var(--fg);background:var(--surface);color:var(--fg);padding:.45rem .8rem;box-shadow:3px 3px 0 var(--fg)}
+button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--fg)}
+button:focus-visible{outline:3px solid var(--vocab);outline-offset:2px}
+.lang{background:var(--vocab);color:#fff;border-radius:999px}
+.es{display:block;font-size:.9em;color:var(--muted);font-style:italic}
+body.no-es .es{display:none}
+
+.frame{display:grid;grid-template-columns:1.2fr 1fr;gap:1rem}
+@media (max-width:800px){.frame{grid-template-columns:1fr}}
+.eq{border:2px solid var(--fg);border-radius:10px;box-shadow:var(--shadow);background:var(--now);padding:.9rem 1.1rem}
+.eq-q{font-family:var(--font-display);font-size:clamp(1.4rem,2.8vw,2.2rem);font-weight:800;margin:.1rem 0 0;line-height:1.1;text-wrap:balance;letter-spacing:-.01em}
+.obj{background:var(--surface);border:2px solid var(--fg);border-radius:10px;box-shadow:var(--shadow);padding:.9rem 1.1rem}
+.obj ul{margin:.3rem 0 0;padding-left:1.1rem;display:grid;gap:.35rem;font-size:1.02rem}
+
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+@media (max-width:900px){.cols{grid-template-columns:1fr}}
+.seg{background:var(--surface);border:2px solid var(--fg);border-radius:12px;box-shadow:var(--shadow);padding:1rem;display:grid;gap:.7rem;align-content:start;min-width:0;cursor:pointer;position:relative;overflow:hidden}
+.seg::before{content:"";display:block;height:.5rem;margin:-1rem -1rem .3rem;background:var(--sec);border-bottom:2px solid var(--fg)}
+.seg.now{background:var(--now)}
+.seg.now::after{content:"NOW";position:absolute;right:.8rem;top:1rem;font-family:var(--font-mono);font-size:.7rem;font-weight:700;background:var(--accent);color:#fff;border:2px solid var(--fg);padding:.1rem .45rem;border-radius:4px}
+.seg.done{opacity:.6}
+.seg-head{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem}
+.seg-num{font-family:var(--font-display);font-size:2.6rem;font-weight:800;color:var(--sec);line-height:1}
+.seg-min{font-family:var(--font-mono);font-weight:700;color:var(--muted)}
+.seg-title{font-family:var(--font-display);font-size:1.5rem;font-weight:800;margin:0;line-height:1.1;text-transform:uppercase;letter-spacing:-.01em}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}
+.steps li{display:grid;grid-template-columns:3.4rem 1fr;gap:.6rem;align-items:start;font-size:1.02rem;padding:.45rem .55rem;border-radius:8px;border:2px solid transparent;background:var(--accent-soft)}
+.steps li .t{font-family:var(--font-mono);font-weight:700;color:var(--fg);font-size:.85rem;padding-top:.15rem}
+.steps li.on{border-color:var(--fg);background:var(--surface);box-shadow:3px 3px 0 var(--fg)}
+.steps li.ok{text-decoration:line-through;color:var(--muted);background:var(--ok-soft)}
+.steps li.ok .t{color:var(--muted)}
+.seg-timer{display:flex;align-items:center;gap:.6rem;border-top:2px dashed var(--line);padding-top:.7rem}
+.seg-timer .tt{font-family:var(--font-mono);font-size:1.6rem;font-weight:700;color:#fff;background:var(--fg);padding:.05rem .5rem;border-radius:6px;min-width:5.4rem;text-align:center}
+.seg-timer .tt.done{background:var(--ok)}
+.foot{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem}
+.box{background:var(--surface);border:2px solid var(--fg);border-radius:10px;box-shadow:var(--shadow);padding:.8rem 1rem;font-size:.98rem;min-width:0}
+.box b{display:block;margin-bottom:.25rem;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.3rem}
+.chip{font-family:var(--font-mono);border:2px solid var(--fg);border-radius:6px;padding:.15rem .55rem;font-size:.85rem;background:var(--bg);box-shadow:2px 2px 0 var(--fg)}
+.hint{font-size:.85rem;color:var(--muted)}
+a{color:var(--accent);font-weight:700}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <div class="eyebrow">Agenda · EL Block · 90 minutes · Habits · Lesson 2 <span class="es" style="display:inline">· Agenda · Bloque EL · 90 minutos</span></div>
+      <h1>One Small Change <span class="es">Un pequeño cambio · Hábitos clave</span></h1>
+    </div>
+    <div>
+      <div class="clock" id="clock">--:--</div>
+      <div class="date" id="date"></div>
+    </div>
+  </div>
+
+  <div class="frame">
+    <div class="eq">
+      <div class="eyebrow">Essential question · Pregunta esencial</div>
+      <p class="eq-q">Which one small habit could change the rest of your day? <span class="es">¿Qué pequeño hábito podría cambiar el resto de tu día?</span></p>
+    </div>
+    <div class="obj">
+      <div class="eyebrow">Today I can… · Hoy puedo…</div>
+      <ul>
+        <li><b>Read &amp; listen:</b> explain what a keystone habit is and give two examples from the text. <span class="es">Leer y escuchar: explicar qué es un hábito clave y dar dos ejemplos del texto.</span></li>
+        <li><b>Speak:</b> predict a chain of effects: <i>If I ___, then I will ___.</i> <span class="es">Hablar: predecir una cadena de efectos.</span></li>
+        <li><b>Write:</b> an O·R·E·A·C paragraph with 3 vocabulary words and 2 <i>if / then</i> sentences. <span class="es">Escribir: un párrafo O·R·E·A·C con 3 palabras de vocabulario y 2 oraciones con if / then.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tools">
+    <button class="lang" id="langBtn" aria-pressed="true">Español: ON</button>
+    <button id="themeBtn">🌙 Dark</button>
+    <button id="resetAll">Reset board</button>
+    <span class="hint">Tap a segment to make it “now.” Tap a step to check it off. Start each timer when you begin that part. <span class="es" style="display:inline">Toca un segmento para marcarlo como “ahora.” Toca un paso para marcarlo como hecho.</span></span>
+  </div>
+
+  <div class="cols">
+    <section class="seg" data-seg="1" data-min="25" style="--sec:#c9a227">
+      <div class="seg-head"><span class="seg-num">1</span><span class="seg-min">25 min</span></div>
+      <p class="seg-title">Open <span class="es">Apertura</span></p>
+      <ul class="steps">
+        <li><span class="t">5 min</span><span>Bell ringer: agree or disagree + 4 sentences in your notebook <span class="es">Actividad de inicio: de acuerdo o en desacuerdo + 4 oraciones en tu cuaderno</span></span></li>
+        <li><span class="t">5 min</span><span>Draw your domino chain: one small habit + what happens next, next, next <span class="es">Dibuja tu cadena de dominó: un hábito pequeño + qué pasa después, después, después</span></span></li>
+        <li><span class="t">5 min</span><span>Hook: What was the first thing you did on your best day? Then the 60-second streak lab <span class="es">Gancho: ¿Qué fue lo primero que hiciste en tu mejor día? Luego el laboratorio de rachas de 60 segundos</span></span></li>
+        <li><span class="t">10 min</span><span>Video: Change Your Life – One Tiny Step at a Time (Kurzgesagt) + 3 video checks <span class="es">Video: Cambia tu vida, un paso pequeño a la vez + 3 comprobaciones</span></span></li>
+      </ul>
+      <div class="seg-timer"><span class="tt" id="t1">25:00</span><button data-t="1">Start</button></div>
+    </section>
+
+    <section class="seg" data-seg="2" data-min="30" style="--sec:#2e7d4f">
+      <div class="seg-head"><span class="seg-num">2</span><span class="seg-min">30 min</span></div>
+      <p class="seg-title">Read &amp; practice <span class="es">Lectura y práctica</span></p>
+      <ul class="steps">
+        <li><span class="t">15 min</span><span>Listen and read all six paragraphs; stop and jot after 2, 4, and 6 <span class="es">Escucha y lee los seis párrafos; para y anota después del 2, 4 y 6</span></span></li>
+        <li><span class="t">8 min</span><span>Vocabulary notebook (10 blue words) + match the meaning <span class="es">Cuaderno de vocabulario (10 palabras azules) + unir el significado</span></span></li>
+        <li><span class="t">7 min</span><span>Grammar move: <i>If</i> + present, <i>then</i> + <i>will</i>; comma after the <i>if</i> part <span class="es">Movida de gramática: If + presente, then + will; coma después de la parte con if</span></span></li>
+      </ul>
+      <div class="seg-timer"><span class="tt" id="t2">30:00</span><button data-t="2">Start</button></div>
+    </section>
+
+    <section class="seg" data-seg="3" data-min="35" style="--sec:#6a3d9a">
+      <div class="seg-head"><span class="seg-num">3</span><span class="seg-min">35 min</span></div>
+      <p class="seg-title">Show what you know <span class="es">Demuestra lo que sabes</span></p>
+      <ul class="steps">
+        <li><span class="t">10 min</span><span>Keystone plan: pick one domino, predict the next three; 30-second explanation <span class="es">Plan de hábito clave: elige una ficha, predice las siguientes tres; explicación de 30 segundos</span></span></li>
+        <li><span class="t">15 min</span><span>Test prep: 5 ELPA21-style questions with audio, one answer each <span class="es">Preparación para el examen: 5 preguntas al estilo ELPA21 con audio, una respuesta cada una</span></span></li>
+        <li><span class="t">10 min</span><span>Exit ticket: O·R·E·A·C paragraph, rubric to Level 4+, then Submit <span class="es">Boleto de salida: párrafo O·R·E·A·C, rúbrica a nivel 4+, luego Enviar</span></span></li>
+      </ul>
+      <div class="seg-timer"><span class="tt" id="t3">35:00</span><button data-t="3">Start</button></div>
+    </section>
+  </div>
+
+  <div class="foot">
+    <div class="box"><b>If time / next day · Si hay tiempo / el día siguiente</b>Vocabulary speed round (5 min) · Partner share: read your domino chain aloud (5 min) · Start the 30-day streak for real: Day 1 is tomorrow</div>
+    <div class="box"><b>Materials · Materiales</b><div class="chips"><span class="chip">Chromebook + earbuds</span><span class="chip">Notebook</span><span class="chip">Pencil</span><span class="chip">Phones in backpacks</span></div></div>
+    <div class="box"><b>Lesson link · Enlace</b><a href="index.html">Lesson 2 page</a> · <a href="https://radan55.github.io/stormhabit/">Lesson 1</a><br><span class="hint">Light red on the page = something to do. Green = done. <span class="es" style="display:inline">Rojo claro en la página = algo por hacer. Verde = hecho.</span></span></div>
+  </div>
+</div>
+
+<script>
+/* clock */
+const clock = document.getElementById('clock'), dateEl = document.getElementById('date');
+function tick(){ const d = new Date(); clock.textContent = d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit'}); dateEl.textContent = d.toLocaleDateString('en-US', {weekday:'long', month:'long', day:'numeric'}); }
+tick(); setInterval(tick, 15000);
+
+/* language + theme */
+const langBtn = document.getElementById('langBtn');
+langBtn.onclick = () => { const off = document.body.classList.toggle('no-es'); langBtn.textContent = off ? 'Español: OFF' : 'Español: ON'; langBtn.setAttribute('aria-pressed', !off); };
+(function(){
+  const root = document.documentElement, btn = document.getElementById('themeBtn');
+  let saved = null; try { saved = localStorage.getItem('keystone-theme'); } catch(e){}
+  let dark = saved ? saved === 'dark' : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  function apply(){ root.setAttribute('data-theme', dark ? 'dark' : 'light'); btn.textContent = dark ? '☀️ Light' : '🌙 Dark'; try { localStorage.setItem('keystone-theme', dark ? 'dark' : 'light'); } catch(e){} }
+  btn.onclick = () => { dark = !dark; apply(); }; apply();
+})();
+
+/* segments and steps */
+document.querySelectorAll('.seg').forEach(seg => {
+  seg.addEventListener('click', e => {
+    if(e.target.closest('button') || e.target.closest('li')) return;
+    const was = seg.classList.contains('now');
+    document.querySelectorAll('.seg').forEach(s => s.classList.remove('now'));
+    if(!was){ seg.classList.add('now'); seg.classList.remove('done'); }
+  });
+  seg.querySelectorAll('.steps li').forEach(li => li.onclick = () => {
+    li.classList.toggle('ok');
+    const all = [...seg.querySelectorAll('.steps li')];
+    if(all.every(x => x.classList.contains('ok'))){ seg.classList.add('done'); seg.classList.remove('now'); } else seg.classList.remove('done');
+    all.forEach(x => x.classList.remove('on')); const next = all.find(x => !x.classList.contains('ok')); if(next && seg.classList.contains('now')) next.classList.add('on');
+  });
+});
+
+/* segment timers (25 / 30 / 35 minutes) */
+const fmt = s => `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
+const timers = {};
+document.querySelectorAll('.seg-timer button').forEach(btn => {
+  const n = btn.dataset.t, seg = btn.closest('.seg'), total = parseInt(seg.dataset.min, 10) * 60, txt = document.getElementById('t' + n);
+  timers[n] = {left:total, id:null, total};
+  btn.onclick = () => {
+    const t = timers[n];
+    if(t.id){ clearInterval(t.id); t.id = null; btn.textContent = 'Resume'; return; }
+    if(t.left <= 0){ t.left = t.total; txt.classList.remove('done'); txt.textContent = fmt(t.left); }
+    document.querySelectorAll('.seg').forEach(s => s.classList.toggle('now', s.dataset.seg === n));
+    Object.keys(timers).forEach(k => { if(k !== n && timers[k].id){ clearInterval(timers[k].id); timers[k].id = null; document.querySelector(`.seg-timer button[data-t="${k}"]`).textContent = 'Resume'; } });
+    const first = [...seg.querySelectorAll('.steps li')].find(x => !x.classList.contains('ok')); seg.querySelectorAll('.steps li').forEach(x => x.classList.remove('on')); if(first) first.classList.add('on');
+    btn.textContent = 'Pause';
+    t.id = setInterval(() => { t.left--; txt.textContent = fmt(t.left); if(t.left <= 0){ clearInterval(t.id); t.id = null; txt.textContent = 'Time!'; txt.classList.add('done'); btn.textContent = 'Restart'; } }, 1000);
+  };
+});
+document.getElementById('resetAll').onclick = () => {
+  Object.keys(timers).forEach(k => { clearInterval(timers[k].id); const total = timers[k].total; timers[k] = {left:total, id:null, total}; const tx = document.getElementById('t' + k); tx.textContent = fmt(total); tx.classList.remove('done'); document.querySelector(`.seg-timer button[data-t="${k}"]`).textContent = 'Start'; });
+  document.querySelectorAll('.seg').forEach(s => s.classList.remove('now','done'));
+  document.querySelectorAll('.steps li').forEach(l => l.classList.remove('ok','on'));
+};
+</script>
+</body>
+</html>

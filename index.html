@@ -1,0 +1,2002 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="One Small Change — keystone habits. An interactive 90-minute EL lesson (grades 9–12, ELPA21 Levels 3–4), Lesson 2 of the habit series, from Storm Studio · Laurel High School EL · EL Publishing.">
+<meta name="theme-color" content="#ff4d2e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%B1%3C/text%3E%3C/svg%3E">
+<style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+</head>
+<body>
+<title>One Small Change — Keystone Habits</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: one reading column (~65ch), a sticky audio bar, a side/bottom vocabulary card */
+:root{
+  --bg:#fbf8f2; --surface:#ffffff; --fg:#1f1b16; --muted:#6b6257;
+  --accent:#b8441f; --accent-soft:#fbe6dd; --line:#e4dccf;
+  --vocab:#1e5a8a; --vocab-soft:#e3eef7; --active:#fff3cf;
+  --font-read:"Literata",Georgia,"Times New Roman",serif;
+  --font-ui:"Nunito","Segoe UI",Arial,sans-serif;
+  --font-display:"Fraunces","Literata",Georgia,serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#16140f; --surface:#211e18; --fg:#ffffff; --muted:#d6cfc4;
+  --accent:#f07a4f; --accent-soft:#3a2117; --line:#3a352c;
+  --vocab:#7fb6e8; --vocab-soft:#1b2d3f; --active:#3b3312; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#16140f; --surface:#211e18; --fg:#ffffff; --muted:#d6cfc4;
+  --accent:#f07a4f; --accent-soft:#3a2117; --line:#3a352c;
+  --vocab:#7fb6e8; --vocab-soft:#1b2d3f; --active:#3b3312; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-ui);margin:0;line-height:1.5}
+.wrap{max-width:72ch;margin:0 auto;padding-block:1.5rem 4rem;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--font-read);font-size:clamp(1.9rem,5vw,2.6rem);line-height:1.1;margin:.25rem 0 1rem;text-wrap:balance;font-weight:700}
+.howto{font-size:.95rem;color:var(--muted);margin:0 0 1.25rem;max-width:60ch}
+
+/* Today strip */
+.today{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:1rem;margin-bottom:1rem;border-top:4px solid var(--accent);padding-top:.8rem}
+.today-eq,.today-obj{min-width:0}
+.today-obj ul{margin:.3rem 0 0;padding-left:1.1rem;display:grid;gap:.35rem;font-size:.95rem}
+
+/* Bell ringer */
+.bell{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1rem 1.1rem;margin-bottom:1rem;display:grid;gap:.7rem}
+.bell-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap}
+.bell-title{font-family:var(--font-read);font-size:1.4rem;font-weight:700;margin:.1rem 0 0}
+.timer{display:flex;align-items:center;gap:.5rem}
+.timer span{font-family:var(--font-ui);font-size:1.5rem;font-weight:700;font-variant-numeric:tabular-nums;color:var(--accent);min-width:3.6rem;text-align:right}
+.timer span.done{color:#2e7d4f}
+.bell-dir,.bell-note{margin:0;font-size:.95rem}
+.bell-note{color:var(--muted)}
+.bell-list{margin:0;padding-left:1.3rem;display:grid;gap:.5rem}
+.bell-list li{display:flex;justify-content:space-between;align-items:center;gap:.8rem;flex-wrap:wrap;font-size:1.02rem}
+.bell-list li span{flex:1 1 16rem;min-width:0}
+.ad{display:flex;gap:.4rem}
+.ad button{padding:.35rem .7rem;font-size:.9rem}
+.ad button.on,#padEraser.on{background:var(--vocab);border-color:var(--vocab);color:#fff;font-weight:700}
+
+.draw{border-top:1px solid var(--line);padding-top:.9rem;display:grid;gap:.7rem}
+.pad-tools{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center}
+.sw{width:1.7rem;height:1.7rem;border-radius:50%;padding:0;border:2px solid var(--line)}
+.sw.on{outline:3px solid var(--vocab);outline-offset:2px}
+#pad{width:100%;max-width:100%;aspect-ratio:900/520;height:auto;background:#fff;border:1px solid var(--line);border-radius:10px;touch-action:none;cursor:crosshair;display:block}
+
+/* Fake feed */
+.feedlab{margin:0}
+.phone{max-width:24rem;margin:0 auto;border:3px solid var(--fg);border-radius:22px;overflow:hidden;background:var(--surface)}
+.phone-top{display:flex;border-bottom:1px solid var(--line);font-family:var(--font-ui)}
+.phone-tab{flex:1;text-align:center;padding:.6rem;font-size:.9rem;border:none;border-radius:0;background:var(--surface);color:var(--muted);position:relative}
+.phone-tab.on{color:var(--fg);font-weight:700;box-shadow:inset 0 -3px 0 var(--vocab)}
+.badge{display:inline-grid;place-items:center;min-width:1.3rem;height:1.3rem;padding:0 .3rem;border-radius:999px;background:#d7261e;color:#fff;font-size:.75rem;font-weight:700;margin-left:.3rem;vertical-align:middle}
+.feed{height:22rem;overflow-y:auto;padding:.6rem;display:grid;gap:.6rem;align-content:start;overscroll-behavior:contain}
+.post{border:1px solid var(--line);border-radius:12px;padding:.6rem .7rem;font-size:.9rem;display:grid;gap:.35rem;background:var(--bg)}
+.post .who{display:flex;align-items:center;gap:.45rem;font-size:.8rem;color:var(--muted)}
+.post .av{width:1.5rem;height:1.5rem;border-radius:50%;background:var(--line)}
+.post .pic{height:5rem;border-radius:8px;background:repeating-linear-gradient(135deg,var(--line) 0 8px,var(--surface) 8px 16px)}
+.post.reward{background:var(--active);border-color:var(--accent)}
+.post.reward .pic{background:linear-gradient(135deg,var(--accent),#e6b800)}
+.post .likes{font-size:.8rem;color:var(--muted)}
+.feed-results{margin-top:1rem;border-top:1px solid var(--line);padding-top:.8rem;display:grid;gap:.6rem}
+.feed-results ul{margin:0;padding-left:1.1rem;display:grid;gap:.25rem}
+#trickPoll button{text-align:left}
+
+/* Karaoke highlight */
+.s{border-radius:4px;transition:background .15s}
+.s.now{background:var(--vocab-soft);box-shadow:0 0 0 3px var(--vocab-soft)}
+
+/* Stop and jot */
+.jot{border:2px dashed var(--accent);border-radius:12px;padding:.7rem .9rem;font-family:var(--font-ui);font-size:.95rem;display:grid;gap:.4rem;background:var(--surface)}
+.jot.now{background:var(--accent-soft);border-style:solid}
+.jot-head{display:flex;justify-content:space-between;align-items:center;gap:.6rem;flex-wrap:wrap}
+.jot p{margin:0}
+.jot-text{width:100%;font-family:var(--font-read);font-size:1rem;padding:.5rem .6rem;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);resize:vertical;min-width:0}
+
+/* Bilingual */
+.es{display:block;font-size:.92em;color:var(--muted);font-style:italic;margin-top:.15em;font-family:var(--font-ui);font-weight:400}
+b .es,i .es,u .es{display:inline}
+button .es,.choices .es{display:block;font-size:.85em}
+.poll button .es,.ad button .es{display:inline;margin-left:.3em;font-size:.85em}
+body.no-es .es,body.no-es .para-es,body.no-es .es-toggle{display:none!important}
+.lang{position:sticky;top:env(safe-area-inset-top,0px);z-index:7;display:flex;justify-content:flex-end;margin-bottom:.5rem;pointer-events:none}
+.lang>*{pointer-events:auto}
+.lang{gap:.5rem;align-items:center}
+.agenda-link{font-weight:700;color:var(--accent);border:2px solid var(--accent);border-radius:999px;padding:.3rem .8rem;text-decoration:none;font-size:.9rem;background:var(--surface)}
+.lang button{font-weight:700;background:var(--vocab);color:#fff;border-color:var(--vocab);border-radius:999px;padding:.35rem .9rem}
+.es-toggle{font-size:.8rem;padding:.2rem .55rem;margin:.3rem 0 0 2.9rem;color:var(--vocab);border-color:var(--vocab)}
+.para-es{display:none;margin:.3rem .75rem .2rem 2.9rem;padding:.5rem .7rem;border-left:3px solid var(--vocab);background:var(--vocab-soft);border-radius:0 8px 8px 0;font-size:1.02rem;line-height:1.55;font-style:italic;color:var(--fg)}
+.para-es.open{display:block}
+
+/* Lesson frame */
+.lesson{display:grid;gap:1rem;margin-bottom:1.75rem}
+.hook{background:var(--accent-soft);border-radius:14px;padding:1rem 1.1rem}
+.hook-q{font-family:var(--font-read);font-size:1.35rem;font-weight:600;margin:.2rem 0 .7rem;text-wrap:balance}
+.poll{display:flex;flex-wrap:wrap;gap:.5rem}
+.poll button{background:var(--surface)}
+.poll button.picked{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+.hook-note{margin:.7rem 0 0;font-size:.95rem}
+.eq{border-left:5px solid var(--accent);padding:.3rem 0 .3rem 1rem}
+.eq-q{font-family:var(--font-read);font-size:1.5rem;font-weight:700;margin:.15rem 0 0;line-height:1.25;text-wrap:balance}
+.frame-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:1rem}
+.frame-box{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;min-width:0;font-size:.92rem}
+.obj-label{margin:.6rem 0 .2rem;font-weight:700;font-size:.85rem;color:var(--accent)}
+.frame-box ul{margin:0;padding-left:1.1rem;display:grid;gap:.3rem}
+.std b{color:var(--vocab)}
+
+/* Audio bar */
+.player.stuck{position:sticky}
+.player{position:static;top:calc(env(safe-area-inset-top,0px) + 6.4rem);z-index:5;background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  padding:.7rem .9rem;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-bottom:1.75rem;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+button{font-family:var(--font-ui);font-size:.95rem;cursor:pointer;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);padding:.5rem .85rem}
+button:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--vocab);outline-offset:2px}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700;min-width:7.5rem}
+.btn-primary:disabled{opacity:.6;cursor:default}
+.ctrl{display:flex;align-items:center;gap:.4rem;font-size:.9rem;color:var(--muted)}
+.ctrl select{font-family:var(--font-ui);font-size:.9rem;padding:.4rem .5rem;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);max-width:11rem}
+.status{font-size:.85rem;color:var(--muted);flex-basis:100%}
+.nosupport{display:none;background:var(--accent-soft);border-radius:8px;padding:.6rem .8rem;font-size:.9rem;flex-basis:100%}
+
+/* Passage */
+.passage{font-family:var(--font-read);font-size:1.2rem;line-height:1.7;display:grid;gap:1.1rem}
+.para{position:relative;padding:.5rem .75rem .5rem 2.9rem;border-radius:10px;transition:background .2s}
+.para.reading{background:var(--active)}
+.pnum{position:absolute;left:.75rem;top:.6rem;display:flex;flex-direction:column;align-items:center;gap:.2rem}
+.pnum span{font-family:var(--font-ui);font-size:.75rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.pplay{width:1.7rem;height:1.7rem;padding:0;border-radius:50%;display:grid;place-items:center;font-size:.7rem;line-height:1}
+.pplay.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.para p{margin:0}
+.v{font-weight:700;color:var(--vocab);background:var(--vocab-soft);border-radius:4px;padding:0 .2em;cursor:pointer;border:none;font:inherit;text-decoration:underline dotted;text-underline-offset:3px}
+.v:hover{filter:brightness(.92)}
+.v.open{outline:2px solid var(--vocab)}
+
+/* Attention check overlay */
+.focus-overlay[hidden],.feed-results[hidden],.rating[hidden]{display:none}
+.focus-overlay{position:fixed;inset:0;z-index:50;background:rgba(20,16,10,.72);display:grid;place-items:center;padding:1rem}
+.focus-box{background:var(--surface);color:var(--fg);border:3px solid var(--accent);border-radius:16px;padding:1.4rem 1.5rem;max-width:26rem;width:100%;text-align:center;display:grid;gap:.6rem;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.focus-icon{font-size:2.4rem;line-height:1}
+.focus-title{font-family:var(--font-read);font-size:1.5rem;font-weight:700;margin:0;text-wrap:balance}
+.focus-msg,.focus-stat{margin:0;font-size:.98rem}
+.focus-stat{color:var(--muted);font-size:.88rem;font-variant-numeric:tabular-nums}
+.focus-box .btn-primary{font-size:1.05rem;padding:.6rem 1.4rem}
+.focus-form{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin:0}
+.focus-form input{font-family:var(--font-ui);font-size:1.1rem;letter-spacing:.15em;padding:.55rem .7rem;border-radius:8px;border:2px solid var(--line);background:var(--bg);color:var(--fg);width:11rem;max-width:100%;text-align:center}
+.focus-form input.shake{border-color:var(--accent);animation:shake .35s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.focus-err{color:var(--accent);min-height:1.2em}
+@keyframes focusPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+.focus-box{animation:focusPulse 1.2s ease-in-out 2}
+@media (prefers-reduced-motion:reduce){.focus-box{animation:none}}
+
+/* Vocabulary card */
+.card{position:fixed;z-index:20;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.18);
+  padding:1rem 1.1rem;width:min(26rem,calc(100vw - 32px));left:50%;transform:translateX(-50%);
+  bottom:calc(16px + env(safe-area-inset-bottom,0px));display:none}
+.card.show{display:block}
+.card .top{display:flex;justify-content:space-between;align-items:flex-start;gap:.6rem}
+.card .word{font-family:var(--font-read);font-size:1.5rem;font-weight:700;color:var(--vocab);margin:0}
+.card .pos{font-size:.8rem;color:var(--muted);font-style:italic}
+.card .def{margin:.5rem 0 0;font-size:1.02rem}
+.card .es{margin:.4rem 0 0;font-size:.92rem;color:var(--muted)}
+.card .es b{color:var(--fg);font-weight:700}
+.card .ex{margin:.6rem 0 0;font-family:var(--font-read);font-size:.98rem;border-left:3px solid var(--vocab);padding-left:.6rem}
+.card .acts{display:flex;gap:.5rem;margin-top:.8rem;flex-wrap:wrap}
+.close{padding:.3rem .55rem;font-size:.85rem}
+
+h2{font-family:var(--font-read);font-size:1.4rem;margin:2.5rem 0 .25rem}
+.section-head{font-size:1.9rem;border-top:4px solid var(--accent);padding-top:.8rem;margin-top:3rem}
+.gl-note{color:var(--muted);font-size:.9rem;margin:0 0 .9rem}
+.notebook{margin-top:2rem}
+.nb-ex{display:grid;grid-template-columns:1fr 3fr;gap:.5rem;font-size:.9rem;padding:.4rem .6rem;border-bottom:2px solid var(--line);font-weight:700;color:var(--muted)}
+.nb-row{font-weight:400;color:var(--fg);border-bottom:1px dashed var(--line);font-family:var(--font-read)}
+.nb-row span:first-child{color:var(--vocab);font-weight:700}
+/* Vocabulary match */
+.vm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem}
+.vm-col{display:grid;gap:.45rem;align-content:start;min-width:0}
+.vm-col button{text-align:left;padding:.55rem .7rem;line-height:1.35;font-size:.95rem}
+#vmWords button{font-family:var(--font-read);font-weight:700;font-size:1.05rem;color:var(--vocab)}
+.vm-col button.sel{outline:3px solid var(--vocab);outline-offset:1px}
+.vm-col button.hit{background:#e4f3ea;border-color:#2e7d4f;color:#163d27;cursor:default}
+.vm-col button.miss{background:var(--accent-soft);border-color:var(--accent)}
+
+/* Practice item */
+.item{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:1rem 1.1rem;display:grid;gap:.9rem}
+.item-dir,.item-q,.item-ext{margin:0;font-size:1rem}
+.chart{margin:0;border:1px solid var(--line);border-radius:10px;padding:.6rem .6rem .3rem;background:var(--bg)}
+.chart figcaption{font-weight:700;text-align:center;margin-bottom:.3rem;font-size:.95rem}
+.chart svg{width:100%;max-width:560px;display:block;margin:0 auto;font-family:var(--font-ui)}
+.chart .grid line{stroke:var(--line);stroke-width:1}
+.chart .tick text{fill:var(--muted);font-size:12px;text-anchor:end;font-variant-numeric:tabular-nums}
+.chart .bars rect{fill:var(--vocab)}
+.chart .val{fill:var(--fg);font-size:13px;font-weight:700;text-anchor:middle}
+.chart .cat text{fill:var(--fg);font-size:13px;text-anchor:middle}
+.chart .axis{fill:var(--muted);font-size:12px;text-anchor:middle}
+.chart-note{margin:.3rem 0 0;font-size:.75rem;color:var(--muted);text-align:center}
+.choices{display:grid;gap:.5rem}
+.choices button{text-align:left;display:flex;gap:.6rem;align-items:flex-start;padding:.6rem .75rem;line-height:1.4}
+.letter{flex:none;width:1.6rem;height:1.6rem;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-weight:700;font-size:.85rem}
+.choices button.correct{border-color:#2e7d4f;background:#e4f3ea;color:#163d27}
+.choices button.correct .letter{border-color:#2e7d4f;background:#2e7d4f;color:#fff}
+.choices button.wrong{border-color:var(--accent);background:var(--accent-soft)}
+.feedback{margin:0;font-size:.95rem;min-height:1.2em}
+.choices button:disabled{cursor:default;opacity:.85}
+.choices button.correct:disabled,.choices button.wrong:disabled{opacity:1}
+.choices button.picked{border-color:var(--vocab);background:var(--vocab-soft)}
+.choices button.picked .letter{border-color:var(--vocab);background:var(--vocab);color:#fff}
+.score input{font-family:var(--font-ui);font-size:.95rem;padding:.45rem .6rem;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);min-width:0;width:min(18rem,100%)}
+.score-row{display:flex;gap:1.25rem;align-items:center;flex-wrap:wrap}
+.score-big{font-family:var(--font-read);font-size:3rem;font-weight:700;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.score-big small{font-size:1.1rem;color:var(--muted);margin-left:.2rem;font-family:var(--font-ui)}
+.score-list{list-style:none;margin:0;padding:0;display:grid;gap:.35rem;font-size:.95rem}
+.score-list em{color:var(--muted);font-style:normal;margin-left:.35rem}
+.dot{display:inline-block;width:.75rem;height:.75rem;border-radius:50%;background:var(--line);margin-right:.5rem;vertical-align:middle}
+.score-list li.ok .dot{background:#2e7d4f}.score-list li.no .dot{background:var(--accent)}
+.score .acts{display:flex;gap:.5rem;flex-wrap:wrap}
+.exit .eq-q{font-size:1.35rem;margin:.1rem 0 0}
+.starters{margin:0;padding-left:1.1rem;font-family:var(--font-read);font-size:1rem;display:grid;gap:.25rem;color:var(--muted)}
+#exitText{width:100%;font-family:var(--font-read);font-size:1.1rem;line-height:1.6;padding:.7rem .8rem;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--fg);resize:vertical;min-width:0}
+.oreac{display:grid;gap:.5rem}
+.oreac-row{display:flex;gap:.7rem;align-items:flex-start;border:1px solid var(--line);border-radius:10px;padding:.55rem .7rem;background:var(--bg)}
+.oreac-row.filled{border-color:#2e7d4f}
+.oreac-letter{flex:none;width:2.1rem;height:2.1rem;border-radius:50%;display:grid;place-items:center;font-family:var(--font-read);font-weight:700;font-size:1.15rem;background:var(--accent);color:#fff}
+.oreac-row.filled .oreac-letter{background:#2e7d4f}
+.oreac-body{flex:1;min-width:0;display:grid;gap:.3rem;font-size:.92rem;color:var(--muted)}
+.oreac-body b{color:var(--fg)}
+.oreac-in{font-family:var(--font-read);font-size:1.02rem;color:var(--fg);padding:.5rem .6rem;border-radius:8px;border:1px solid var(--line);background:var(--surface);min-width:0;width:100%}
+.oreac-out{margin:0;font-family:var(--font-read);font-size:1.08rem;line-height:1.6;border-left:4px solid var(--vocab);padding:.5rem .8rem;background:var(--bg);border-radius:0 8px 8px 0;min-height:3rem}
+.exit-meter{display:flex;gap:.5rem;flex-wrap:wrap}
+.pill{font-size:.85rem;padding:.25rem .65rem;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--muted);font-variant-numeric:tabular-nums}
+.pill.ok{background:#e4f3ea;border-color:#2e7d4f;color:#163d27}
+.btn-link{display:inline-block;text-decoration:none;font-weight:700;background:var(--accent);color:#fff;border-radius:8px;padding:.55rem 1rem;font-size:.95rem}
+.btn-link[aria-disabled="true"]{opacity:.45;pointer-events:none}
+.listen-box{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap}
+.rating{border-left:5px solid var(--vocab);background:var(--vocab-soft);border-radius:0 10px 10px 0;padding:.7rem .9rem}
+.rating-level strong{display:block;font-family:var(--font-read);font-size:1.4rem;color:var(--vocab)}
+.rating p{margin:.3rem 0 0;font-size:.95rem}
+.quote{margin:0;font-family:var(--font-read);font-size:1.1rem;border-left:4px solid var(--line);padding:.4rem 0 .4rem .9rem}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<style>
+/* Habit lab */
+.lab-screen{height:22rem;display:grid;grid-template-rows:auto 1fr auto;gap:.6rem;padding:.8rem;background:var(--bg);text-align:center}
+.lab-bell{font-size:4rem;line-height:1;transition:transform .15s;filter:grayscale(1);opacity:.45}
+.lab-bell.ring{filter:none;opacity:1;transform:scale(1.15);animation:ring .5s infinite}
+@keyframes ring{0%,100%{rotate:0deg}25%{rotate:-15deg}75%{rotate:15deg}}
+.lab-msg{font-family:var(--font-read);font-size:1.05rem;min-height:3.2em;display:grid;place-items:center;padding:.4rem;border-radius:10px;background:var(--surface);border:1px solid var(--line)}
+.lab-msg.reward{background:var(--active);border-color:var(--accent);font-weight:700}
+.lab-tap{font-size:1.15rem;padding:.9rem 1rem;border-radius:999px;background:var(--vocab);border-color:var(--vocab);color:#fff;font-weight:700}
+.lab-tap:disabled{opacity:.5}
+.lab-count{display:flex;justify-content:space-around;font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+/* Habit planner */
+.ad-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem}
+.ad-form{display:grid;gap:.6rem}
+.ad-l{display:grid;gap:.25rem;font-size:.92rem;font-weight:700}
+.ad-l input{font-family:var(--font-read);font-size:1rem;font-weight:400;padding:.5rem .6rem;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);min-width:0}
+.loop-card{border:3px solid var(--fg);border-radius:18px;background:var(--surface);padding:1rem;display:grid;gap:.6rem;align-content:start;max-width:22rem;margin:0 auto}
+.loop-head{display:flex;align-items:center;gap:.6rem}
+.loop-icon{font-size:2.2rem;line-height:1}
+.loop-name{font-family:var(--font-read);font-size:1.25rem;font-weight:700;margin:0}
+.loop-step{display:grid;grid-template-columns:5.2rem 1fr;gap:.5rem;align-items:start;font-size:.95rem;border-left:4px solid var(--line);padding:.3rem .6rem}
+.loop-step.cue{border-color:#e6b800}.loop-step.routine{border-color:var(--vocab)}.loop-step.reward{border-color:#2e7d4f}
+.loop-step b{color:var(--muted);font-size:.8rem;letter-spacing:.05em;text-transform:uppercase}
+.loop-old{text-decoration:line-through;color:var(--muted)}
+.loop-new{font-weight:700;color:var(--vocab)}
+.loop-arrow{text-align:center;color:var(--muted);font-size:1.2rem;line-height:1}
+.ps-empty{color:var(--muted);font-style:italic}
+/* Grammar move */
+.gm-row{display:grid;gap:.4rem;border:1px solid var(--line);border-radius:10px;padding:.6rem .7rem;background:var(--bg)}
+.gm-pair{font-family:var(--font-read);font-size:1rem}
+.gm-out{font-family:var(--font-read);font-size:1.05rem;min-height:1.5em;color:var(--vocab);font-weight:700}
+
+/* Section color coding */
+.sec{--sec:#1e5a8a}
+.today{--sec:#1e5a8a;border-top-color:var(--sec)!important;background:color-mix(in srgb,var(--sec) 6%,transparent);border-radius:0 0 14px 14px;padding:0.8rem 1rem 1rem}
+.bell{--sec:#c9a227;border-left:8px solid var(--sec)!important}
+.hook{--sec:#b8441f;border-left:8px solid var(--sec);background:color-mix(in srgb,var(--sec) 10%,var(--surface))!important}
+.feedlab{--sec:#b8441f;border-left:8px solid var(--sec)!important}
+.frame-box{--sec:#6b6257;border-left:8px solid var(--sec)!important}
+.player{--sec:#2e7d4f;border-left:8px solid var(--sec)!important}
+.passage{--sec:#2e7d4f;border-left:8px solid var(--sec);padding-left:.6rem;border-radius:0 12px 12px 0}
+.appdesign{--sec:#6a3d9a;border-left:8px solid var(--sec)!important}
+.notebook,.vmatch{--sec:#1b7f8a;border-left:8px solid var(--sec)!important}
+#grammar{--sec:#c2185b;border-left:8px solid var(--sec)!important}
+.item[aria-label^="Practice question"]{--sec:#b8441f;border-left:8px solid var(--sec)!important}
+.score{--sec:#6b6257;border-left:8px solid var(--sec)!important}
+.exit{--sec:#6a3d9a;border-left:8px solid var(--sec)!important}
+.today .eyebrow,.bell>.bell-head .eyebrow,.draw .eyebrow,.hook .eyebrow,.feedlab .eyebrow,.frame-box>.eyebrow,.jot .eyebrow,.notebook>.eyebrow,.vmatch .eyebrow,#feedResults .eyebrow,.exit>.eyebrow{color:var(--sec);font-weight:700}
+h2.section-head{border-top-color:var(--sec)!important}
+h2.section-head.c-purple{--sec:#6a3d9a}h2.section-head.c-orange{--sec:#b8441f}h2.section-head.c-green{--sec:#2e7d4f}
+h2.section-head::before,.sec-tag::before{content:"";display:inline-block;width:.8em;height:.8em;border-radius:3px;background:var(--sec);margin-right:.45em;vertical-align:-.05em}
+h2:not(.section-head){border-left:6px solid var(--sec,var(--line));padding-left:.5rem}
+h2.c-teal{--sec:#1b7f8a}h2.c-pink{--sec:#c2185b}h2.c-orange{--sec:#b8441f}h2.c-gray{--sec:#6b6257}h2.c-purple{--sec:#6a3d9a}
+.legend{display:flex;flex-wrap:wrap;gap:.4rem .8rem;font-size:.8rem;color:var(--muted);margin:0 0 1rem}
+.legend span::before{content:"";display:inline-block;width:.75em;height:.75em;border-radius:3px;background:var(--sec);margin-right:.35em;vertical-align:-.05em}
+
+:root[data-theme="dark"] .legend,:root[data-theme="dark"] .today-obj,:root[data-theme="dark"] .std{color:#fff}
+:root[data-theme="dark"] .choices button.correct,:root[data-theme="dark"] .vm-col button.hit,:root[data-theme="dark"] .pill.ok{background:#1f4a30;color:#fff}
+:root[data-theme="dark"] .lab-msg.reward{color:#fff}
+:root[data-theme="dark"] #pad{background:#fff}
+.lang button#themeBtn{background:var(--surface);color:var(--fg);border-color:var(--line)}
+.vid{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000;border:1px solid var(--line)}
+.vid{display:grid;place-items:center;align-content:center;gap:.4rem;text-decoration:none;color:#fff;background:linear-gradient(135deg,#1f1b16,#2e7d4f)}
+.vid-play{font-size:3.2rem;line-height:1;width:5rem;height:5rem;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff}
+.vid-t{font-family:var(--font-read);font-size:1.2rem;font-weight:700;text-align:center;padding:0 1rem}
+.vid-s{font-size:.8rem;opacity:.85;text-align:center;padding:0 1rem}
+.vid-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000;border:2px solid var(--line)}
+.vid-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid-alt{color:var(--accent);font-weight:700}
+.vid-qs li{display:block}
+.video .eyebrow{color:var(--sec);font-weight:700}
+.rubric{display:grid;gap:.5rem;border-top:1px solid var(--line);padding-top:.8rem}
+.rub-t{width:100%;border-collapse:collapse;font-size:.85rem}
+.rub-t th,.rub-t td{border:1px solid var(--line);padding:.4rem .45rem;vertical-align:top;text-align:left}
+.rub-t th{background:var(--vocab-soft);color:var(--vocab);font-size:.8rem}
+.rub-t td .es{display:block;font-size:.8em}
+.rub-t td small.std{display:block;color:var(--muted);font-size:.78em;margin-top:.15rem}
+.rub-t th small{font-weight:400;color:var(--muted)}
+.rub-s{font-weight:700;text-align:center!important;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rub-t tr.r0 .rub-s{color:var(--accent)}.rub-t tr.r1 .rub-s{color:#c9a227}.rub-t tr.r2 .rub-s{color:#2e7d4f}
+.rub-t tr.r2 td{background:color-mix(in srgb,#2e7d4f 10%,transparent)}
+.rub-t tfoot td{background:var(--bg);font-size:1rem}
+.rub-tips{margin:0;padding-left:1.1rem;font-size:.9rem;display:grid;gap:.25rem}
+@media (max-width:480px){.rub-t tbody td:nth-child(2),.rub-t tbody td:nth-child(3),.rub-t tbody td:nth-child(4),.rub-t th:nth-child(2),.rub-t th:nth-child(3),.rub-t th:nth-child(4){display:none}.rub-t tfoot td[colspan]{colspan:1}}
+.prog{position:sticky;top:calc(env(safe-area-inset-top,0px) + 2.6rem);z-index:6;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:.45rem .7rem;margin:0 0 1rem;display:grid;gap:.3rem;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.prog-top{display:flex;justify-content:space-between;align-items:center;font-size:.82rem;color:var(--muted);gap:.6rem}
+.prog-top b{color:var(--fg)}
+.prog-bar{height:.6rem;border-radius:999px;background:var(--line);overflow:hidden}
+.prog-fill{height:100%;width:0;background:linear-gradient(90deg,#1e5a8a,#2e7d4f);transition:width .4s}
+.prog-steps{display:none;gap:.25rem;flex-wrap:wrap}
+.prog.open .prog-steps{display:flex}
+.prog-top{cursor:pointer}
+@media (min-width:700px){.prog-steps{display:flex}}
+.prog-steps span{font-size:.7rem;padding:.1rem .45rem;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.prog-steps span.on{background:#e4f3ea;border-color:#2e7d4f;color:#163d27}
+:root[data-theme="dark"] .prog-steps span.on{background:#1f4a30;color:#fff}
+.jot-fb{margin:0;font-size:.85rem;color:var(--muted)}
+.jot.ok{border-color:#2e7d4f;border-style:solid}
+.jot.ok .jot-fb{color:#2e7d4f;font-weight:700}
+.hear{display:flex;gap:.4rem;flex-wrap:wrap}
+.hear button{font-size:.85rem;padding:.35rem .7rem}
+.report{width:100%;font-family:var(--font-ui);font-size:.85rem;padding:.6rem;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);min-height:7rem}
+.plan90{margin:0 0 1rem;display:grid;gap:.3rem}
+.plan90 ol{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:.3rem}
+.plan90 li{font-size:.78rem;border:1px solid var(--line);border-radius:999px;padding:.15rem .55rem;background:var(--surface)}
+.plan90 li b{color:var(--accent);margin-right:.25rem}
+
+/* Design elements */
+body{background-image:radial-gradient(circle at 1px 1px,color-mix(in srgb,var(--fg) 7%,transparent) 1px,transparent 0);background-size:22px 22px}
+.hero{display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center;margin:.3rem 0 .6rem;padding:1rem 1.1rem;border-radius:18px;background:linear-gradient(135deg,color-mix(in srgb,#e6b800 18%,var(--surface)),color-mix(in srgb,var(--vocab) 16%,var(--surface)) 50%,color-mix(in srgb,#2e7d4f 18%,var(--surface)));border:1px solid var(--line);box-shadow:0 6px 24px rgba(0,0,0,.06)}
+.hero h1{margin:.2rem 0 .3rem}
+.hero-sub{margin:0;font-family:var(--font-read);font-size:1.05rem;color:var(--muted)}
+.hero-loop{width:9.5rem;height:9.5rem;flex:none}
+.hero-lbl{font-family:var(--font-ui);font-size:12px;font-weight:700;fill:var(--fg);letter-spacing:.04em;text-transform:uppercase}
+.hero-mid{font-size:34px;fill:var(--muted)}
+.hero-loop{animation:spin-in 1.2s ease-out}
+@keyframes spin-in{from{transform:rotate(-40deg);opacity:0}to{transform:rotate(0);opacity:1}}
+@media (max-width:480px){.hero{grid-template-columns:1fr}.hero-loop{width:12rem;height:12rem;margin:0 auto}}
+.item,.bell,.hook,.frame-box,.player,.prog{box-shadow:0 4px 16px rgba(0,0,0,.05)}
+h2.section-head{display:flex;align-items:center;gap:.5rem}
+h2.section-head .h-ic{font-size:1.4rem;line-height:1;width:2.4rem;height:2.4rem;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--sec) 15%,transparent);flex:none}
+h2.section-head::before{display:none}
+.today{position:relative;overflow:hidden}
+.today::after{content:"🔁";position:absolute;right:-.2rem;bottom:-.6rem;font-size:5rem;opacity:.07;pointer-events:none}
+.bell-title{position:relative}
+.eq-q{position:relative;padding-left:.2rem}
+.timer span{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:.1rem .45rem}
+.lab-tap{box-shadow:0 6px 0 color-mix(in srgb,var(--vocab) 60%,#000);transition:transform .05s,box-shadow .05s}
+.lab-tap:active{transform:translateY(4px);box-shadow:0 2px 0 color-mix(in srgb,var(--vocab) 60%,#000)}
+.loop-card{box-shadow:0 10px 30px rgba(0,0,0,.12);background:linear-gradient(180deg,var(--surface),color-mix(in srgb,var(--bg) 60%,var(--surface)))}
+.score-big{text-shadow:0 2px 0 color-mix(in srgb,var(--accent) 25%,transparent)}
+.oreac-letter{box-shadow:0 3px 0 color-mix(in srgb,var(--accent) 50%,#000)}
+.prog-fill{background:linear-gradient(90deg,#e6b800,var(--vocab),#2e7d4f)}
+.choices button{transition:transform .08s}.choices button:not(:disabled):active{transform:scale(.98)}
+.pill.ok,.vm-col button.hit{animation:pop .25s}
+@keyframes pop{50%{transform:scale(1.06)}}
+@media (prefers-reduced-motion:reduce){.hero-loop,.pill.ok,.vm-col button.hit{animation:none}}
+
+/* Typography */
+h1,h2,.bell-title,.eq-q,.hook-q,.focus-title,.loop-name,.card .word,.score-big,.vid-t{font-family:var(--font-display);font-variation-settings:"SOFT" 60}
+h1{font-size:clamp(2.2rem,6vw,3rem);font-weight:900;letter-spacing:-.02em;line-height:1.05}
+h2.section-head{font-weight:900;letter-spacing:-.01em}
+h2:not(.section-head){font-weight:700}
+.eq-q{font-weight:700;font-style:italic}
+.eyebrow{font-family:var(--font-ui);font-weight:800;letter-spacing:.12em}
+.hero-sub{font-family:var(--font-display);font-style:italic;font-weight:500}
+.hero-lbl{font-family:var(--font-ui);font-weight:800}
+.oreac-letter,.letter,.score-big{font-family:var(--font-display);font-weight:900}
+.plan90 li b,.prog-top b,.pill{font-weight:800}
+button{font-weight:700}
+.passage{font-size:1.22rem}
+</style>
+
+<style>
+/* ===== Redesign: "Field notebook" neo-brutalist skin ===== */
+:root{
+  --bg:#f1f0ea; --surface:#ffffff; --fg:#111418; --muted:#525a66;
+  --accent:#ff4d2e; --accent-soft:#ffe3dc; --line:#111418;
+  --vocab:#0b6e62; --vocab-soft:#d9f2ec; --active:#fff3a3;
+  --font-read:"Source Serif 4",Georgia,serif;
+  --font-ui:"Public Sans","Segoe UI",Arial,sans-serif;
+  --font-display:"Bricolage Grotesque","Public Sans",sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --shadow:5px 5px 0 var(--fg);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0f1115; --surface:#181b22; --fg:#ffffff; --muted:#c7ccd6; --line:#e8e8e8;
+  --accent:#ff6a4d; --accent-soft:#4a2017; --vocab:#4fd1c0; --vocab-soft:#123b36; --active:#4a4210; --shadow:5px 5px 0 #e8e8e8 } }
+:root[data-theme="dark"]{
+  --bg:#0f1115; --surface:#181b22; --fg:#ffffff; --muted:#c7ccd6; --line:#e8e8e8;
+  --accent:#ff6a4d; --accent-soft:#4a2017; --vocab:#4fd1c0; --vocab-soft:#123b36; --active:#4a4210; --shadow:5px 5px 0 #e8e8e8 }
+body{background:var(--bg);background-image:linear-gradient(color-mix(in srgb,var(--fg) 6%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--fg) 6%,transparent) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:none;margin:0;padding:0 0 5rem;display:grid;grid-template-columns:1fr;gap:0}
+.main{max-width:74ch;margin:0 auto;padding:1rem 16px 3rem;min-width:0}
+@media (min-width:960px){
+  .wrap{grid-template-columns:16rem 1fr;padding-bottom:0}
+  .rail{position:sticky;top:0;height:100vh;overflow:auto;border-right:3px solid var(--fg);background:var(--surface);padding:1rem .9rem;display:grid;align-content:start;gap:1rem}
+  .rail-fab{display:none}
+  .main{padding:1.5rem 2rem 4rem}
+}
+@media (max-width:959px){
+  .rail{position:fixed;inset:auto 0 0 0;z-index:40;background:var(--surface);border-top:3px solid var(--fg);padding:.8rem 16px calc(.8rem + env(safe-area-inset-bottom,0px));display:grid;gap:.6rem;max-height:70vh;overflow:auto;transform:translateY(calc(100% - 3.9rem));transition:transform .25s}
+  .rail.open{transform:none}
+  .rail-fab{position:fixed;right:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:41;font-family:var(--font-mono);font-weight:700;background:var(--accent);color:#fff;border:2px solid var(--fg);box-shadow:var(--shadow);padding:.55rem .9rem;border-radius:999px}
+  .rail-links{display:grid;grid-template-columns:1fr 1fr;gap:.35rem}
+}
+.rail-top{display:flex;justify-content:space-between;align-items:center;gap:.6rem}
+.rail-brand{font-family:var(--font-mono);font-size:.78rem;font-weight:700;letter-spacing:.08em;line-height:1.2}
+.rail-brand small{font-weight:500;color:var(--muted);letter-spacing:.02em}
+.rail-dot{display:inline-block;width:.6rem;height:.6rem;background:var(--accent);border:2px solid var(--fg);margin-right:.35rem;vertical-align:middle}
+.rail-ctl{display:flex;gap:.35rem}
+.rail-ctl button{font-family:var(--font-mono);font-weight:700;padding:.3rem .55rem;border:2px solid var(--fg);border-radius:6px;background:var(--surface);color:var(--fg);box-shadow:3px 3px 0 var(--fg)}
+.rail-ctl #langBtn{background:var(--vocab);color:#fff}
+.hero-links{margin:.8rem 0 0}.hero-links .btn-link{background:var(--fg);color:#fff;border:2px solid var(--fg);box-shadow:3px 3px 0 var(--accent);border-radius:8px;text-decoration:none;font-family:var(--font-mono);font-size:.85rem}.hero-links .es{display:inline;color:#fff;opacity:.8;font-style:normal}
+.rail-agenda{display:inline-grid;place-items:center;text-decoration:none;font-size:1rem;padding:.3rem .5rem;border:2px solid var(--fg);border-radius:6px;background:var(--surface);box-shadow:3px 3px 0 var(--fg);color:var(--fg)}
+.rail-links{list-style:none;margin:0;padding:0;display:grid;gap:.3rem;counter-reset:s}
+.rail-links a{display:flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--fg);font-family:var(--font-ui);font-weight:600;font-size:.9rem;padding:.4rem .5rem;border:2px solid transparent;border-radius:6px;counter-increment:s}
+.rail-links a::before{content:counter(s,decimal-leading-zero);font-family:var(--font-mono);font-size:.72rem;color:#fff;background:var(--sec);padding:.1rem .35rem;border-radius:4px;border:2px solid var(--fg)}
+.rail-links a:hover,.rail-links a.here{border-color:var(--fg);background:color-mix(in srgb,var(--sec) 12%,var(--surface));box-shadow:3px 3px 0 var(--fg)}
+.prog{position:static;top:auto;border:2px solid var(--fg);box-shadow:var(--shadow);border-radius:8px;margin:0;padding:.5rem .65rem}
+.prog-top{font-family:var(--font-mono);font-size:.75rem}
+.prog-bar{height:.8rem;border-radius:4px;border:2px solid var(--fg);background:var(--surface)}
+.prog-fill{background:repeating-linear-gradient(45deg,var(--accent) 0 6px,#ffb300 6px 12px)}
+.prog-steps{display:flex!important}
+.prog-steps span{font-family:var(--font-mono);font-size:.62rem;border:1.5px solid var(--fg);border-radius:4px}
+.prog-steps span.on{background:var(--active);color:var(--fg)}
+
+/* type */
+h1,h2,.bell-title,.eq-q,.hook-q,.focus-title,.loop-name,.card .word,.score-big,.vid-t{font-family:var(--font-display);font-variation-settings:normal;letter-spacing:-.02em}
+h1{font-size:clamp(2.4rem,7vw,3.6rem);font-weight:800;line-height:.98;text-transform:uppercase}
+h1 .es,h2 .es{text-transform:none;font-size:.5em;font-weight:500;letter-spacing:0;font-family:var(--font-ui)}
+@media (max-width:959px){.rail-links a:last-child{margin-right:6.5rem}}
+h2.section-head{font-size:clamp(1.6rem,4.5vw,2.1rem);font-weight:800;text-transform:uppercase;border-top:0;padding:0;margin-top:3rem;gap:.6rem}
+h2.section-head .h-ic{border:2px solid var(--fg);border-radius:8px;box-shadow:3px 3px 0 var(--fg);background:var(--sec);color:#fff;font-size:1.2rem;width:2.3rem;height:2.3rem}
+h2:not(.section-head){font-weight:700;border-left:0;padding:0;font-size:1.3rem}
+h2:not(.section-head)::before{content:"//";font-family:var(--font-mono);color:var(--sec,var(--accent));margin-right:.4rem}
+.eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;font-weight:700}
+.eq-q{font-weight:800;font-style:normal;font-size:1.6rem}
+.hero-sub{font-family:var(--font-mono);font-style:normal;font-size:.9rem;color:var(--fg)}
+.passage{font-size:1.2rem;line-height:1.75}
+.timer span{font-family:var(--font-mono);background:var(--fg);color:#fff;border:0;border-radius:4px;padding:.15rem .5rem}
+.timer span.done{background:#2e7d4f;color:#fff}
+.pill,.plan90 li,.prog-steps span,.lab-count,.chart-note,.rub-s{font-family:var(--font-mono)}
+
+/* cards: hard edges, offset shadows */
+.item,.bell,.hook,.frame-box,.player,.phone,.loop-card,.card,.jot,.focus-box,.today{border:2px solid var(--fg)!important;border-radius:10px;box-shadow:var(--shadow);background:var(--surface)}
+.today{background:var(--surface);padding:1rem 1.1rem}
+.today::after{display:none}
+.hook{background:var(--active)!important}
+.jot{border-style:dashed!important}
+.jot.ok{border-style:solid!important;background:var(--vocab-soft)}
+.section-head+.gl-note,.gl-note{font-family:var(--font-ui)}
+.hero{border:2px solid var(--fg);border-radius:12px;box-shadow:var(--shadow);background:var(--surface);position:relative;overflow:hidden;padding:1.2rem 1.2rem}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,var(--active) 0 38%,transparent 38%);z-index:0}
+.hero>*{position:relative;z-index:1}
+.hero-loop{animation:none}
+.item,.bell,.hook,.frame-box,.player,.feedlab,.appdesign,.notebook,.vmatch,#grammar,.score,.exit,.video,.player{border-left-width:2px!important}
+.item::before,.bell::before,.hook::before{content:"";display:block;height:.45rem;margin:-1rem -1.1rem .8rem;background:var(--sec,var(--accent));border-bottom:2px solid var(--fg);border-radius:8px 8px 0 0}
+.item.video::before{background:#2e7d4f}
+.player::before{display:none}
+.player{border-radius:10px}
+.player.stuck{top:.6rem}
+button{border:2px solid var(--fg);border-radius:8px;box-shadow:3px 3px 0 var(--fg);font-family:var(--font-ui);font-weight:700}
+button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--fg)}
+button:disabled{box-shadow:none}
+.btn-primary,.lab-tap,.btn-link{background:var(--accent);border:2px solid var(--fg);color:#fff;box-shadow:3px 3px 0 var(--fg)}
+.poll button.picked,.ad button.on{background:var(--fg);color:#fff;border-color:var(--fg)}
+.choices button.correct{background:#d9f2ec;border-color:var(--fg);color:var(--fg)}
+.choices button.wrong{background:var(--accent-soft)}
+.choices button.correct .letter{background:#2e7d4f;border-color:var(--fg)}
+.letter{border:2px solid var(--fg);font-family:var(--font-mono)}
+.pplay{box-shadow:none}
+.close,.sw,.es-toggle,.hear button,.pplay{box-shadow:none}
+.sw{border:2px solid var(--fg)}
+.oreac-row{border:2px solid var(--fg);background:var(--surface)}
+.oreac-letter{font-family:var(--font-display);border:2px solid var(--fg);box-shadow:none;background:var(--accent)}
+.oreac-row.filled .oreac-letter{background:#2e7d4f}
+.oreac-out{border-left:4px solid var(--fg);background:var(--active);color:var(--fg)}
+.rub-t th,.rub-t td{border:2px solid var(--fg)}
+.rub-t th{background:var(--fg);color:#fff}
+.rub-t tr.r2 td{background:var(--vocab-soft)}
+.legend{display:none}
+.plan90 li{border:2px solid var(--fg);border-radius:6px;background:var(--surface);box-shadow:2px 2px 0 var(--fg)}
+.plan90 li b{color:var(--accent)}
+.v{background:var(--active);color:var(--fg);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;text-decoration-color:var(--vocab);border-radius:2px}
+.s.now{background:var(--vocab-soft);box-shadow:0 0 0 3px var(--vocab-soft)}
+.para.reading{background:var(--active);border-radius:8px}
+.phone{border-radius:16px}
+.lab-screen{background:var(--bg)}
+.score-big{color:var(--accent);text-shadow:none;font-size:3.4rem}
+.rating{border:2px solid var(--fg);border-left:8px solid var(--vocab);background:var(--vocab-soft);border-radius:8px}
+.focus-overlay{background:rgba(17,20,24,.85)}
+.focus-box{border:3px solid var(--fg)!important;box-shadow:8px 8px 0 var(--accent)}
+footer{font-family:var(--font-mono)!important}
+.phone-tab.on{box-shadow:inset 0 -3px 0 var(--accent)}
+.badge{border:2px solid var(--fg)}
+:root[data-theme="dark"] .choices button.correct,:root[data-theme="dark"] .vm-col button.hit,:root[data-theme="dark"] .pill.ok{background:#1f4a30;color:#fff}
+:root[data-theme="dark"] .hook{color:var(--fg)}
+:root[data-theme="dark"] .hero::before{background:linear-gradient(120deg,#3a3510 0 38%,transparent 38%)}
+:root[data-theme="dark"] .timer span{background:#fff;color:#111}
+:root[data-theme="dark"] .rail-links a::before{color:#111}
+</style>
+
+<style>
+/* Magazine spacing */
+.main{padding-top:2rem}
+.main>*{margin-bottom:0}
+.hero{margin:0 0 2.5rem}
+.howto,.plan90{margin-bottom:2.5rem}
+.today,.bell,.lesson,.frame-grid{margin-bottom:3.5rem}
+.lesson{gap:2rem}
+.frame-grid{gap:1.5rem}
+h2.section-head{margin-top:5.5rem;margin-bottom:1.25rem;padding-top:2rem;border-top:2px solid var(--fg)!important;position:relative}
+h2.section-head::after{content:"";position:absolute;left:0;top:-2px;width:5rem;height:6px;background:var(--sec)}
+h2:not(.section-head){margin:3rem 0 .75rem}
+.item,.player,.passage{margin-bottom:2.5rem}
+.player{margin-bottom:1.5rem}
+.passage{gap:1.6rem}
+.para{padding-top:.8rem;padding-bottom:.8rem}
+.jot{margin:.4rem 0}
+.gl-note{margin-bottom:1.25rem}
+.item{padding:1.4rem 1.5rem;gap:1.1rem}
+.item::before,.bell::before,.hook::before{margin:-1.4rem -1.5rem 1rem}
+.bell{padding:1.4rem 1.5rem}
+.today{padding:1.4rem 1.5rem}
+.hook{padding:1.3rem 1.5rem}
+.bell-head{margin-bottom:.4rem}
+.draw{margin-top:1.5rem;padding-top:1.5rem;border-top:2px solid var(--line)}
+.score{margin-bottom:3rem}
+.exit{margin-bottom:4rem}
+.rubric{padding-top:1.5rem;margin-top:1rem}
+@media (min-width:960px){.main{padding:3rem 3.5rem 6rem}}
+</style>
+
+<style>
+.prog-steps span.late{background:var(--accent);color:#fff;border-color:var(--fg);animation:latePulse 1.2s ease-in-out infinite}
+.prog-steps span.late::after{content:" ⏰"}
+.prog-steps span.on::after{content:" ✓"}
+.rail-links a.done::after{content:"✓";margin-left:auto;font-family:var(--font-mono);color:#2e7d4f;font-weight:700}
+.rail-links a.late{background:var(--accent-soft);border-color:var(--accent)}
+.rail-links a.late::after{content:"⏰";margin-left:auto}
+@keyframes latePulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 60%,transparent)}50%{box-shadow:0 0 0 5px transparent}}
+@media (prefers-reduced-motion:reduce){.prog-steps span.late{animation:none}}
+</style>
+
+<style>
+/* To-do highlights: anything to complete or write in the notebook */
+:root{--todo:#ffe3e0;--todo-line:#e5484d}
+:root[data-theme="dark"]{--todo:#4a1f1f;--todo-line:#ff7b7b}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--todo:#4a1f1f;--todo-line:#ff7b7b}}
+.todo,.bell-dir,.item-ext,.hook-note,#trickNote,.notebook .item-q,.exit .item-dir,.jot:not(.ok),.oreac-row:not(.filled),.gm-row:not(:has(.picked)),.video .bell-dir,.vid-qs li{background:var(--todo)!important;border-left:5px solid var(--todo-line)!important;border-radius:8px;padding:.6rem .8rem!important}
+.bell-dir,.item-ext,.hook-note,#trickNote,.notebook .item-q,.exit .item-dir{margin:.2rem 0!important}
+.jot:not(.ok){border-color:var(--todo-line)!important;border-style:dashed!important}
+.oreac-row:not(.filled){border-color:var(--todo-line)!important}
+.gm-row:not(:has(.picked)){border-color:var(--todo-line)!important}
+.todo-tag{display:inline-block;font-family:var(--font-mono);font-size:.68rem;font-weight:700;letter-spacing:.06em;background:var(--todo-line);color:#fff;border-radius:4px;padding:.05rem .4rem;margin-right:.4rem;vertical-align:middle}
+input.oreac-in:placeholder-shown,.ad-l input:placeholder-shown,#sname:placeholder-shown,.jot-text:placeholder-shown{background:var(--todo)!important;border-color:var(--todo-line)!important}
+.ad-form .ad-l:has(input:placeholder-shown){background:var(--todo);border-left:5px solid var(--todo-line);border-radius:8px;padding:.4rem .6rem}
+#adIcons:not(:has(.picked)){background:var(--todo);border-left:5px solid var(--todo-line);border-radius:8px;padding:.4rem .6rem}
+.choices:not(:has(.correct,.wrong,.picked)){background:var(--todo);border-left:5px solid var(--todo-line);border-radius:8px;padding:.5rem .6rem}
+.bell-list li:not(:has(.on)){background:var(--todo);border-left:5px solid var(--todo-line);border-radius:8px;padding:.4rem .6rem}
+.todo-key{display:flex;align-items:center;gap:.6rem;font-size:.85rem;margin:0 0 2rem;font-family:var(--font-ui)}
+.todo-key span.sw2{display:inline-block;width:2.2rem;height:1.1rem;background:var(--todo);border-left:5px solid var(--todo-line);border-radius:4px}
+:root[data-theme="dark"] .todo-tag{color:#111}
+</style>
+
+<div class="wrap">
+  <nav class="rail" id="rail" aria-label="Lesson sections">
+    <div class="rail-top">
+      <div class="rail-brand"><span class="rail-dot"></span>STORM STUDIO<br><small>Habits · Lesson 2</small></div>
+      <div class="rail-ctl"><a class="rail-agenda" href="agenda.html" target="_blank" rel="noopener" title="Agenda board">📋 Agenda</a><a class="rail-agenda" href="https://radan55.github.io/stormhabit/" target="_blank" rel="noopener" title="Lesson 1: How a Habit Is Built">🔁</a><button id="themeBtn" aria-label="Light or dark mode">🌙</button><button id="langBtn" aria-pressed="true">ES</button></div>
+    </div>
+    <div class="prog" id="prog" aria-label="Lesson progress">
+      <div class="prog-top" title="Tap to see each step"><span><b id="progPct">0%</b> <span id="progNext">Next: Bell ringer</span></span><span id="progCount">0 / 10</span></div>
+      <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+      <div class="prog-steps" id="progSteps"></div>
+    </div>
+    <ol class="rail-links">
+      <li><a href="#s-today" style="--sec:#1e5a8a">Today</a></li>
+      <li><a href="#s-bell" style="--sec:#c9a227">Bell ringer</a></li>
+      <li><a href="#s-hook" style="--sec:#b8441f">Hook + lab</a></li>
+      <li><a href="#s-video" style="--sec:#2e7d4f">Video</a></li>
+      <li><a href="#s-read" style="--sec:#2e7d4f">Read &amp; listen</a></li>
+      <li><a href="#s-vocab" style="--sec:#1b7f8a">Vocabulary</a></li>
+      <li><a href="#grammar" style="--sec:#c2185b">Grammar</a></li>
+      <li><a href="#s-plan" style="--sec:#6a3d9a">Keystone plan</a></li>
+      <li><a href="#s-test" style="--sec:#b8441f">Test prep</a></li>
+      <li><a href="#s-exit" style="--sec:#6a3d9a">Exit ticket</a></li>
+    </ol>
+  </nav>
+  <button class="rail-fab" id="railFab" aria-label="Open lesson menu" aria-expanded="false"><span id="fabPct">0%</span> Menu</button>
+  <main class="main">
+  <div class="hero">
+    <div class="hero-text">
+      <div class="eyebrow">Read &amp; listen · Informational text · Lesson 2 of the habit series <span class="es">Lee y escucha · Texto informativo · Lección 2 de la serie de hábitos</span></div>
+      <h1>One Small Change</h1>
+      <p class="hero-sub">Keystone habits: one habit that knocks over the rest. <span class="es">Hábitos clave: un hábito que derriba a los demás.</span></p>
+      <p class="hero-links" style="display:flex;gap:.6rem;flex-wrap:wrap"><a class="btn-link" href="agenda.html" target="_blank" rel="noopener">📋 Agenda board <span class="es">Tablero de agenda</span></a><a class="btn-link" href="https://radan55.github.io/stormhabit/" target="_blank" rel="noopener">🔁 Lesson 1 <span class="es">Lección 1</span></a></p>
+    </div>
+    <svg class="hero-loop" viewBox="0 0 220 220" role="img" aria-label="Five dominoes falling in a row, the first one pushed by a finger">
+      <g fill="#111418"><rect x="18" y="120" width="22" height="70" rx="4" transform="rotate(-38 29 190)" fill="#e6b800" stroke="#111418" stroke-width="3"/><rect x="62" y="112" width="22" height="78" rx="4" transform="rotate(-24 73 190)" fill="#ff4d2e" stroke="#111418" stroke-width="3"/><rect x="106" y="104" width="22" height="86" rx="4" transform="rotate(-10 117 190)" fill="#0b6e62" stroke="#111418" stroke-width="3"/><rect x="150" y="96" width="22" height="94" rx="4" fill="#6a3d9a" stroke="#111418" stroke-width="3"/><rect x="190" y="88" width="22" height="102" rx="4" fill="#1e5a8a" stroke="#111418" stroke-width="3"/></g>
+      <path d="M8 100 q10 -30 30 -18" fill="none" stroke="#111418" stroke-width="3" stroke-linecap="round"/><circle cx="8" cy="100" r="5" fill="#111418"/>
+      <line x1="4" y1="194" x2="216" y2="194" stroke="#111418" stroke-width="3" stroke-linecap="round"/>
+      <text x="110" y="40" text-anchor="middle" class="hero-lbl">one push</text>
+    </svg>
+  </div>
+  <p class="howto">Press <strong>Listen to all</strong> to hear the whole passage, or the round button beside a paragraph to hear only that part. Tap any <span class="v" style="cursor:default">blue word</span> to see what it means.</p>
+  <p class="todo-key"><span class="sw2"></span><span><b>Light red = something to do:</b> tap, write on this page, or write in your notebook. It turns normal when it is done. <span class="es">Rojo claro = algo por hacer: toca, escribe en esta página o en tu cuaderno. Vuelve a lo normal cuando está hecho.</span></span></p>
+  <div class="plan90"><span class="eyebrow">90-minute plan <span class="es">Plan de 90 minutos</span></span>
+    <ol><li><b>5</b> Bell ringer</li><li><b>5</b> Draw it</li><li><b>5</b> Hook + lab</li><li><b>10</b> Video</li><li><b>15</b> Read &amp; listen</li><li><b>8</b> Vocabulary</li><li><b>7</b> Grammar</li><li><b>10</b> Keystone plan</li><li><b>15</b> Test prep</li><li><b>10</b> Exit ticket</li></ol></div>
+  <section class="today" id="s-today" aria-label="Today's lesson">
+    <div class="today-eq">
+      <div class="eyebrow">Essential question</div>
+      <p class="eq-q">Which one small habit could change the rest of your day?</p>
+    </div>
+    <div class="today-obj">
+      <div class="eyebrow">Today I can…</div>
+      <ul>
+        <li><b>Read &amp; listen:</b> explain what a keystone habit is and give two examples from the text.</li>
+        <li><b>Speak:</b> predict a chain of effects using the frame <i>“If I ___, then I will ___.”</i></li>
+        <li><b>Write:</b> answer the essential question in 3–5 sentences using at least three vocabulary words and two <i>if / then</i> sentences.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="bell" id="s-bell" aria-label="Bell ringer">
+    <div class="bell-head">
+      <div><div class="eyebrow">Bell ringer · 10 minutes · Part 1 · 5 minutes</div><p class="bell-title">Agree or disagree?</p></div>
+      <div class="timer"><span id="timerText">5:00</span><button id="timerBtn">Start</button></div>
+    </div>
+    <p class="bell-dir"><span class="todo-tag">NOTEBOOK</span><b>Step 1:</b> Read each statement and tap <b>Agree</b> or <b>Disagree</b>.<br><b>Step 2:</b> In your notebook, write one sentence for <u>each</u> of your four choices using the frame: <i>“I agree/disagree that ___ because ___.”</i><br><b>Step 3:</b> Be ready to read one of your sentences to the class.</p>
+    <ol class="bell-list" id="bell">
+      <li><span>To change my life, I need to change many things at once.</span><div class="ad"><button data-v="agree">Agree</button><button data-v="disagree">Disagree</button></div></li>
+      <li><span>Making your bed in the morning can change how the rest of your day goes.</span><div class="ad"><button data-v="agree">Agree</button><button data-v="disagree">Disagree</button></div></li>
+      <li><span>People who exercise usually eat better too.</span><div class="ad"><button data-v="agree">Agree</button><button data-v="disagree">Disagree</button></div></li>
+      <li><span>A small habit is not worth the effort.</span><div class="ad"><button data-v="agree">Agree</button><button data-v="disagree">Disagree</button></div></li>
+    </ol>
+    <p class="bell-note" id="bellNote">Example: <i>“I disagree that I need to change many things at once because one change can lead to others.”</i> After reading, come back and see if you would change any answer.</p>
+
+    <div class="draw">
+      <div class="bell-head">
+        <div><div class="eyebrow">Part 2 · Draw it · 5 minutes</div><p class="bell-title">Draw your domino chain</p></div>
+        <div class="timer"><span id="timer2Text">5:00</span><button id="timer2Btn">Start</button></div>
+      </div>
+      <p class="bell-dir"><span class="todo-tag">DRAW</span><b>Step 1:</b> Draw <u>four dominoes</u> in a row. On the first one, write one small habit you could start tomorrow. On the next three, write what might happen next, next, and next.<br><b>Step 2:</b> Label your chain with a word from the box: <i>keystone, chain, ripple, trigger, routine, result</i>.<br><b>Step 3:</b> Under the drawing, write one sentence: <i>“If I ___, then ___, and then ___.”</i></p>
+      <div class="pad-tools">
+        <span class="ctrl">Color</span>
+        <button class="sw on" data-c="#1f1b16" style="background:#1f1b16" aria-label="Black"></button>
+        <button class="sw" data-c="#b8441f" style="background:#b8441f" aria-label="Orange"></button>
+        <button class="sw" data-c="#1e5a8a" style="background:#1e5a8a" aria-label="Blue"></button>
+        <button class="sw" data-c="#2e7d4f" style="background:#2e7d4f" aria-label="Green"></button>
+        <button class="sw" data-c="#e6b800" style="background:#e6b800" aria-label="Yellow"></button>
+        <label class="ctrl">Size <select id="padSize"><option value="3">Thin</option><option value="6" selected>Medium</option><option value="12">Thick</option></select></label>
+        <button id="padEraser">Eraser</button>
+        <button id="padClear">Clear</button>
+      </div>
+      <canvas id="pad" width="900" height="520" aria-label="Sketchpad. Draw with your mouse or finger."></canvas>
+      <p class="bell-note">Your drawing stays on this screen only. Hold it up or describe it to a partner; if your teacher wants a copy, take a screenshot.</p>
+    </div>
+  </section>
+
+  <section class="lesson" id="s-hook" aria-label="Lesson frame">
+    <div class="hook">
+      <div class="bell-head">
+        <div class="eyebrow">Hook + streak lab · 5 minutes</div>
+        <div class="timer"><span id="timer3Text">5:00</span><button id="timer3Btn">Start</button></div>
+      </div>
+      <p class="hook-q">Think of the best day you had this month. What was the <u>first</u> thing you did that morning?</p>
+      <div class="poll" id="poll">
+        <button data-v="exercised or walked">Exercised or walked</button><button data-v="ate breakfast">Ate breakfast</button><button data-v="checked my phone">Checked my phone</button><button data-v="slept late">Slept late</button>
+      </div>
+      <p class="hook-note" id="hookNote">Tap one. Then talk with a partner: <em>Did that first thing change what came after it?</em></p>
+    </div>
+  <section class="item feedlab" aria-label="Streak lab">
+    <div class="bell-head">
+      <div><div class="eyebrow">Streak lab · 60 seconds</div><p class="bell-title">One small habit, 30 “days.” Can you keep the streak alive?</p></div>
+      <div class="timer"><span id="feedTimer">1:00</span><button id="feedStart" class="btn-primary">Start</button></div>
+    </div>
+    <p class="bell-dir">Press Start. Each “day” lasts two seconds. On every day, tap <b>Do it</b> once. Miss a day and the streak resets. Watch what happens to the other habits as your streak grows.</p>
+    <div class="phone">
+      <div class="phone-top">
+        <span class="phone-tab on">Streak lab</span>
+        <span class="phone-tab">Lab · Laboratorio</span>
+      </div>
+      <div class="lab-screen">
+        <div class="lab-bell" id="labBell">🛏️</div>
+        <div class="lab-msg" id="labMsg">Press Start. Your small habit: make the bed.</div>
+        <div>
+          <button class="lab-tap" id="labTap" disabled>✅ Do it</button>
+          <div class="lab-count"><span id="labCues">Day: 0 / 30</span><span id="labTaps">Streak: 0</span><span id="labRewards">Ripples: 0</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="feed-results" id="feedResults" hidden>
+      <div class="eyebrow">What just happened</div>
+      <ul id="feedStats"></ul>
+      <p class="item-q"><b>What did the streak feel like?</b></p>
+      <div class="poll" id="trickPoll">
+        <button data-v="momentum">Momentum · each day made the next one easier</button>
+        <button data-v="reset">Reset · one miss and I wanted to quit</button>
+        <button data-v="ripple">Ripple · other habits started to unlock</button>
+      </div>
+      <p class="item-ext" id="trickNote"><span class="todo-tag">NOTEBOOK</span>In your notebook: <i>“The streak felt like ___ because ___.”</i> You will read about this in paragraphs 3 and 5.</p>
+    </div>
+  </section>
+    <div class="frame-grid">
+      <div class="frame-box">
+        <div class="eyebrow">Objectives (full)</div>
+        <p class="obj-label">Content (ELA)</p>
+        <ul>
+          <li>Determine the main idea of an informational text and explain how examples support it.</li>
+          <li>Figure out the meaning of academic words such as <i>keystone</i>, <i>momentum</i>, and <i>ripple</i> from context.</li>
+          <li>Analyze a cause-and-effect chain and predict a likely next effect, citing text evidence.</li>
+        </ul>
+        <p class="obj-label">Language (ELP)</p>
+        <ul>
+          <li><b>Listening/Reading:</b> I can listen to and read an informational text and name a keystone habit and two of its effects.</li>
+          <li><b>Speaking:</b> I can predict a chain of effects, using the frame <i>“If I ___, then I will ___.”</i></li>
+          <li><b>Writing:</b> I can write a 3–5 sentence response with at least three vocabulary words and two <i>if / then</i> sentences.</li>
+        </ul>
+      </div>
+      <div class="frame-box">
+        <div class="eyebrow">Standards</div>
+        <p class="obj-label">Mississippi CCRS for ELA (Grades 9–10)</p>
+        <ul class="std">
+          <li><b>RI.9-10.1</b> Cite strong textual evidence to support analysis of what the text says explicitly and inferentially.</li>
+          <li><b>RI.9-10.2</b> Determine a central idea and analyze its development; provide an objective summary.</li>
+          <li><b>RI.9-10.3</b> Analyze how the author unfolds a series of ideas or events and the connections between them.</li>
+          <li><b>L.9-10.1</b> Use various types of phrases and clauses to convey specific meanings; write conditional sentences.</li>
+          <li><b>SL.9-10.1</b> Participate in collaborative discussions, building on others' ideas.</li>
+        </ul>
+        <p class="obj-label">ELP Standards (ELPA21, Grades 9–12)</p>
+        <ul class="std">
+          <li><b>ELP 1</b> Construct meaning from oral presentations and grade-appropriate literary and informational text.</li>
+          <li><b>ELP 2</b> Participate in grade-appropriate oral and written exchanges of information and ideas.</li>
+          <li><b>ELP 8</b> Determine the meaning of words and phrases in oral presentations and text.</li>
+          <li><b>ELP 9</b> Create clear and coherent speech and text.</li>
+          <li><b>ELP 10</b> Make accurate use of standard English to communicate in speech and writing.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <h2 class="section-head c-green"><span class="h-ic">🎬</span>Watch · One tiny step <span class="es">Mira · Un paso pequeño</span></h2>
+  <section class="item video" id="s-video" aria-label="Video" style="--sec:#2e7d4f;border-left:8px solid var(--sec)">
+    <div class="bell-head">
+      <div><div class="eyebrow">Watch · 10 minutes</div><p class="bell-title" style="margin:0">Change Your Life – One Tiny Step at a Time</p></div>
+      <div class="timer"><span id="timer7Text">10:00</span><button id="timer7Btn">Start</button></div>
+    </div>
+    <p class="bell-dir"><span class="todo-tag">WATCH + NOTEBOOK</span><b>Step 1:</b> Watch once with captions on (tap <b>CC</b>). Turn on English captions, or Spanish if you need them.<br><b>Step 2:</b> As you watch, write down <u>one tiny step</u> the video says is enough to start.<br><b>Step 3:</b> Answer the three video checks below. They grade themselves; you get one try each.</p>
+    <div class="vid-frame"><iframe src="https://www.youtube-nocookie.com/embed/75d_29QWELk?rel=0&cc_load_policy=1" title="Change Your Life – One Tiny Step at a Time" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+    <p class="chart-note" style="text-align:left"><a class="vid-alt" href="https://www.youtube.com/watch?v=75d_29QWELk" target="_blank" rel="noopener">▶ Open the video on YouTube instead</a> · <span class="es">Abrir el video en YouTube</span></p>
+    <p class="chart-note" style="text-align:left">Video: “Change Your Life – One Tiny Step at a Time” by Kurzgesagt – In a Nutshell on YouTube. Watch it right here, or open it on YouTube.</p>
+    <div class="item" style="padding:.8rem .9rem">
+      <p class="item-q"><b>Video check 1:</b> According to the video, what is the best way to start changing your life?<span class="es"><b>Comprobación 1:</b> Según el video, ¿cuál es la mejor manera de empezar a cambiar tu vida?</span></p>
+      <div class="choices" data-vq="1" role="group">
+        <button data-k="A"><span class="letter">A</span> change everything at once with a big plan</button>
+        <button data-k="B" data-ok="1"><span class="letter">B</span> start with one tiny step that is almost too easy</button>
+        <button data-k="C"><span class="letter">C</span> wait until you feel motivated</button>
+        <button data-k="D"><span class="letter">D</span> copy exactly what a successful person does</button>
+      </div>
+      <p class="feedback" data-vfb="1" aria-live="polite"></p>
+    </div>
+    <div class="item" style="padding:.8rem .9rem">
+      <p class="item-q"><b>Video check 2:</b> Why does the video say a tiny step works better than a big goal?<span class="es"><b>Comprobación 2:</b> ¿Por qué dice el video que un paso pequeño funciona mejor que una meta grande?</span></p>
+      <div class="choices" data-vq="2" role="group">
+        <button data-k="A"><span class="letter">A</span> because big goals are not important</button>
+        <button data-k="B"><span class="letter">B</span> because tiny steps do not take any time</button>
+        <button data-k="C" data-ok="1"><span class="letter">C</span> because a tiny step is easy to repeat, and repeating builds momentum</button>
+        <button data-k="D"><span class="letter">D</span> because other people will not notice</button>
+      </div>
+      <p class="feedback" data-vfb="2" aria-live="polite"></p>
+    </div>
+    <div class="item" style="padding:.8rem .9rem">
+      <p class="item-q"><b>Video check 3:</b> Which of these is a <u>tiny step</u>, the way the video means it?<span class="es"><b>Comprobación 3:</b> ¿Cuál de estos es un <u>paso pequeño</u>, como lo explica el video?</span></p>
+      <div class="choices" data-vq="3" role="group">
+        <button data-k="A"><span class="letter">A</span> run five miles every morning starting Monday</button>
+        <button data-k="B" data-ok="1"><span class="letter">B</span> put on your running shoes and walk to the end of the street</button>
+        <button data-k="C"><span class="letter">C</span> sign up for a marathon</button>
+        <button data-k="D"><span class="letter">D</span> read a whole book about running</button>
+      </div>
+      <p class="feedback" data-vfb="3" aria-live="polite"></p>
+    </div>
+    <p class="feedback" id="vidScore"><b>Video score: 0 / 3</b><span class="es">Puntuación del video: 0 / 3</span></p>
+    <p class="item-ext"><span class="todo-tag">SPEAK</span><b>Turn and talk:</b> Tell a partner one tiny step you could take tomorrow: <i>“If I ___, then I will probably ___.”</i> Then read the passage below.</p>
+  </section>
+
+  <h2 class="section-head c-green" ><span class="h-ic">🎧</span>Read &amp; listen · One Small Change <span class="es">Lee y escucha · Un pequeño cambio</span></h2>
+  <div class="bell-head" style="margin-bottom:.4rem"><div class="eyebrow" style="color:#2e7d4f;font-weight:700">Read &amp; listen · 15 minutes <span class="es">Lee y escucha · 15 minutos</span></div><div class="timer"><span id="timer8Text">15:00</span><button id="timer8Btn">Start</button></div></div>
+  <p class="gl-note">Press <b>Listen to all</b> and follow along. The reading stops three times for you to write a sentence. Tap any blue word for its meaning.<span class="es">Pulsa <b>Escuchar todo</b> y sigue la lectura. La lectura se detiene tres veces para que escribas una oración. Toca cualquier palabra azul para ver su significado.</span></p>
+
+  <div class="player" id="s-read" role="region" aria-label="Audio player">
+    <button class="btn-primary" id="playAll">▶ Listen to all</button>
+    <button id="pauseBtn" disabled>⏸ Pause</button>
+    <button id="stopBtn" disabled>■ Stop</button>
+    <label class="ctrl">Speed
+      <select id="rate"><option value="0.75">Slow</option><option value="0.9" selected>Normal</option><option value="1.1">Fast</option></select>
+    </label>
+    <label class="ctrl">Voice <select id="voice"></select></label>
+    <div class="status" id="status">Ready. Six paragraphs, about four minutes.</div>
+    <div class="nosupport" id="nosupport">This browser cannot read aloud. Try Chrome, Edge, or Safari.</div>
+  </div>
+
+  <div class="passage" id="passage">
+    <div class="para" data-i="0"><div class="pnum"><span>1</span><button class="pplay" aria-label="Play paragraph 1">▶</button></div>
+      <p>In the last lesson, you learned that every habit is a <button class="v" data-w="loop">loop</button>: a cue, a routine, and a reward. But not all habits are equal. Some habits stay small. Others start a <button class="v" data-w="chain reaction">chain reaction</button>. Scientists call these <button class="v" data-w="keystone habits">keystone habits</button>. In a stone arch, the keystone is the one stone at the top that holds all the others in place. A keystone habit works the same way. Change that one habit, and other habits begin to <button class="v" data-w="shift">shift</button> on their own.</p><button class="es-toggle" type="button" aria-expanded="false">Ver en español ▾</button><div class="para-es" lang="es">En la lección anterior aprendiste que todo hábito es un ciclo: una señal, una rutina y una recompensa. Pero no todos los hábitos son iguales. Algunos hábitos se quedan pequeños. Otros inician una reacción en cadena. Los científicos los llaman hábitos clave. En un arco de piedra, la clave es la piedra de arriba que sostiene a todas las demás. Un hábito clave funciona igual. Cambia ese hábito, y otros hábitos empiezan a cambiar por sí solos.</div></div>
+
+    <div class="para" data-i="1"><div class="pnum"><span>2</span><button class="pplay" aria-label="Play paragraph 2">▶</button></div>
+      <p>The most famous keystone habit is <button class="v" data-w="exercise">exercise</button>. Researchers who studied people who started working out, even once a week, noticed something strange. The exercise was not the only thing that changed. The same people began to eat better. They slept more. They smoked less. They used their credit cards less and felt less <button class="v" data-w="stress">stress</button> at work. Nobody told them to do these things. One habit had <button class="v" data-w="triggered">triggered</button> a <button class="v" data-w="ripple effect">ripple effect</button>, like a stone dropped in a pond.</p><button class="es-toggle" type="button" aria-expanded="false">Ver en español ▾</button><div class="para-es" lang="es">El hábito clave más famoso es el ejercicio. Los investigadores que estudiaron a personas que empezaron a hacer ejercicio, aunque fuera una vez por semana, notaron algo extraño. El ejercicio no fue lo único que cambió. Las mismas personas empezaron a comer mejor. Dormían más. Fumaban menos. Usaban menos sus tarjetas de crédito y sentían menos estrés en el trabajo. Nadie les dijo que hicieran estas cosas. Un hábito había provocado un efecto dominó, como una piedra que cae en un estanque.</div></div>
+
+    <div class="jot" data-after="1" data-keys="keystone,arch,chain,ripple,exercise,trigger,change,shift,one"><div class="jot-head"><span class="eyebrow"><span class="todo-tag">WRITE HERE</span>Stop and jot · after paragraphs 1–2</span><button class="jot-go" hidden>Continue reading ▶</button></div>
+      <p>In one sentence: <b>What is a keystone habit, and what is the famous example?</b></p>
+      <textarea class="jot-text" rows="2" placeholder="A keystone habit is… The famous example is…"></textarea><p class="jot-fb">Write at least 6 words using a word from the paragraphs. <span class="es">Escribe al menos 6 palabras usando una palabra de los párrafos.</span></p></div>
+
+    <div class="para" data-i="2"><div class="pnum"><span>3</span><button class="pplay" aria-label="Play paragraph 3">▶</button></div>
+      <p>Why does this happen? Part of the answer is <button class="v" data-w="momentum">momentum</button>. When you finish a workout, your brain records a small <button class="v" data-w="victory">victory</button>. That feeling of “I did it” does not stay in the gym. It follows you to the kitchen, where choosing an apple over chips suddenly feels <button class="v" data-w="possible">possible</button>. Each small win makes the next good choice a little easier. Researchers call these small wins, and they add up faster than most people expect.</p><button class="es-toggle" type="button" aria-expanded="false">Ver en español ▾</button><div class="para-es" lang="es">¿Por qué pasa esto? Parte de la respuesta es el impulso. Cuando terminas un entrenamiento, tu cerebro registra una pequeña victoria. Esa sensación de «lo logré» no se queda en el gimnasio. Te sigue a la cocina, donde elegir una manzana en vez de papitas de repente parece posible. Cada pequeño logro hace que la siguiente buena decisión sea un poco más fácil. Los investigadores los llaman pequeños logros, y se suman más rápido de lo que la mayoría espera.</div></div>
+
+    <div class="para" data-i="3"><div class="pnum"><span>4</span><button class="pplay" aria-label="Play paragraph 4">▶</button></div>
+      <p>The other part of the answer is <button class="v" data-w="identity">identity</button>. A person who exercises three times a week starts to think, “I am someone who takes care of myself.” Once you believe that about yourself, it changes what you do when no one is watching. You go to bed earlier because that is what a healthy person does. You finish your homework because that is what a <button class="v" data-w="responsible">responsible</button> person does. The habit changes the <button class="v" data-w="story">story</button> you tell about who you are, and the story changes everything else.</p><button class="es-toggle" type="button" aria-expanded="false">Ver en español ▾</button><div class="para-es" lang="es">La otra parte de la respuesta es la identidad. Una persona que hace ejercicio tres veces por semana empieza a pensar: «Soy alguien que se cuida». Una vez que crees eso de ti mismo, cambia lo que haces cuando nadie te mira. Te acuestas más temprano porque eso hace una persona sana. Terminas tu tarea porque eso hace una persona responsable. El hábito cambia la historia que cuentas sobre quién eres, y la historia cambia todo lo demás.</div></div>
+
+    <div class="jot" data-after="3" data-keys="momentum,victory,win,identity,story,believe,easier,yourself"><div class="jot-head"><span class="eyebrow"><span class="todo-tag">WRITE HERE</span>Stop and jot · after paragraphs 3–4</span><button class="jot-go" hidden>Continue reading ▶</button></div>
+      <p>In one sentence: <b>What are the two reasons a keystone habit spreads, according to paragraphs 3 and 4?</b></p>
+      <textarea class="jot-text" rows="2" placeholder="A keystone habit spreads because of ___ and ___…"></textarea><p class="jot-fb">Write at least 6 words using a word from the paragraphs. <span class="es">Escribe al menos 6 palabras usando una palabra de los párrafos.</span></p></div>
+
+    <div class="para" data-i="4"><div class="pnum"><span>5</span><button class="pplay" aria-label="Play paragraph 5">▶</button></div>
+      <p>Keystone habits do not have to be big. One of the most studied is making your bed. People who make their bed every morning report higher <button class="v" data-w="productivity">productivity</button> and a stronger sense of <button class="v" data-w="control">control</button> during the day. The bed itself does not matter. What matters is that the day starts with a finished task. Family dinner is another one. Teens who eat dinner with their family several times a week get better grades and have fewer problems with <button class="v" data-w="anxiety">anxiety</button>, even when the food is the same. The <button class="v" data-w="pattern">pattern</button> is what counts.</p><button class="es-toggle" type="button" aria-expanded="false">Ver en español ▾</button><div class="para-es" lang="es">Los hábitos clave no tienen que ser grandes. Uno de los más estudiados es tender la cama. Las personas que tienden su cama cada mañana reportan más productividad y una mayor sensación de control durante el día. La cama en sí no importa. Lo que importa es que el día empieza con una tarea terminada. La cena en familia es otro. Los adolescentes que cenan con su familia varias veces por semana sacan mejores calificaciones y tienen menos problemas de ansiedad, aunque la comida sea la misma. El patrón es lo que cuenta.</div></div>
+
+    <div class="para" data-i="5"><div class="pnum"><span>6</span><button class="pplay" aria-label="Play paragraph 6">▶</button></div>
+      <p>So how do you find your keystone habit? Look for a small action that gives you a quick win and makes you feel <button class="v" data-w="capable">capable</button>. Then make it almost too easy to skip: two push-ups, one page of a book, one glass of water before you check your phone. Do it in the same place at the same time until it becomes <button class="v" data-w="automatic">automatic</button>. If you <button class="v" data-w="protect">protect</button> that one habit, you will not have to fight every other habit one by one. The first domino falls, and the rest follow.</p><button class="es-toggle" type="button" aria-expanded="false">Ver en español ▾</button><div class="para-es" lang="es">Entonces, ¿cómo encuentras tu hábito clave? Busca una acción pequeña que te dé un logro rápido y te haga sentir capaz. Luego hazla casi demasiado fácil como para saltarla: dos flexiones, una página de un libro, un vaso de agua antes de revisar tu teléfono. Hazla en el mismo lugar y a la misma hora hasta que se vuelva automática. Si proteges ese único hábito, no tendrás que pelear con cada uno de los demás hábitos uno por uno. Cae la primera ficha de dominó, y las demás la siguen.</div></div>
+
+    <div class="jot" data-after="5" data-keys="keystone,small,easy,win,capable,automatic,protect,domino,bed,water"><div class="jot-head"><span class="eyebrow"><span class="todo-tag">WRITE HERE</span>Stop and jot · after paragraphs 5–6</span><button class="jot-go" hidden>Done ✓</button></div>
+      <p>In one sentence: <b>Which keystone habit would you try, and why would it be easy to keep?</b></p>
+      <textarea class="jot-text" rows="2" placeholder="I would try… because…"></textarea><p class="jot-fb">Write at least 6 words using a word from the paragraphs. <span class="es">Escribe al menos 6 palabras usando una palabra de los párrafos.</span></p></div>
+  </div>
+
+  <h2 class="section-head c-purple"><span class="h-ic">🧱</span>Keystone plan <span class="es">Plan de hábito clave</span></h2>
+  <section class="item appdesign" id="s-plan" aria-label="Keystone plan">
+    <div class="bell-head">
+      <div><div class="eyebrow">Keystone plan · 10 minutes</div><p class="bell-title" style="margin:0">Pick one domino. Predict the next three.</p></div>
+      <div class="timer"><span id="timer5Text">10:00</span><button id="timer5Btn">Start</button></div>
+    </div>
+    <p class="bell-dir">Paragraph 6 says to pick one small action that gives you a quick win. Choose yours, then predict the chain reaction. The domino card builds itself as you type. Then copy your plan into your notebook and be ready to explain it in 30 seconds.</p>
+    <div class="ad-grid">
+      <div class="ad-form">
+        <label class="ad-l">My keystone habit (small and easy) <input id="adName" type="text" maxlength="50" placeholder="e.g., One glass of water before my phone"></label>
+        <label class="ad-l">When and where <input id="adCue" type="text" maxlength="60" placeholder="e.g., In the kitchen, right after I wake up"></label>
+        <label class="ad-l">Ripple 1 · what might change next <input id="adOld" type="text" maxlength="60" placeholder="e.g., I will eat breakfast instead of skipping it."></label>
+        <label class="ad-l">Ripple 2 · and then <input id="adReward" type="text" maxlength="60" placeholder="e.g., I will have energy in first period."></label>
+        <label class="ad-l">Ripple 3 · and then <input id="adNew" type="text" maxlength="60" placeholder="e.g., I will finish my work in class."></label>
+        <div class="ad-l">Icon
+          <div class="poll" id="adIcons">
+            <button data-v="💧">💧</button><button data-v="🛏️">🛏️</button><button data-v="🏃">🏃</button><button data-v="📖">📖</button><button data-v="🍎">🍎</button><button data-v="🍽️">🍽️</button><button data-v="📝">📝</button><button data-v="🎒">🎒</button>
+          </div>
+        </div>
+      </div>
+      <div class="ad-preview">
+        <div class="loop-card">
+          <div class="loop-head"><span class="loop-icon" id="psIcon">🧱</span><p class="loop-name" id="psName">Your keystone habit</p></div>
+          <div class="loop-step cue"><b>When</b><span id="psCue"><span class="ps-empty">When and where?</span></span></div>
+          <div class="loop-arrow">▼</div>
+          <div class="loop-step routine"><b>Ripple 1</b><span id="psOld"><span class="ps-empty">What changes next?</span></span></div>
+          <div class="loop-arrow">▼</div>
+          <div class="loop-step reward"><b>Ripple 2</b><span id="psReward"><span class="ps-empty">And then?</span></span></div>
+          <div class="loop-arrow">▼</div>
+          <div class="loop-step cue"><b>Ripple 3</b><span id="psNew"><span class="ps-empty">And then?</span></span></div>
+        </div>
+      </div>
+    </div>
+    <p class="feedback" id="adStatus">0 of 6 parts done.</p>
+    <p class="item-ext"><span class="todo-tag">NOTEBOOK + SPEAK</span><b>Explain it (30 seconds):</b> <i>“My keystone habit is ___. If I ___, then I will ___. After that, ___. The small win makes the next choice easier.”</i></p>
+  </section>
+
+  <section class="item notebook" id="s-vocab" aria-label="Vocabulary notebook">
+    <div class="eyebrow">Vocabulary notebook</div>
+    <p class="item-q"><span class="todo-tag">NOTEBOOK</span>As you read, tap each <span class="v" style="cursor:default">blue word</span> and copy it into your notebook with its meaning <b>in your own words</b>. Set up your page like this:</p>
+    <div class="nb-ex"><span>Word</span><span>My definition</span></div>
+    <div class="nb-ex nb-row"><span>keystone habit</span><span>one habit that makes other habits change too</span></div>
+    <p class="item-ext">Goal: at least <b>10 words</b> before you start the questions below. You may write the Spanish word next to the English word if it helps you remember.</p>
+  </section>
+
+  <h2 class="c-teal">Vocabulary activity · Match the meaning <span class="es">Actividad de vocabulario · Une el significado</span></h2>
+  <div class="bell-head" style="margin-bottom:.4rem"><div class="eyebrow" style="color:#1b7f8a;font-weight:700">Notebook + match · 8 minutes <span class="es">Cuaderno + unir · 8 minutos</span></div><div class="timer"><span id="timer9Text">8:00</span><button id="timer9Btn">Start</button></div></div>
+  <p class="gl-note">Tap a word, then tap its meaning. Match all eight. Wrong matches turn orange so you can try again.<span class="es">Toca una palabra y luego su significado. Une las ocho. Los errores se ponen naranja para que lo intentes de nuevo.</span></p>
+  <section class="item vmatch" aria-label="Vocabulary matching">
+    <div class="vm-grid">
+      <div class="vm-col" id="vmWords"><div class="eyebrow">Words</div></div>
+      <div class="vm-col" id="vmDefs"><div class="eyebrow">Meanings</div></div>
+    </div>
+    <div class="exit-meter">
+      <span class="pill" id="vmStreak">🔥 Streak: 0</span>
+      <span class="pill" id="vmBest">Best streak: 0</span>
+      <span class="pill" id="vmSpeedPill" hidden>⏱ 1:00 · 0 matches</span>
+    </div>
+    <p class="feedback" id="vmStatus">0 of 8 matched.</p>
+    <div class="acts"><button id="vmShuffle">New set of words</button><button id="vmSpeed" class="btn-primary">⚡ 60-second speed round</button></div>
+    <p class="item-ext"><span class="todo-tag">NOTEBOOK</span><b>Use it:</b> In your notebook, write three sentences about a habit that could change your day. Use one vocabulary word in each sentence and underline it. Example: <i>“Making my bed gives me <u>momentum</u> for the rest of the morning.”</i></p>
+  </section>
+
+  <h2 class="c-pink">Grammar move · If this, then that <span class="es">Movida de gramática · Si esto, entonces aquello</span></h2>
+  <div class="bell-head" style="margin-bottom:.4rem"><div class="eyebrow" style="color:#c2185b;font-weight:700">Grammar move · 7 minutes <span class="es">Movida de gramática · 7 minutos</span></div><div class="timer"><span id="timer10Text">7:00</span><button id="timer10Btn">Start</button></div></div>
+  <p class="gl-note">A keystone habit is a prediction: <b>if</b> this happens, <b>then</b> that will follow. Use the first conditional: <b>If</b> + present, <b>(then)</b> + <b>will</b> + verb. Tap a button to build each sentence. Notice the comma after the <i>if</i> part, and no comma when <i>if</i> comes second.<span class="es">Un hábito clave es una predicción: <b>si</b> pasa esto, <b>entonces</b> seguirá aquello. Usa el primer condicional: <b>If</b> + presente, <b>(then)</b> + <b>will</b> + verbo. Toca un botón para formar cada oración. Fíjate en la coma después de la parte con <i>if</i>, y sin coma cuando <i>if</i> va segundo.</span></p>
+  <section class="item" aria-label="Grammar move" id="grammar">
+    <div class="gm-row" data-a="you exercise once a week" data-b="you will probably eat better">
+      <p class="gm-pair">1. You exercise once a week. &nbsp;→&nbsp; You will probably eat better.</p>
+      <div class="poll gm-pick"><button data-v="If">If … , then …</button><button data-v="mid">… if …</button></div>
+      <p class="gm-out"></p>
+    </div>
+    <div class="gm-row" data-a="you make your bed" data-b="your day will start with a finished task">
+      <p class="gm-pair">2. You make your bed. &nbsp;→&nbsp; Your day will start with a finished task.</p>
+      <div class="poll gm-pick"><button data-v="If">If … , then …</button><button data-v="mid">… if …</button></div>
+      <p class="gm-out"></p>
+    </div>
+    <div class="gm-row" data-a="you protect one keystone habit" data-b="the other habits will follow">
+      <p class="gm-pair">3. You protect one keystone habit. &nbsp;→&nbsp; The other habits will follow.</p>
+      <div class="poll gm-pick"><button data-v="If">If … , then …</button><button data-v="mid">… if …</button></div>
+      <p class="gm-out"></p>
+    </div>
+    <p class="item-ext"><span class="todo-tag">NOTEBOOK</span><b>Your turn:</b> In your notebook, write two <i>if / then</i> sentences about your own keystone habit: one with <i>If</i> first (comma!) and one with <i>if</i> in the middle (no comma). Underline <i>will</i> in each one.</p>
+  </section>
+
+  <h2 class="section-head c-orange" id="s-test"><span class="h-ic">📝</span>Test prep <span class="es">Preparación para el examen</span></h2>
+  <div class="bell-head" style="margin-bottom:.5rem">
+    <p class="gl-note" style="margin:0;flex:1 1 16rem">Five ELPA21-style questions in 15 minutes. Your answers are graded automatically on this page; show your score to your teacher.<span class="es">Cinco preguntas al estilo ELPA21 en 15 minutos. Tus respuestas se califican automáticamente en esta página; muestra tu puntuación a tu maestro.</span></p>
+    <div class="timer"><span id="timer6Text">15:00</span><button id="timer6Btn">Start</button></div>
+  </div>
+  <h2 class="c-orange">Test prep 1 · Reading a graph <span class="es">Preparación 1 · Leer una gráfica</span></h2>
+  <p class="gl-note">These five items are written in the style of ELPA21 questions. You get <b>one answer</b> per question, so think before you tap.<span class="es">Tienes <b>una sola respuesta</b> por pregunta, así que piensa antes de tocar. Las opciones de respuesta están en inglés, como en el examen real.</span></p>
+  <section class="item" aria-label="Practice question">
+    <p class="item-dir"><b>Directions:</b> A researcher followed 100 students for 12 weeks. Half started a small exercise habit; half did not. The graph shows how many students in each group also reported a second new healthy habit by the end.<span class="es"><b>Instrucciones:</b> Un investigador siguió a 100 estudiantes durante 12 semanas. La mitad empezó un pequeño hábito de ejercicio; la otra mitad no. La gráfica muestra cuántos estudiantes de cada grupo reportaron también un segundo hábito saludable nuevo al final.</span></p>
+    <figure class="chart">
+      <figcaption>Students Who Added a Second Healthy Habit (of 50 in each group)</figcaption>
+      <svg viewBox="0 0 560 300" role="img" aria-label="Bar graph. Exercise group: ate better 34, slept more 29, less screen time 22. No-exercise group: ate better 11, slept more 9, less screen time 8.">
+        <g class="grid">
+          <line x1="60" y1="240" x2="530" y2="240"/><line x1="60" y1="196" x2="530" y2="196"/><line x1="60" y1="152" x2="530" y2="152"/>
+          <line x1="60" y1="108" x2="530" y2="108"/><line x1="60" y1="64" x2="530" y2="64"/><line x1="60" y1="20" x2="530" y2="20"/>
+        </g>
+        <g class="tick">
+          <text x="52" y="244">0</text><text x="52" y="200">10</text><text x="52" y="156">20</text><text x="52" y="112">30</text><text x="52" y="68">40</text><text x="52" y="24">50</text>
+        </g>
+        <text class="axis" transform="rotate(-90) translate(-130 18)">Students</text>
+        <g class="bars">
+          <rect x="90" y="90.4" width="40" height="149.6"/><text class="val" x="110" y="83">34</text>
+          <rect x="134" y="191.6" width="40" height="48.4" fill="#c9a227"/><text class="val" x="154" y="184">11</text>
+          <rect x="240" y="112.4" width="40" height="127.6"/><text class="val" x="260" y="105">29</text>
+          <rect x="284" y="200.4" width="40" height="39.6" fill="#c9a227"/><text class="val" x="304" y="193">9</text>
+          <rect x="390" y="143.2" width="40" height="96.8"/><text class="val" x="410" y="136">22</text>
+          <rect x="434" y="204.8" width="40" height="35.2" fill="#c9a227"/><text class="val" x="454" y="197">8</text>
+        </g>
+        <g class="cat">
+          <text x="132" y="262">Ate better</text><text x="282" y="262">Slept more</text><text x="432" y="262">Less screen time</text>
+          <text x="132" y="280" style="font-size:11px">■ exercise  ■ no exercise</text>
+        </g>
+      </svg>
+      <p class="chart-note">Sample data for practice; numbers are not from a published study. Dark bars = exercise group; gold bars = no-exercise group.</p>
+    </figure>
+    <p class="item-q"><b>Question:</b> Which statement is <u>best</u> supported by the graph <u>and</u> paragraph 2 of the passage?<span class="es"><b>Pregunta:</b> ¿Qué afirmación está <u>mejor</u> apoyada por la gráfica <u>y</u> el párrafo 2 del texto?</span></p>
+    <div class="hear"><button type="button" class="hear-q" data-q="1">🔊 Hear the question <span class="es">Oír la pregunta</span></button><button type="button" class="hear-c" data-q="1">🔊 Hear the choices <span class="es">Oír las opciones</span></button></div>
+    <div class="choices" id="choices" role="group" aria-label="Answer choices">
+      <button data-k="A"><span class="letter">A</span> Exercise made every student eat better.</button>
+      <button data-k="B" data-ok="1"><span class="letter">B</span> Students who started exercising were more likely to add other healthy habits.</button>
+      <button data-k="C"><span class="letter">C</span> Screen time went up for the exercise group.</button>
+      <button data-k="D"><span class="letter">D</span> The two groups changed in exactly the same way.</button>
+    </div>
+    <p class="feedback" id="feedback" aria-live="polite"></p>
+    <p class="item-ext"><span class="todo-tag">NOTEBOOK</span><b>Part B (explain):</b> Write one sentence using the frame: <i>“The graph shows that ___, and paragraph 2 says ___.”</i><span class="es"><b>Parte B (explica):</b> Escribe una oración con el marco: «The graph shows that ___, and paragraph 2 says ___».</span></p>
+  </section>
+
+  <h2 class="c-orange">Test prep 2 · Word meaning <span class="es">Preparación 2 · Significado de una palabra</span></h2>
+  <section class="item" aria-label="Practice question 2">
+    <p class="item-dir"><b>Directions:</b> Read the sentences from paragraph 3. Then answer the question.<span class="es"><b>Instrucciones:</b> Lee las oraciones del párrafo 3. Luego responde la pregunta.</span></p>
+    <blockquote class="quote">Part of the answer is <b>momentum</b>. When you finish a workout, your brain records a small victory. … Each small win makes the next good choice a little easier.</blockquote>
+    <p class="item-q"><b>Question:</b> What does the word <b>momentum</b> mean in these sentences?<span class="es"><b>Pregunta:</b> ¿Qué significa la palabra <b>momentum</b> en estas oraciones?</span></p>
+    <div class="hear"><button type="button" class="hear-q" data-q="2">🔊 Hear the question <span class="es">Oír la pregunta</span></button><button type="button" class="hear-c" data-q="2">🔊 Hear the choices <span class="es">Oír las opciones</span></button></div>
+    <div class="choices" data-item="q2" role="group" aria-label="Answer choices">
+      <button data-k="A"><span class="letter">A</span> a moment of rest after exercise</button>
+      <button data-k="B" data-ok="1"><span class="letter">B</span> the force that keeps something going once it has started</button>
+      <button data-k="C"><span class="letter">C</span> a prize you win at the gym</button>
+      <button data-k="D"><span class="letter">D</span> a feeling of being tired</button>
+    </div>
+    <p class="feedback" data-fb="q2" aria-live="polite"></p>
+  </section>
+
+  <h2 class="c-orange">Test prep 3 · Supporting details <span class="es">Preparación 3 · Detalles de apoyo</span></h2>
+  <section class="item" aria-label="Practice question 3">
+    <p class="item-dir"><b>Directions:</b> Read the main idea. Then choose the details from the passage that support it.<span class="es"><b>Instrucciones:</b> Lee la idea principal. Luego elige los detalles del texto que la apoyan.</span></p>
+    <p class="item-q"><b>Main idea:</b> A keystone habit does not have to be big to have a big effect.<span class="es"><b>Idea principal:</b> Un hábito clave no tiene que ser grande para tener un gran efecto.</span></p>
+    <p class="item-q"><b>Question:</b> Choose <u>TWO</u> details from the passage that support this main idea.<span class="es"><b>Pregunta:</b> Elige <u>DOS</u> detalles del texto que apoyan esta idea principal.</span></p>
+    <div class="hear"><button type="button" class="hear-q" data-q="3">🔊 Hear the question <span class="es">Oír la pregunta</span></button><button type="button" class="hear-c" data-q="3">🔊 Hear the choices <span class="es">Oír las opciones</span></button></div>
+    <div class="choices" data-item="q3" data-multi="2" role="group" aria-label="Answer choices">
+      <button data-k="A" data-ok="1"><span class="letter">A</span> People who make their bed each morning report higher productivity and more control.</button>
+      <button data-k="B"><span class="letter">B</span> In a stone arch, the keystone is the stone at the top.</button>
+      <button data-k="C" data-ok="1"><span class="letter">C</span> Teens who eat family dinner several times a week get better grades.</button>
+      <button data-k="D"><span class="letter">D</span> A person who exercises starts to think, “I am someone who takes care of myself.”</button>
+      <button data-k="E"><span class="letter">E</span> Every habit is a loop with a cue, a routine, and a reward.</button>
+    </div>
+    <p class="feedback" data-fb="q3" aria-live="polite">Select two answers, then press Check.<span class="es">Elige dos respuestas y luego pulsa Revisar.</span></p>
+    <div><button id="checkQ3" class="btn-primary">Check answers</button></div>
+  </section>
+
+  <h2 class="c-orange">Test prep 4 · Author's purpose <span class="es">Preparación 4 · Propósito del autor</span></h2>
+  <section class="item" aria-label="Practice question 4">
+    <p class="item-dir"><b>Directions:</b> Read the sentences from paragraph 1. Then answer the question.<span class="es"><b>Instrucciones:</b> Lee las oraciones del párrafo 1. Luego responde la pregunta.</span></p>
+    <blockquote class="quote">In a stone arch, the keystone is the one stone at the top that holds all the others in place. A keystone habit works the same way.</blockquote>
+    <p class="item-q"><b>Question:</b> Why does the author compare a habit to the keystone of an arch?<span class="es"><b>Pregunta:</b> ¿Por qué el autor compara un hábito con la piedra clave de un arco?</span></p>
+    <div class="hear"><button type="button" class="hear-q" data-q="4">🔊 Hear the question <span class="es">Oír la pregunta</span></button><button type="button" class="hear-c" data-q="4">🔊 Hear the choices <span class="es">Oír las opciones</span></button></div>
+    <div class="choices" data-item="q4" role="group" aria-label="Answer choices">
+      <button data-k="A"><span class="letter">A</span> to show that habits are made of stone and hard to change</button>
+      <button data-k="B" data-ok="1"><span class="letter">B</span> to show that one habit can hold many other habits in place</button>
+      <button data-k="C"><span class="letter">C</span> to explain how to build an arch</button>
+      <button data-k="D"><span class="letter">D</span> to show that habits are heavy and tiring</button>
+    </div>
+    <p class="feedback" data-fb="q4" aria-live="polite"></p>
+  </section>
+
+  <h2 class="c-orange">Test prep 5 · Listening <span class="es">Preparación 5 · Comprensión auditiva</span></h2>
+  <section class="item" aria-label="Practice question 5">
+    <p class="item-dir"><b>Directions:</b> Listen to the paragraph. You may listen two times. Then answer the question. (The text is hidden on purpose.)<span class="es"><b>Instrucciones:</b> Escucha el párrafo. Puedes escucharlo dos veces. Luego responde la pregunta. (El texto está oculto a propósito.)</span></p>
+    <div class="listen-box">
+      <button id="listenQ5" class="btn-primary">🔊 Play the paragraph</button>
+      <span id="listenCount" class="ctrl">Plays left: 2 <span class="es">Reproducciones restantes: 2</span></span>
+    </div>
+    <p class="item-q"><b>Question:</b> According to the speaker, what should you look for when choosing a keystone habit?<span class="es"><b>Pregunta:</b> Según el hablante, ¿qué debes buscar al elegir un hábito clave?</span></p>
+    <div class="hear"><button type="button" class="hear-q" data-q="5">🔊 Hear the question <span class="es">Oír la pregunta</span></button><button type="button" class="hear-c" data-q="5">🔊 Hear the choices <span class="es">Oír las opciones</span></button></div>
+    <div class="choices" data-item="q5" role="group" aria-label="Answer choices">
+      <button data-k="A"><span class="letter">A</span> the biggest change you can imagine</button>
+      <button data-k="B" data-ok="1"><span class="letter">B</span> a small action that gives a quick win and makes you feel capable</button>
+      <button data-k="C"><span class="letter">C</span> a habit your friends already have</button>
+      <button data-k="D"><span class="letter">D</span> something you do once a month</button>
+    </div>
+    <p class="feedback" data-fb="q5" aria-live="polite"></p>
+  </section>
+
+  <h2 class="c-gray">My score <span class="es">Mi puntuación</span></h2>
+  <section class="item score" aria-label="Score">
+    <label class="ctrl" for="sname">Name <input id="sname" type="text" placeholder="First and last name / Nombre y apellido" autocomplete="off"></label>
+    <div class="score-row">
+      <div class="score-big"><span id="scoreNum">0</span><small>/ 5</small></div>
+      <ul class="score-list" id="scoreList">
+        <li data-q="1"><span class="dot"></span>Q1 Reading a graph <em>not answered</em></li>
+        <li data-q="2"><span class="dot"></span>Q2 Word meaning <em>not answered</em></li>
+        <li data-q="3"><span class="dot"></span>Q3 Supporting details <em>not checked</em></li>
+        <li data-q="4"><span class="dot"></span>Q4 Author's purpose <em>not answered</em></li>
+        <li data-q="5"><span class="dot"></span>Q5 Listening <em>not answered</em></li>
+      </ul>
+    </div>
+    <p class="feedback" id="scoreMsg">Answer all five questions. Your score updates automatically.<span class="es">Responde las cinco preguntas. Tu puntuación se actualiza sola.</span></p>
+    <div class="rating" id="rating" hidden>
+      <div class="rating-level"><span class="eyebrow">Practice ELPA21 rating · Nivel de práctica ELPA21</span><strong id="ratingName"></strong></div>
+      <p id="ratingDesc"></p>
+      <p class="chart-note" style="text-align:left">This is a classroom practice estimate from five questions, not an official ELPA21 score.<span class="es">Esta es una estimación de práctica con cinco preguntas, no una puntuación oficial de ELPA21.</span></p>
+    </div>
+  </section>
+
+  <h2 class="section-head c-purple"><span class="h-ic">🎟️</span>Exit ticket <span class="es">Boleto de salida</span></h2>
+  <div class="bell-head" style="margin-bottom:.4rem"><div class="eyebrow" style="color:#6a3d9a;font-weight:700">Exit ticket + rubric · 10 minutes <span class="es">Boleto de salida + rúbrica · 10 minutos</span></div><div class="timer"><span id="timer11Text">10:00</span><button id="timer11Btn">Start</button></div></div>
+  <section class="item exit" id="s-exit" aria-label="Exit ticket">
+    <div class="eyebrow">Essential question</div>
+    <p class="eq-q">Which one small habit could change the rest of your day?</p>
+    <p class="item-dir"><span class="todo-tag">WRITE HERE</span>Write <b>one sentence for each letter</b> of <b>O·R·E·A·C</b>. Use at least <b>three vocabulary words</b> from the passage, and make at least two sentences <i>if / then</i> sentences with <i>will</i>. Your five sentences become one paragraph at the bottom.</p>
+    <div class="oreac">
+      <label class="oreac-row"><span class="oreac-letter">O</span><span class="oreac-body"><b>Opinion</b> · Which small habit would change your day? <span class="es">¿Qué hábito pequeño cambiaría tu día?</span> <input class="oreac-in" data-k="O" type="text" placeholder="I think ___ is a keystone habit for me because…"></span></label>
+      <label class="oreac-row"><span class="oreac-letter">R</span><span class="oreac-body"><b>Reason</b> · Why do you think so? <span class="es">¿Por qué piensas eso?</span> <input class="oreac-in" data-k="R" type="text" placeholder="If I ___, then I will…"></span></label>
+      <label class="oreac-row"><span class="oreac-letter">E</span><span class="oreac-body"><b>Evidence</b> · A detail from the passage (paragraph number helps). <span class="es">Un detalle del texto (ayuda poner el número del párrafo).</span> <input class="oreac-in" data-k="E" type="text" placeholder="In paragraph ___, the author says…"></span></label>
+      <label class="oreac-row"><span class="oreac-letter">A</span><span class="oreac-body"><b>Analysis</b> · What does that evidence show? <span class="es">¿Qué muestra esa evidencia?</span> <input class="oreac-in" data-k="A" type="text" placeholder="This shows that…"></span></label>
+      <label class="oreac-row"><span class="oreac-letter">C</span><span class="oreac-body"><b>Conclusion</b> · What is your first tiny step? <span class="es">¿Cuál es tu primer paso pequeño?</span> <input class="oreac-in" data-k="C" type="text" placeholder="So, tomorrow I will ___, and if I keep it, then…"></span></label>
+    </div>
+    <div class="eyebrow" style="margin-top:.3rem">Your paragraph · Tu párrafo</div>
+    <p class="oreac-out" id="exitPreview"><span class="ps-empty">Your five sentences will appear here as one paragraph. <span class="es">Tus cinco oraciones aparecerán aquí como un párrafo.</span></span></p>
+    <textarea id="exitText" rows="2" hidden aria-hidden="true"></textarea>
+    <div class="exit-meter">
+      <span id="exitSent" class="pill">0 sentences</span>
+      <span id="exitVocab" class="pill">0 vocabulary words</span>
+      <span id="exitWords" class="pill">0 words</span>
+    </div>
+    <p class="feedback" id="exitFb">Still to write: O, R, E, A, C.</p>
+    <div class="rubric" id="rubric">
+      <div class="eyebrow">ELPA21 writing rubric · grades itself as you type <span class="es">Rúbrica de escritura ELPA21 · se califica sola mientras escribes</span></div>
+      <p class="gl-note" style="margin:0">Each row matches an ELP standard and an ELPA21 writing task type. Your total maps to a practice ELPA21 writing level (1–5).<span class="es">Cada fila corresponde a un estándar ELP y a un tipo de tarea de escritura de ELPA21. Tu total se convierte en un nivel de práctica de escritura ELPA21 (1–5).</span></p>
+      <table class="rub-t">
+        <thead><tr><th>Criterion · Criterio<br><small>ELPA21 task · ELP standard</small></th><th>0</th><th>1</th><th>2</th><th>Score</th></tr></thead>
+        <tbody>
+          <tr data-r="structure"><td><b>Organization</b> · all five O·R·E·A·C sentences in order<br><small class="std"><b>Write an Opinion</b> · ELP 9: clear, coherent text with an introduction, reasons, and a conclusion</small><span class="es">Organización · las cinco oraciones en orden</span></td><td>0–2 written</td><td>3–4 written</td><td>all 5</td><td class="rub-s">–</td></tr>
+          <tr data-r="vocab"><td><b>Academic vocabulary</b> · words from the passage used correctly<br><small class="std"><b>Respond to a Text</b> · ELP 8 / ELP 7: use grade-level academic words from the text</small><span class="es">Vocabulario académico · palabras del texto usadas correctamente</span></td><td>0–1 word</td><td>2 words</td><td>3+ words</td><td class="rub-s">–</td></tr>
+          <tr data-r="complex"><td><b>Sentence structure</b> · <i>if / then</i> sentences with <i>will</i>, comma rule<br><small class="std"><b>Sentence Construction</b> · ELP 10: standard English grammar, varied sentence types</small><span class="es">Estructura de oraciones · oraciones con if / then, regla de la coma</span></td><td>none</td><td>1 sentence</td><td>2+ sentences</td><td class="rub-s">–</td></tr>
+          <tr data-r="evidence"><td><b>Claim &amp; evidence</b> · opinion supported with a detail from the text (paragraph number, a keystone example)<br><small class="std"><b>Write an Opinion / Respond to a Text</b> · ELP 4: construct claims and support them with text evidence</small><span class="es">Afirmación y evidencia · opinión apoyada con un detalle del texto</span></td><td>no detail</td><td>example <u>or</u> paragraph #</td><td>both</td><td class="rub-s">–</td></tr>
+          <tr data-r="length"><td><b>Development</b> · complete sentences, 50+ words, ideas explained<br><small class="std"><b>Write a Paragraph</b> · ELP 9 / ELP 3: speak and write about text with detail</small><span class="es">Desarrollo · oraciones completas, 50+ palabras, ideas explicadas</span></td><td>under 30 words</td><td>30–49 words</td><td>50+ words, every sentence 6+ words</td><td class="rub-s">–</td></tr>
+        </tbody>
+        <tfoot><tr><td colspan="4"><b>Total</b> · Total</td><td class="rub-s" id="rubTotal">0 / 10</td></tr></tfoot>
+      </table>
+      <p class="feedback" id="rubLevel"></p>
+      <ul class="rub-tips" id="rubTips"></ul>
+      <p class="chart-note" style="text-align:left">Levels: 9–10 = 5 Advanced · 7–8 = 4 Early Advanced · 5–6 = 3 Intermediate · 3–4 = 2 Early Intermediate · 0–2 = 1 Beginning. A classroom practice estimate aligned to ELP Standards 4, 7, 8, 9, and 10, not an official ELPA21 score.<span class="es">Niveles: 9–10 = 5 Avanzado · 7–8 = 4 Avanzado inicial · 5–6 = 3 Intermedio · 3–4 = 2 Intermedio inicial · 0–2 = 1 Inicial. Es una estimación de práctica alineada con los estándares ELP 4, 7, 8, 9 y 10, no una puntuación oficial de ELPA21.</span></p>
+    </div>
+    <div class="eyebrow" style="margin-top:.5rem">My full report · Mi reporte completo</div>
+    <p class="chart-note" style="text-align:left">Everything on this page (bell ringer, lab, video checks, jots, vocabulary, keystone plan, grammar, test prep, rubric) goes into your Jotform submission. You can also copy it.<span class="es">Todo lo de esta página va en tu envío de Jotform. También puedes copiarlo.</span></p>
+    <textarea class="report" id="report" readonly aria-label="Full report"></textarea>
+    <div class="acts"><button id="copyReport">📋 Copy my report <span class="es">Copiar mi reporte</span></button></div>
+    <div class="acts"><a id="submitLink" class="btn-link" href="https://form.jotform.com/262995533300054" target="_blank" rel="noopener" aria-disabled="true">Submit my exit ticket</a></div>
+    <p class="chart-note" id="submitNote" style="text-align:left">Finish your exit ticket to turn on Submit. It opens a short form with your answer already filled in.</p>
+  </section>
+  </main>
+</div>
+
+<div class="card" id="card" role="dialog" aria-live="polite" aria-label="Word definition">
+  <div class="top"><div><p class="word" id="cWord"></p><span class="pos" id="cPos"></span></div><button class="close" id="cClose" aria-label="Close / Cerrar">✕</button></div>
+  <p class="def" id="cDef"></p>
+  <p class="es" id="cEs"></p>
+  <p class="ex" id="cEx"></p>
+  <div class="acts"><button id="cSay">🔊 Hear the word <span class="es">Oír la palabra</span></button><button id="cSayEx">🔊 Hear the example <span class="es">Oír el ejemplo</span></button></div>
+</div>
+
+<script>
+const VOCAB = {
+  "loop":{pos:"noun",def:"A circle of steps that repeats: the end leads back to the start.",es:"ciclo / bucle",defEs:"Un círculo de pasos que se repite.",ex:"Every habit is a loop: cue, routine, reward."},
+  "chain reaction":{pos:"noun phrase",def:"One event that causes another, which causes another, and so on.",es:"reacción en cadena",defEs:"Un evento que causa otro, que causa otro, y así sucesivamente.",ex:"One missed bus started a chain reaction that ruined the whole morning."},
+  "keystone habits":{pos:"noun phrase",def:"Habits that, when changed, cause other habits to change too.",es:"hábitos clave",defEs:"Hábitos que, al cambiarlos, hacen que otros hábitos también cambien.",ex:"Exercise and making your bed are common keystone habits."},
+  "shift":{pos:"verb",def:"To move or change a little.",es:"cambiar / moverse",defEs:"Moverse o cambiar un poco.",ex:"After he started running, his eating began to shift."},
+  "exercise":{pos:"noun",def:"Physical activity that keeps the body strong and healthy.",es:"ejercicio",defEs:"Actividad física que mantiene el cuerpo fuerte y sano.",ex:"Twenty minutes of exercise a day is a good start."},
+  "stress":{pos:"noun",def:"A feeling of pressure or worry.",es:"estrés",defEs:"Una sensación de presión o preocupación.",ex:"Exams cause a lot of stress for students."},
+  "triggered":{pos:"verb (past)",def:"Started or caused something to happen.",es:"provocó / desencadenó",defEs:"Hizo que algo empezara o sucediera.",ex:"The alarm triggered the whole morning routine."},
+  "ripple effect":{pos:"noun phrase",def:"A change that spreads outward and causes other changes, like rings in water.",es:"efecto dominó / efecto en cadena",defEs:"Un cambio que se extiende y causa otros cambios, como ondas en el agua.",ex:"Her new sleep habit had a ripple effect on her grades."},
+  "momentum":{pos:"noun",def:"The force that keeps something moving once it has started.",es:"impulso",defEs:"La fuerza que mantiene algo en movimiento una vez que ha empezado.",ex:"After two good days, she had momentum and did not want to stop."},
+  "victory":{pos:"noun",def:"A win; success in a struggle.",es:"victoria",defEs:"Un triunfo; éxito en una lucha.",ex:"Finishing the first page felt like a small victory."},
+  "possible":{pos:"adjective",def:"Able to happen or be done.",es:"posible",defEs:"Que puede pasar o hacerse.",ex:"With a plan, an A in math felt possible."},
+  "identity":{pos:"noun",def:"Who a person is; how they see themselves.",es:"identidad",defEs:"Quién es una persona; cómo se ve a sí misma.",ex:"Running became part of his identity."},
+  "responsible":{pos:"adjective",def:"Able to be trusted to do what is expected.",es:"responsable",defEs:"Que se puede confiar en que hará lo que se espera.",ex:"A responsible student turns work in on time."},
+  "story":{pos:"noun",def:"Here: the way you describe yourself and your life.",es:"historia / relato",defEs:"Aquí: la manera en que describes tu vida y quién eres.",ex:"Change the story you tell about yourself, and your choices change."},
+  "productivity":{pos:"noun",def:"How much useful work a person gets done.",es:"productividad",defEs:"Cuánto trabajo útil hace una persona.",ex:"Her productivity went up after she started sleeping eight hours."},
+  "control":{pos:"noun",def:"The power to decide what happens.",es:"control",defEs:"El poder de decidir lo que pasa.",ex:"Making a plan gave him a sense of control."},
+  "anxiety":{pos:"noun",def:"A strong feeling of worry or nervousness.",es:"ansiedad",defEs:"Un sentimiento fuerte de preocupación o nervios.",ex:"Family dinner can lower anxiety for teens."},
+  "pattern":{pos:"noun",def:"Something that happens again and again in the same way.",es:"patrón",defEs:"Algo que pasa una y otra vez de la misma manera.",ex:"The pattern of eating together is what matters."},
+  "capable":{pos:"adjective",def:"Able to do things well.",es:"capaz",defEs:"Que puede hacer las cosas bien.",ex:"A quick win makes you feel capable."},
+  "automatic":{pos:"adjective",def:"Happening by itself, without thinking.",es:"automático",defEs:"Que ocurre por sí solo, sin pensar.",ex:"After a month, the glass of water became automatic."},
+  "protect":{pos:"verb",def:"To keep something safe; to make sure it continues.",es:"proteger",defEs:"Mantener algo a salvo; asegurarse de que continúe.",ex:"Protect your keystone habit, even on busy days."},
+  "small win":{pos:"noun phrase",def:"A little success that makes the next step easier.",es:"pequeño logro",defEs:"Un pequeño éxito que hace más fácil el siguiente paso.",ex:"Two push-ups is a small win that leads to more."},
+  "domino":{pos:"noun",def:"A small tile in a game; when one falls, it knocks over the next.",es:"ficha de dominó",defEs:"Una ficha pequeña de un juego; cuando una cae, derriba la siguiente.",ex:"The first domino falls, and the rest follow."},
+  "arch":{pos:"noun",def:"A curved structure over an opening, like a doorway.",es:"arco",defEs:"Una estructura curva sobre una abertura, como una puerta.",ex:"The old bridge was built as a stone arch."},
+  "predict":{pos:"verb",def:"To say what will probably happen.",es:"predecir",defEs:"Decir lo que probablemente pasará.",ex:"I predict that if I sleep more, I will focus better."}
+};
+
+const bi = (en, es) => en + '<span class="es" lang="es">' + es + '</span>';
+const synth = window.speechSynthesis;
+const paras = [...document.querySelectorAll('.para')];
+const texts = paras.map(p => p.querySelector('p').textContent.replace(/\s+/g,' ').trim());
+const status = document.getElementById('status');
+const playAll = document.getElementById('playAll'), pauseBtn = document.getElementById('pauseBtn'), stopBtn = document.getElementById('stopBtn');
+const rateSel = document.getElementById('rate'), voiceSel = document.getElementById('voice');
+let queue = [], current = -1, paused = false, voices = [];
+let sentIdx = 0, run = 0, playingAll = false, pendingJot = null;
+
+/* Wrap each sentence in a span so it can be highlighted as it is read */
+function wrapSentences(p){
+  const nodes = [...p.childNodes]; p.innerHTML = '';
+  let span = document.createElement('span'); span.className = 's';
+  const flush = () => { if(span.childNodes.length) p.appendChild(span); span = document.createElement('span'); span.className = 's'; };
+  nodes.forEach(node => {
+    if(node.nodeType === 3){
+      const text = node.nodeValue, re = /[.!?]["”]?\s+/g; let last = 0, m;
+      while((m = re.exec(text))){ span.appendChild(document.createTextNode(text.slice(last, m.index + m[0].length))); flush(); last = m.index + m[0].length; }
+      if(last < text.length) span.appendChild(document.createTextNode(text.slice(last)));
+    } else span.appendChild(node);
+  });
+  flush();
+}
+paras.forEach(p => wrapSentences(p.querySelector('p')));
+const sents = paras.map(p => [...p.querySelectorAll('.s')]);
+const JOT_AFTER = new Set([1, 3, 5]);
+function markSentence(sp){ document.querySelectorAll('.s.now').forEach(x => x.classList.remove('now')); if(sp) sp.classList.add('now'); }
+
+if (!synth) { document.getElementById('nosupport').style.display='block'; playAll.disabled = true; }
+
+function loadVoices(){
+  if(!synth) return;
+  voices = synth.getVoices().filter(v => v.lang.toLowerCase().startsWith('en'));
+  if(!voices.length) voices = synth.getVoices();
+  voiceSel.innerHTML = '';
+  voices.forEach((v,i)=>{ const o=document.createElement('option'); o.value=i; o.textContent=v.name.replace(/Microsoft |Google /,'').slice(0,28); if(v.default) o.selected=true; voiceSel.appendChild(o); });
+}
+loadVoices(); if(synth) synth.onvoiceschanged = loadVoices;
+
+function makeUtt(text){
+  const u = new SpeechSynthesisUtterance(text);
+  u.rate = parseFloat(rateSel.value);
+  const v = voices[voiceSel.value]; if(v) u.voice = v;
+  u.lang = (v && v.lang) || 'en-US';
+  return u;
+}
+function markReading(i){
+  paras.forEach((p,k)=>{ p.classList.toggle('reading', k===i); p.querySelector('.pplay').classList.toggle('on', k===i); });
+  if(i>=0){ const p = paras[i]; const r = p.getBoundingClientRect(); if(r.top<90||r.bottom>window.innerHeight) p.scrollIntoView({behavior:'smooth',block:'center'}); }
+}
+function speakQueue(list, all){
+  if(!synth) return;
+  synth.cancel(); run++; queue = list; paused=false; playingAll = !!all; pendingJot = null;
+  document.querySelectorAll('.jot.now').forEach(j => { j.classList.remove('now'); j.querySelector('.jot-go').hidden = true; });
+  pauseBtn.disabled=false; stopBtn.disabled=false; pauseBtn.textContent='⏸ Pause'; playAll.disabled=true;
+  current = queue.shift(); sentIdx = 0; markReading(current);
+  next();
+}
+function next(){
+  if(sentIdx >= sents[current].length){
+    markSentence(null);
+    if(playingAll && JOT_AFTER.has(current)){
+      const jot = document.querySelector(`.jot[data-after="${current}"]`);
+      pendingJot = jot; jot.classList.add('now'); jot.querySelector('.jot-go').hidden = false;
+      jot.scrollIntoView({behavior:'smooth', block:'center'}); jot.querySelector('.jot-text').focus({preventScroll:true});
+      markReading(-1); pauseBtn.disabled = true;
+      status.innerHTML = queue.length ? bi('Stop and jot. Write your sentence, then press Continue reading.','Para y anota. Escribe tu oración y luego pulsa Seguir leyendo.') : bi('Stop and jot. Write your last sentence, then press Done.','Para y anota. Escribe tu última oración y luego pulsa Listo.');
+      return;
+    }
+    if(!queue.length){ finish(); return; }
+    current = queue.shift(); sentIdx = 0; markReading(current);
+  }
+  status.textContent = `Reading paragraph ${current+1} of 6…`;
+  const sp = sents[current][sentIdx], myRun = run;
+  markSentence(sp);
+  const u = makeUtt(sp.textContent.trim());
+  u.onend = () => { if(myRun !== run) return; sentIdx++; next(); };
+  u.onerror = (e) => { if(myRun !== run) return; if(e.error!=='interrupted' && e.error!=='canceled'){ status.textContent='Audio stopped. Press Listen to try again.'; finish(); } };
+  synth.speak(u);
+}
+function finish(){
+  markReading(-1); markSentence(null); current=-1; queue=[]; pendingJot = null; playingAll = false;
+  pauseBtn.disabled=true; stopBtn.disabled=true; playAll.disabled=false; paused=false; pauseBtn.textContent='⏸ Pause';
+  if(status.textContent.startsWith('Reading')) status.textContent='Finished. Press Listen to hear it again.';
+}
+document.querySelectorAll('.jot-go').forEach(b => b.onclick = () => {
+  const jot = b.closest('.jot'); if(jot !== pendingJot) return;
+  jot.classList.remove('now'); b.hidden = true; pendingJot = null;
+  if(!queue.length){ status.textContent = 'Finished. Now set up your vocabulary notebook and go on to the activities below.'; finish(); return; }
+  current = queue.shift(); sentIdx = 0; markReading(current); pauseBtn.disabled = false; next();
+});
+playAll.onclick = () => speakQueue([0,1,2,3,4,5], true);
+paras.forEach((p,i)=> p.querySelector('.pplay').onclick = () => speakQueue([i], false));
+pauseBtn.onclick = () => {
+  if(!synth) return;
+  if(paused){ synth.resume(); paused=false; pauseBtn.textContent='⏸ Pause'; status.textContent=`Reading paragraph ${current+1} of 6…`; }
+  else { synth.pause(); paused=true; pauseBtn.textContent='▶ Resume'; status.textContent='Paused.'; }
+};
+stopBtn.onclick = () => { queue=[]; run++; if(synth) synth.cancel(); document.querySelectorAll('.jot.now').forEach(j => { j.classList.remove('now'); j.querySelector('.jot-go').hidden = true; }); status.textContent='Stopped.'; finish(); };
+rateSel.onchange = voiceSel.onchange = () => { if(current>=0 && !pendingJot){ const rest=[current,...queue], all = playingAll, si = sentIdx; speakQueue(rest, all); sentIdx = si; } };
+
+/* Vocabulary card */
+const card=document.getElementById('card'); let openBtn=null, cur=null;
+function showWord(w, btn){
+  const d = VOCAB[w]; if(!d) return;
+  cur = w;
+  document.getElementById('cWord').textContent = w;
+  document.getElementById('cPos').textContent = d.pos;
+  document.getElementById('cDef').textContent = d.def;
+  document.getElementById('cEs').innerHTML = 'En español: <b></b><span class="es"></span>'; document.querySelector('#cEs b').textContent = d.es; document.querySelector('#cEs .es').textContent = d.defEs;
+  document.getElementById('cEx').textContent = '“' + d.ex + '”';
+  if(openBtn) openBtn.classList.remove('open');
+  openBtn = btn; if(btn && btn.classList.contains('v')) btn.classList.add('open');
+  card.classList.add('show');
+}
+function hideCard(){ card.classList.remove('show'); if(openBtn) openBtn.classList.remove('open'); openBtn=null; }
+document.querySelectorAll('.passage .v').forEach(b => b.onclick = () => showWord(b.dataset.w, b));
+document.getElementById('cClose').onclick = hideCard;
+document.addEventListener('keydown', e => { if(e.key==='Escape') hideCard(); });
+function sayOnce(text){ if(!synth) return; if(current>=0){ queue=[]; run++; synth.cancel(); finish(); } const u=makeUtt(text); u.rate=Math.min(u.rate,0.9); synth.speak(u); }
+document.getElementById('cSay').onclick = () => cur && sayOnce(cur);
+document.getElementById('cSayEx').onclick = () => cur && sayOnce(VOCAB[cur].ex);
+
+/* Bell ringer */
+document.querySelectorAll('#bell .ad').forEach(g => g.querySelectorAll('button').forEach(b => b.onclick = () => {
+  g.querySelectorAll('button').forEach(x => x.classList.remove('on')); b.classList.add('on');
+  const n = document.querySelectorAll('#bell .ad .on').length;
+  document.getElementById('bellNote').innerHTML = n < 4 ? bi(`${n} of 4 answered. Write a sentence in your notebook for each choice as you go.`,`${n} de 4 respondidas. Escribe una oración en tu cuaderno por cada respuesta.`) : bi('All four answered. Now finish your four sentences in your notebook and pick one to read to the class. After reading the passage, come back and see if you would change any answer.','Las cuatro respondidas. Termina tus cuatro oraciones en tu cuaderno y elige una para leer a la clase. Después de leer el texto, vuelve y mira si cambiarías alguna respuesta.');
+}));
+const fmt = s => `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
+function makeTimer(textId, btnId, total){
+  let left = total, id = null;
+  const txt = document.getElementById(textId), btn = document.getElementById(btnId);
+  btn.onclick = () => {
+    if(id){ clearInterval(id); id = null; btn.textContent = 'Resume'; return; }
+    if(left <= 0){ left = total; txt.classList.remove('done'); txt.textContent = fmt(left); if(window.__timeUp) delete window.__timeUp[textId]; }
+    btn.textContent = 'Pause';
+    id = setInterval(() => {
+      left--; txt.textContent = fmt(left);
+      if(left <= 0){ clearInterval(id); id = null; txt.textContent = 'Time!'; txt.classList.add('done'); btn.textContent = 'Restart'; (window.__timeUp = window.__timeUp || {})[textId] = true; }
+    }, 1000);
+  };
+}
+makeTimer('timerText', 'timerBtn', 300);
+makeTimer('timer2Text', 'timer2Btn', 300);
+makeTimer('timer3Text', 'timer3Btn', 300);
+makeTimer('timer6Text', 'timer6Btn', 900);
+makeTimer('timer7Text', 'timer7Btn', 600);
+makeTimer('timer8Text', 'timer8Btn', 900);
+makeTimer('timer9Text', 'timer9Btn', 480);
+makeTimer('timer10Text', 'timer10Btn', 420);
+makeTimer('timer11Text', 'timer11Btn', 600);
+
+
+/* Sketchpad */
+(function(){
+  const c = document.getElementById('pad'), ctx = c.getContext('2d');
+  let color = '#1f1b16', size = 6, eraser = false, drawing = false, last = null;
+  ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  const pos = e => { const r = c.getBoundingClientRect(); return { x:(e.clientX - r.left) * c.width / r.width, y:(e.clientY - r.top) * c.height / r.height }; };
+  c.addEventListener('pointerdown', e => { drawing = true; last = pos(e); c.setPointerCapture(e.pointerId); e.preventDefault(); });
+  c.addEventListener('pointermove', e => {
+    if(!drawing) return; const p = pos(e);
+    ctx.strokeStyle = eraser ? '#fff' : color; ctx.lineWidth = eraser ? size * 3 : size;
+    ctx.beginPath(); ctx.moveTo(last.x, last.y); ctx.lineTo(p.x, p.y); ctx.stroke(); last = p;
+  });
+  ['pointerup','pointercancel','pointerleave'].forEach(ev => c.addEventListener(ev, () => { drawing = false; }));
+  document.querySelectorAll('.sw').forEach(b => b.onclick = () => { document.querySelectorAll('.sw').forEach(x => x.classList.remove('on')); b.classList.add('on'); color = b.dataset.c; eraser = false; document.getElementById('padEraser').classList.remove('on'); });
+  document.getElementById('padSize').onchange = e => size = parseInt(e.target.value, 10);
+  document.getElementById('padEraser').onclick = e => { eraser = !eraser; e.target.classList.toggle('on', eraser); };
+  document.getElementById('padClear').onclick = () => ctx.clearRect(0, 0, c.width, c.height);
+})();
+
+
+
+/* Streak lab: one small habit, 30 two-second "days" */
+(function(){
+  const bell = document.getElementById('labBell'), msg = document.getElementById('labMsg'), tap = document.getElementById('labTap');
+  const tText = document.getElementById('feedTimer'), startBtn = document.getElementById('feedStart');
+  const dayEl = document.getElementById('labCues'), streakEl = document.getElementById('labTaps'), ripEl = document.getElementById('labRewards');
+  const RIPPLES = [[3,'🍎 Ripple: you grabbed fruit instead of chips.'],[6,'😴 Ripple: you went to bed 20 minutes earlier.'],[10,'📚 Ripple: homework started before dinner.'],[15,'💧 Ripple: water before your phone, no reminder needed.'],[21,'🏃 Ripple: a walk after school, your idea.'],[27,'🧠 Ripple: “I am someone who follows through.”']];
+  let running = false, left = 60, tId = null, dayTimer = null, day = 0, didToday = false, streak = 0, best = 0, misses = 0, ripples = 0, resets = 0;
+  const counts = () => { dayEl.textContent = `Day: ${day} / 30`; streakEl.textContent = `Streak: ${streak}`; ripEl.textContent = `Ripples: ${ripples}`; };
+  function nextDay(){
+    if(!running) return;
+    if(day > 0 && !didToday){ misses++; if(streak > 0) resets++; streak = 0; msg.className = 'lab-msg'; msg.textContent = `Day ${day}: missed. Streak reset to 0.`; bell.classList.remove('ring'); }
+    day++; didToday = false;
+    if(day > 30){ endRun(); return; }
+    bell.classList.add('ring');
+    if(didToday === false && streak === 0) msg.textContent = `Day ${day}. Tap Do it.`;
+    else if(!msg.textContent.startsWith('Day')) msg.textContent = `Day ${day}. Keep the streak.`;
+    counts();
+    dayTimer = setTimeout(nextDay, 2000);
+  }
+  tap.onclick = () => {
+    if(!running || didToday) return;
+    didToday = true; streak++; if(streak > best) best = streak; bell.classList.remove('ring');
+    const r = RIPPLES.find(x => x[0] === streak);
+    if(r){ ripples++; msg.className = 'lab-msg reward'; msg.textContent = r[1]; }
+    else { msg.className = 'lab-msg'; msg.textContent = `Day ${day}: done ✓ (streak ${streak})`; }
+    counts();
+  };
+  function endRun(){
+    running = false; clearInterval(tId); clearTimeout(dayTimer); bell.classList.remove('ring'); tap.disabled = true;
+    tText.textContent = 'Time!'; tText.classList.add('done'); startBtn.textContent = 'Try again'; msg.className = 'lab-msg'; msg.textContent = 'Done. Read what happened below.';
+    const done = Math.min(day, 30);
+    document.getElementById('feedStats').innerHTML = [
+      `<li>${bi(`<b>Momentum:</b> your longest streak was <b>${best}</b> day${best === 1 ? '' : 's'}. Each tap made the next one feel normal; that is the small-win effect from paragraph 3.`,`<b>Impulso:</b> tu racha más larga fue de <b>${best}</b> día${best === 1 ? '' : 's'}. Cada toque hizo que el siguiente pareciera normal; ese es el efecto de los pequeños logros del párrafo 3.`)}</li>`,
+      `<li>${bi(`<b>Reset:</b> you missed <b>${misses}</b> day${misses === 1 ? '' : 's'} and the streak reset <b>${resets}</b> time${resets === 1 ? '' : 's'}. ${misses ? 'A miss is not the end; the next day is a new first domino.' : 'No misses. That is what protecting a keystone habit looks like.'}`,`<b>Reinicio:</b> fallaste <b>${misses}</b> día${misses === 1 ? '' : 's'} y la racha se reinició <b>${resets}</b> ${resets === 1 ? 'vez' : 'veces'}. ${misses ? 'Fallar no es el final; el día siguiente es una nueva primera ficha.' : 'Sin fallas. Así se ve proteger un hábito clave.'}`)}</li>`,
+      `<li>${bi(`<b>Ripple effect:</b> <b>${ripples}</b> other habit${ripples === 1 ? '' : 's'} unlocked on your own, without a new rule. In the text, that is paragraphs 2 and 5.`,`<b>Efecto dominó:</b> se desbloquearon <b>${ripples}</b> hábito${ripples === 1 ? '' : 's'} más por sí solos, sin una regla nueva. En el texto, son los párrafos 2 y 5.`)}</li>`
+    ].join('');
+    document.getElementById('feedResults').hidden = false;
+    document.getElementById('feedResults').scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+  startBtn.onclick = () => {
+    if(running) return;
+    running = true; left = 60; day = 0; didToday = false; streak = 0; best = 0; misses = 0; ripples = 0; resets = 0; counts();
+    tap.disabled = false; msg.className = 'lab-msg'; msg.textContent = 'Day 1 starts now…';
+    tText.classList.remove('done'); tText.textContent = '1:00'; startBtn.textContent = 'Running…';
+    document.getElementById('feedResults').hidden = true;
+    dayTimer = setTimeout(nextDay, 400);
+    tId = setInterval(() => { left--; tText.textContent = `0:${String(left).padStart(2,'0')}`; if(left <= 0) endRun(); }, 1000);
+  };
+  document.querySelectorAll('#trickPoll button').forEach(b => b.onclick = () => {
+    document.querySelectorAll('#trickPoll button').forEach(x => x.classList.remove('picked')); b.classList.add('picked');
+    const p = {momentum:'3', reset:'6', ripple:'2 and 5'}[b.dataset.v];
+    document.getElementById('trickNote').innerHTML = '<span class="todo-tag">NOTEBOOK</span>' + bi(`You chose <b>${b.dataset.v}</b>. In your notebook: <i>“The streak felt like ${b.dataset.v} because ___.”</i> Paragraph${p.includes('and') ? 's' : ''} ${p} explain${p.includes('and') ? '' : 's'} this.`,`Elegiste <b>${{momentum:'impulso', reset:'reinicio', ripple:'efecto dominó'}[b.dataset.v]}</b>. En tu cuaderno: «The streak felt like ${b.dataset.v} because ___». Lo explica${p.includes('and') ? 'n los párrafos' : ' el párrafo'} ${p.replace('and','y')}.`);
+  });
+})();
+
+
+/* Attention lock removed */
+
+
+
+
+/* Video checks: autograded, one try each */
+(function(){
+  const VFB = {
+    1:{A:bi("Not quite. The video warns against trying to change everything at once.","No exactamente. El video advierte contra intentar cambiar todo a la vez."),B:bi("Correct! Start with one tiny step that is almost too easy.","¡Correcto! Empieza con un paso pequeño, casi demasiado fácil."),C:bi("Not quite. Motivation comes and goes; the tiny step works without it.","No exactamente. La motivación va y viene; el paso pequeño funciona sin ella."),D:bi("Not quite. The video is about your own tiny step, not copying someone.","No exactamente. El video trata de tu propio paso pequeño, no de copiar a alguien.")},
+    2:{A:bi("Not quite. Big goals matter; the point is how to reach them.","No exactamente. Las metas grandes importan; el punto es cómo alcanzarlas."),B:bi("Not quite. Tiny steps take a little time; they just take less effort.","No exactamente. Los pasos pequeños toman algo de tiempo; solo requieren menos esfuerzo."),C:bi("Correct! Easy to repeat means you actually repeat it, and repetition builds momentum.","¡Correcto! Fácil de repetir significa que de verdad lo repites, y la repetición crea impulso."),D:bi("Not quite. Other people are not the reason.","No exactamente. Los demás no son la razón.")},
+    3:{A:bi("Not quite. Five miles is a big step for day one.","No exactamente. Cinco millas es un paso grande para el primer día."),B:bi("Correct! Shoes on, walk to the corner: almost too easy, so you will do it again tomorrow.","¡Correcto! Zapatos puestos, caminar hasta la esquina: casi demasiado fácil, así que lo harás otra vez mañana."),C:bi("Not quite. Signing up is a goal, not a daily step.","No exactamente. Inscribirse es una meta, no un paso diario."),D:bi("Not quite. Reading about running is not running.","No exactamente. Leer sobre correr no es correr.")}
+  };
+  const got = {};
+  document.querySelectorAll('[data-vq]').forEach(g => {
+    const q = g.dataset.vq, fb = document.querySelector(`[data-vfb="${q}"]`);
+    g.querySelectorAll('button').forEach(b => b.onclick = () => {
+      if(got[q] !== undefined) return;
+      got[q] = !!b.dataset.ok; b.classList.add(got[q] ? 'correct' : 'wrong'); fb.innerHTML = VFB[q][b.dataset.k];
+      g.querySelectorAll('button').forEach(x => x.disabled = true);
+      const n = Object.values(got).filter(Boolean).length, done = Object.keys(got).length;
+      document.getElementById('vidScore').innerHTML = `<b>Video score: ${n} / 3</b>` + (done === 3 ? bi(n === 3 ? ' All three correct. Now read the passage.' : ' Read the feedback, then look for the same ideas in paragraph 6.', n === 3 ? ' Las tres correctas. Ahora lee el texto.' : ' Lee la explicación y luego busca las mismas ideas en el párrafo 6.') : '<span class="es">Puntuación del video: ' + n + ' / 3</span>');
+    });
+  });
+})();
+
+
+/* Keep the audio bar pinned only while the passage is on screen */
+(function(){
+  const pl = document.querySelector('.player'), ps = document.getElementById('passage');
+  if(!('IntersectionObserver' in window)) return;
+  new IntersectionObserver(es => es.forEach(e => pl.classList.toggle('stuck', e.isIntersecting || current >= 0)), {rootMargin:'-120px 0px 0px 0px'}).observe(ps);
+})();
+
+
+/* Rail navigation */
+(function(){
+  const rail = document.getElementById('rail'), fab = document.getElementById('railFab');
+  fab.onclick = () => { const o = rail.classList.toggle('open'); fab.setAttribute('aria-expanded', o); };
+  rail.querySelectorAll('.rail-links a').forEach(a => a.addEventListener('click', () => { rail.classList.remove('open'); fab.setAttribute('aria-expanded', false); }));
+  const links = [...rail.querySelectorAll('.rail-links a')];
+  const targets = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(es => { es.forEach(e => { if(e.isIntersecting){ links.forEach(a => a.classList.toggle('here', a.getAttribute('href') === '#' + e.target.id)); } }); }, {rootMargin:'-30% 0px -60% 0px'}).observe && targets.forEach(t => new IntersectionObserver(es => { es.forEach(e => { if(e.isIntersecting){ links.forEach(a => a.classList.toggle('here', a.getAttribute('href') === '#' + e.target.id)); } }); }, {rootMargin:'-30% 0px -60% 0px'}).observe(t));
+  }
+  setInterval(() => { document.getElementById('fabPct').textContent = document.getElementById('progPct').textContent; }, 1000);
+})();
+
+/* Light / dark mode toggle */
+(function(){
+  const root = document.documentElement, btn = document.getElementById('themeBtn');
+  let saved = null; try { saved = localStorage.getItem('keystone-theme'); } catch(e){}
+  const sys = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  let dark = saved ? saved === 'dark' : sys;
+  function apply(){ root.setAttribute('data-theme', dark ? 'dark' : 'light'); btn.textContent = dark ? '☀️' : '🌙'; try { localStorage.setItem('keystone-theme', dark ? 'dark' : 'light'); } catch(e){} }
+  btn.onclick = () => { dark = !dark; apply(); };
+  apply();
+})();
+
+/* Bilingual: append Spanish under English for static text */
+(function(){
+  const ES = {
+"h1": ["Un pequeño cambio"],
+".howto": ["Pulsa <strong>Escuchar todo</strong> para oír el texto completo, o el botón redondo junto a un párrafo para oír solo esa parte. Toca cualquier palabra azul para ver su significado."],
+".today-eq .eyebrow": ["Pregunta esencial"],
+".today-eq .eq-q": ["¿Qué pequeño hábito podría cambiar el resto de tu día?"],
+".today-obj .eyebrow": ["Hoy puedo…"],
+".today-obj li": [
+"<b>Leer y escuchar:</b> explicar qué es un hábito clave y dar dos ejemplos del texto.",
+"<b>Hablar:</b> predecir una cadena de efectos con el marco «If I ___, then I will ___».",
+"<b>Escribir:</b> responder la pregunta esencial en 3–5 oraciones usando al menos tres palabras de vocabulario y dos oraciones con <i>if / then</i>."
+],
+".bell > .bell-head .eyebrow": ["Actividad de inicio · 10 minutos · Parte 1 · 5 minutos"],
+".bell > .bell-head .bell-title": ["¿De acuerdo o en desacuerdo?"],
+".bell > .bell-dir": ["<b>Paso 1:</b> Lee cada afirmación y toca <b>De acuerdo</b> o <b>En desacuerdo</b>.<br><b>Paso 2:</b> En tu cuaderno, escribe una oración por <u>cada</u> una de tus cuatro respuestas con el marco: «Estoy de acuerdo/en desacuerdo con que ___ porque ___».<br><b>Paso 3:</b> Prepárate para leer una de tus oraciones a la clase."],
+".bell-list li > span": [
+"Para cambiar mi vida, necesito cambiar muchas cosas a la vez.",
+"Tender la cama por la mañana puede cambiar cómo va el resto del día.",
+"Las personas que hacen ejercicio normalmente también comen mejor.",
+"Un hábito pequeño no vale el esfuerzo."
+],
+".ad button[data-v=\"agree\"]": ["De acuerdo","De acuerdo","De acuerdo","De acuerdo"],
+".ad button[data-v=\"disagree\"]": ["En desacuerdo","En desacuerdo","En desacuerdo","En desacuerdo"],
+"#bellNote": ["Ejemplo: «Estoy en desacuerdo con que necesite cambiar muchas cosas a la vez porque un cambio puede llevar a otros». Después de leer, vuelve y mira si cambiarías alguna respuesta."],
+".draw .eyebrow": ["Parte 2 · Dibújalo · 5 minutos"],
+".draw .bell-title": ["Dibuja tu cadena de dominó"],
+".draw .bell-dir": ["<b>Paso 1:</b> Dibuja <u>cuatro fichas de dominó</u> en fila. En la primera, escribe un hábito pequeño que podrías empezar mañana. En las otras tres, escribe lo que podría pasar después, después y después.<br><b>Paso 2:</b> Pon en tu cadena una palabra de la lista: keystone, chain, ripple, trigger, routine, result.<br><b>Paso 3:</b> Debajo del dibujo, escribe una oración: «If I ___, then ___, and then ___»."],
+".pad-tools > .ctrl": ["Color"],
+"#padEraser": ["Borrador"],
+"#padClear": ["Limpiar"],
+".draw .bell-note": ["Tu dibujo se queda solo en esta pantalla. Muéstralo o descríbelo a un compañero; si tu maestro quiere una copia, toma una captura de pantalla."],
+".hook .eyebrow": ["Gancho + laboratorio de rachas · 5 minutos"],
+".hook-q": ["Piensa en el mejor día que tuviste este mes. ¿Qué fue lo <u>primero</u> que hiciste esa mañana?"],
+"#poll button": ["Hice ejercicio o caminé","Desayuné","Revisé mi teléfono","Dormí hasta tarde"],
+"#hookNote": ["Toca una opción. Luego habla con un compañero: <em>¿Esa primera cosa cambió lo que vino después?</em>"],
+".feedlab .eyebrow": ["Laboratorio de rachas · 60 segundos"],
+".feedlab .bell-title": ["Un hábito pequeño, 30 «días». ¿Puedes mantener la racha viva?"],
+".feedlab .bell-dir": ["Pulsa Empezar. Cada «día» dura dos segundos. Cada día, toca <b>Do it</b> una vez. Si fallas un día, la racha se reinicia. Observa qué pasa con los otros hábitos mientras crece tu racha."],
+"#feedResults .eyebrow": ["Qué acaba de pasar"],
+"#feedResults .item-q": ["<b>¿Cómo se sintió la racha?</b>"],
+"#trickPoll button": ["Impulso · cada día hizo más fácil el siguiente","Reinicio · con una falla quise rendirme","Efecto dominó · otros hábitos empezaron a desbloquearse"],
+"#trickNote": ["En tu cuaderno: «The streak felt like ___ because ___». Leerás sobre esto en los párrafos 3 y 5."],
+".frame-box .eyebrow": ["Objetivos (completos)","Estándares"],
+".frame-box .obj-label": ["Contenido (ELA)","Lenguaje (ELP)","CCRS de Misisipi para ELA (grados 9–10)","Estándares ELP (ELPA21, grados 9–12)"],
+".video .eyebrow": ["Mira · 10 minutos"],
+".video .bell-title": ["Cambia tu vida, un paso pequeño a la vez"],
+".video .bell-dir": ["<b>Paso 1:</b> Mira el video una vez con subtítulos (toca <b>CC</b>). Activa los subtítulos en inglés, o en español si los necesitas.<br><b>Paso 2:</b> Mientras miras, anota <u>un paso pequeño</u> que el video dice que es suficiente para empezar.<br><b>Paso 3:</b> Responde las tres comprobaciones de abajo. Se califican solas; tienes un intento en cada una."],
+".video .item-ext": ["<b>Habla con un compañero:</b> Cuéntale un paso pequeño que podrías dar mañana: «If I ___, then I will probably ___». Luego lee el texto de abajo."],
+"#playAll": ["Escuchar todo"],
+"#pauseBtn": ["Pausa"],
+"#stopBtn": ["Parar"],
+".player label.ctrl": ["Velocidad","Voz"],
+"#status": ["Listo. Seis párrafos, unos cuatro minutos."],
+".jot .eyebrow": ["Para y anota · después de los párrafos 1–2","Para y anota · después de los párrafos 3–4","Para y anota · después de los párrafos 5–6"],
+".jot-go": ["Seguir leyendo ▶","Seguir leyendo ▶","Listo ✓"],
+".jot > p:not(.jot-fb)": [
+"En una oración: <b>¿Qué es un hábito clave y cuál es el ejemplo famoso?</b>",
+"En una oración: <b>¿Cuáles son las dos razones por las que un hábito clave se extiende, según los párrafos 3 y 4?</b>",
+"En una oración: <b>¿Qué hábito clave probarías y por qué sería fácil de mantener?</b>"
+],
+".appdesign .bell-title": ["Elige una ficha. Predice las siguientes tres."],
+".appdesign .bell-dir": ["El párrafo 6 dice que elijas una acción pequeña que te dé un logro rápido. Elige la tuya y luego predice la reacción en cadena. La tarjeta de dominó se construye sola mientras escribes. Luego copia tu plan en tu cuaderno y prepárate para explicarlo en 30 segundos."],
+".ad-l": ["Mi hábito clave (pequeño y fácil)","Cuándo y dónde","Efecto 1 · qué podría cambiar después","Efecto 2 · y luego","Efecto 3 · y luego","Ícono"],
+".appdesign .item-ext": ["<b>Explícalo (30 segundos):</b> «My keystone habit is ___. If I ___, then I will ___. After that, ___. The small win makes the next choice easier»."],
+".notebook .eyebrow": ["Cuaderno de vocabulario"],
+".notebook .item-q": ["Mientras lees, toca cada palabra azul y cópiala en tu cuaderno con su significado <b>en tus propias palabras</b>. Organiza tu página así:"],
+".nb-ex:not(.nb-row) span": ["Palabra","Mi definición"],
+".notebook .item-ext": ["Meta: al menos <b>10 palabras</b> antes de empezar las preguntas de abajo. Puedes escribir la palabra en español junto a la palabra en inglés si te ayuda a recordar."],
+".vmatch .eyebrow": ["Palabras","Significados"],
+"#vmShuffle": ["Nuevo grupo de palabras"],
+"#vmSpeed": ["Ronda rápida de 60 segundos"],
+".vmatch .item-ext": ["<b>Úsalo:</b> En tu cuaderno, escribe tres oraciones sobre un hábito que podría cambiar tu día. Usa una palabra de vocabulario en cada oración y subráyala. Ejemplo: «Making my bed gives me <u>momentum</u> for the rest of the morning»."],
+"#grammar .item-ext": ["<b>Tu turno:</b> En tu cuaderno, escribe dos oraciones con <i>if / then</i> sobre tu propio hábito clave: una con <i>If</i> al principio (¡coma!) y una con <i>if</i> en el medio (sin coma). Subraya <i>will</i> en cada una."],
+"#checkQ3": ["Revisar respuestas"],
+"#listenQ5": ["Reproducir el párrafo"],
+".score label.ctrl": ["Nombre"],
+".exit > .eyebrow": ["Pregunta esencial"],
+".exit .eq-q": ["¿Qué pequeño hábito podría cambiar el resto de tu día?"],
+".exit .item-dir": ["Escribe <b>una oración por cada letra</b> de <b>O·R·E·A·C</b>. Usa al menos <b>tres palabras de vocabulario</b> del texto, y haz que al menos dos oraciones sean de <i>if / then</i> con <i>will</i>. Tus cinco oraciones se convierten en un párrafo al final."],
+".oreac-body b": ["Opinión","Razón","Evidencia","Análisis","Conclusión"],
+"#submitLink": ["Enviar mi boleto de salida"]
+};
+  Object.entries(ES).forEach(([sel, list]) => {
+    const els = document.querySelectorAll(sel);
+    list.forEach((html, i) => { const el = els[i]; if(!el || !html) return; const sp = document.createElement('span'); sp.className = 'es'; sp.lang = 'es'; sp.innerHTML = html; el.appendChild(sp); });
+  });
+  document.querySelectorAll('.es-toggle').forEach(b => b.onclick = () => { const box = b.nextElementSibling; const open = !box.classList.contains('open'); box.classList.toggle('open', open); b.setAttribute('aria-expanded', open); b.textContent = open ? 'Ocultar español ▴' : 'Ver en español ▾'; });
+  const btn = document.getElementById('langBtn');
+  btn.onclick = () => { const off = document.body.classList.toggle('no-es'); btn.textContent = off ? 'EN' : 'ES'; btn.title = off ? 'Spanish off' : 'Spanish on'; btn.setAttribute('aria-pressed', !off); };
+})();
+
+/* Hook poll */
+document.querySelectorAll('#poll button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('#poll button').forEach(x => x.classList.remove('picked'));
+  b.classList.add('picked');
+  document.getElementById('hookNote').innerHTML = bi(`You picked <b>${b.dataset.v}</b>. The first thing you do often works like the first domino. Talk with a partner: <em>Did that first thing change what came after it?</em>`,`Elegiste <b>${b.dataset.v}</b>. Lo primero que haces suele funcionar como la primera ficha de dominó. Habla con un compañero: <em>¿Esa primera cosa cambió lo que vino después?</em>`);
+});
+
+/* Practice item 1 */
+const FB = {
+  A:bi("Not quite. 34 of 50 is most, not every student. The graph does not show 50.","No exactamente. 34 de 50 es la mayoría, no todos los estudiantes. La gráfica no muestra 50."),
+  B:bi("Correct! Every dark bar is taller than its gold bar, and paragraph 2 says exercise triggered other healthy changes.","¡Correcto! Cada barra oscura es más alta que su barra dorada, y el párrafo 2 dice que el ejercicio provocó otros cambios saludables."),
+  C:bi("Not quite. The graph shows 22 exercise-group students used screens less, not more.","No exactamente. La gráfica muestra que 22 estudiantes del grupo de ejercicio usaron menos las pantallas, no más."),
+  D:bi("Not quite. The bars are very different heights, so the groups did not change the same way.","No exactamente. Las barras tienen alturas muy diferentes, así que los grupos no cambiaron igual.")
+};
+document.querySelectorAll('#choices button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('#choices button').forEach(x => x.classList.remove('correct','wrong'));
+  b.classList.add(b.dataset.ok ? 'correct' : 'wrong');
+  document.getElementById('feedback').innerHTML = FB[b.dataset.k];
+});
+
+/* Vocabulary matching with streak counter and speed round */
+(function(){
+  const wordsEl = document.getElementById('vmWords'), defsEl = document.getElementById('vmDefs'), st = document.getElementById('vmStatus');
+  const streakEl = document.getElementById('vmStreak'), bestEl = document.getElementById('vmBest'), speedPill = document.getElementById('vmSpeedPill'), speedBtn = document.getElementById('vmSpeed');
+  const all = Object.keys(VOCAB);
+  let selWord = null, matched = 0, streak = 0, best = 0, speed = false, speedLeft = 60, speedHits = 0, speedId = null;
+  const shuffle = a => a.map(x => [Math.random(), x]).sort((p, q) => p[0] - q[0]).map(p => p[1]);
+  function showStreak(){
+    streakEl.textContent = `🔥 Streak: ${streak}`; streakEl.classList.toggle('ok', streak >= 3);
+    bestEl.textContent = `Best streak: ${best}`;
+  }
+  function build(){
+    const set = shuffle(all).slice(0, 8); matched = 0; selWord = null;
+    wordsEl.innerHTML = '<div class="eyebrow">Words</div>'; defsEl.innerHTML = '<div class="eyebrow">Meanings</div>';
+    set.forEach(w => { const b = document.createElement('button'); b.textContent = w; b.dataset.w = w; wordsEl.appendChild(b); });
+    shuffle(set).forEach(w => { const b = document.createElement('button'); b.textContent = VOCAB[w].def.replace(/\s*\(.*\)$/, ''); b.dataset.w = w; defsEl.appendChild(b); });
+    if(!speed) st.textContent = '0 of 8 matched.';
+    wordsEl.querySelectorAll('button').forEach(b => b.onclick = () => {
+      if(b.classList.contains('hit')) return;
+      wordsEl.querySelectorAll('button').forEach(x => x.classList.remove('sel')); b.classList.add('sel'); selWord = b;
+      st.textContent = `Now tap the meaning of “${b.dataset.w}”.`;
+    });
+    defsEl.querySelectorAll('button').forEach(b => b.onclick = () => {
+      if(b.classList.contains('hit')) return;
+      if(!selWord){ st.textContent = 'Tap a word first.'; return; }
+      if(b.dataset.w === selWord.dataset.w){
+        b.classList.add('hit'); selWord.classList.add('hit'); selWord.classList.remove('sel'); selWord = null; matched++;
+        streak++; if(streak > best) best = streak; showStreak();
+        if(speed){ speedHits++; speedPill.textContent = `⏱ ${fmt(speedLeft)} · ${speedHits} matches`; }
+        const cheer = streak >= 8 ? ' Unstoppable!' : streak >= 5 ? ' On fire!' : streak >= 3 ? ' Keep it going!' : '';
+        if(matched === 8){ if(speed){ build(); st.textContent = `New set!${cheer}`; } else st.textContent = `All eight matched.${cheer} Press “New set of words” for eight more.`; }
+        else st.textContent = `${matched} of 8 matched.${cheer}`;
+      } else {
+        b.classList.add('miss'); selWord.classList.add('miss');
+        streak = 0; showStreak();
+        st.textContent = `Not a match. Streak reset. Tap “${selWord.dataset.w}” in the passage if you need a hint.`;
+        setTimeout(() => { b.classList.remove('miss'); if(selWord) selWord.classList.remove('miss'); wordsEl.querySelectorAll('.miss').forEach(x => x.classList.remove('miss')); }, 900);
+      }
+    });
+  }
+  function endSpeed(){
+    clearInterval(speedId); speed = false; speedBtn.disabled = false; speedBtn.textContent = '⚡ Play speed round again';
+    speedPill.textContent = `⏱ Time! ${speedHits} matches`;
+    st.textContent = `Speed round over: ${speedHits} match${speedHits === 1 ? '' : 'es'} in 60 seconds, best streak ${best}. Can you beat it?`;
+  }
+  speedBtn.onclick = () => {
+    if(speed) return;
+    speed = true; speedLeft = 60; speedHits = 0; streak = 0; showStreak();
+    speedPill.hidden = false; speedPill.textContent = '⏱ 1:00 · 0 matches'; speedBtn.disabled = true; speedBtn.textContent = 'Go!';
+    build(); st.textContent = 'Go! Match as many as you can.';
+    speedId = setInterval(() => { speedLeft--; speedPill.textContent = `⏱ ${fmt(speedLeft)} · ${speedHits} matches`; if(speedLeft <= 0) endSpeed(); }, 1000);
+  };
+  document.getElementById('vmShuffle').onclick = () => { if(speed) return; build(); };
+  showStreak(); build();
+})();
+
+
+/* Keystone plan */
+(function(){
+  makeTimer('timer5Text', 'timer5Btn', 600);
+  const $ = id => document.getElementById(id);
+  const state = { icon:'' };
+  const put = (id, val, empty) => { const el = $(id); if(val){ el.textContent = val; } else { el.innerHTML = `<span class="ps-empty">${empty}</span>`; } };
+  function render(){
+    const name = $('adName').value.trim(), cue = $('adCue').value.trim(), r1 = $('adOld').value.trim(), r2 = $('adReward').value.trim(), r3 = $('adNew').value.trim();
+    $('psName').textContent = name || 'Your keystone habit';
+    $('psIcon').textContent = state.icon || '🧱';
+    put('psCue', cue, 'When and where?');
+    put('psOld', r1, 'What changes next?');
+    put('psReward', r2, 'And then?');
+    put('psNew', r3, 'And then?');
+    const done = [name, cue, r1, r2, r3, state.icon].filter(Boolean).length;
+    $('adStatus').innerHTML = done === 6 ? bi('All 6 parts done. Copy your chain into your notebook and practice your 30-second explanation.','Las 6 partes listas. Copia tu cadena en tu cuaderno y practica tu explicación de 30 segundos.') : bi(`${done} of 6 parts done.`,`${done} de 6 partes listas.`);
+  }
+  ['adName','adCue','adOld','adReward','adNew'].forEach(id => $(id).addEventListener('input', render));
+  document.querySelectorAll('#adIcons button').forEach(b => b.onclick = () => { document.querySelectorAll('#adIcons button').forEach(x => x.classList.remove('picked')); b.classList.add('picked'); state.icon = b.dataset.v; render(); });
+  render();
+})();
+
+/* Grammar move: first conditional, If first → comma */
+document.querySelectorAll('.gm-row').forEach(row => {
+  const a = row.dataset.a, b = row.dataset.b, out = row.querySelector('.gm-out');
+  const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+  row.querySelectorAll('.gm-pick button').forEach(btn => btn.onclick = () => {
+    row.querySelectorAll('.gm-pick button').forEach(x => x.classList.remove('picked')); btn.classList.add('picked');
+    if(btn.dataset.v === 'If') out.innerHTML = `<u>If</u> ${a}<b>,</b> then ${b}. <span class="es">(<i>If</i> va primero: coma en el medio.)</span>`;
+    else out.innerHTML = `${cap(b)} <u>if</u> ${a}. <span class="es">(<i>if</i> va en el medio: sin coma.)</span>`;
+  });
+});
+
+/* Item 2: single choice */
+const FB2 = {
+  A:bi("Not quite. Momentum is about keeping going, not resting.","No exactamente. «Momentum» es seguir adelante, no descansar."),
+  B:bi("Correct! Momentum is the force that keeps you going once you start; each win pushes the next one.","¡Correcto! «Momentum» es la fuerza que te mantiene en marcha una vez que empiezas; cada logro empuja al siguiente."),
+  C:bi("Not quite. The small victory is a feeling, not a prize, and momentum is what it creates.","No exactamente. La pequeña victoria es una sensación, no un premio, y el impulso es lo que crea."),
+  D:bi("Not quite. The sentences say the next choice gets easier, not that you feel tired.","No exactamente. Las oraciones dicen que la siguiente decisión se vuelve más fácil, no que te sientas cansado.")
+};
+const q2 = document.querySelector('[data-item="q2"]'), fb2 = document.querySelector('[data-fb="q2"]');
+q2.querySelectorAll('button').forEach(b => b.onclick = () => {
+  q2.querySelectorAll('button').forEach(x => x.classList.remove('correct','wrong'));
+  b.classList.add(b.dataset.ok ? 'correct' : 'wrong');
+  fb2.innerHTML = FB2[b.dataset.k];
+});
+
+/* Item 3: choose two */
+const q3 = document.querySelector('[data-item="q3"]'), fb3 = document.querySelector('[data-fb="q3"]');
+q3.querySelectorAll('button').forEach(b => b.onclick = () => {
+  q3.querySelectorAll('button').forEach(x => x.classList.remove('correct','wrong'));
+  const picked = q3.querySelectorAll('button.picked');
+  if(b.classList.contains('picked')) b.classList.remove('picked');
+  else if(picked.length < 2) b.classList.add('picked');
+  else { fb3.textContent = 'You already chose two. Tap one of your choices to unselect it first.'; return; }
+  const now = q3.querySelectorAll('button.picked').length;
+  fb3.textContent = `${now} of 2 selected.`;
+  if(now === 2) checkQ3();
+});
+function checkQ3(){
+  const picked = [...q3.querySelectorAll('button.picked')];
+  if(picked.length < 2){ fb3.textContent = 'Choose two answers before checking.'; return; }
+  let right = 0;
+  picked.forEach(b => { if(b.dataset.ok){ b.classList.add('correct'); right++; } else b.classList.add('wrong'); });
+  fb3.innerHTML = right === 2
+    ? bi('Correct! Making the bed and family dinner are both small habits with big effects (paragraph 5).','¡Correcto! Tender la cama y la cena en familia son hábitos pequeños con grandes efectos (párrafo 5).')
+    : right === 1
+      ? bi('One is right. The other detail explains what a keystone or a loop is, not a small habit with a big effect. Look again at paragraph 5.','Uno es correcto. El otro detalle explica qué es una clave o un ciclo, no un hábito pequeño con gran efecto. Vuelve a mirar el párrafo 5.')
+      : bi('Not yet. Both of your choices are true, but they are not examples of small habits with big effects. Those are in paragraph 5.','Todavía no. Tus dos opciones son ciertas, pero no son ejemplos de hábitos pequeños con grandes efectos. Esos están en el párrafo 5.');
+  results[3] = right === 2; grade();
+}
+document.getElementById('checkQ3').onclick = checkQ3;
+
+/* Item 4: author's purpose */
+const FB4 = {
+  A:bi("Not quite. The comparison is about what the keystone does, holding others, not about being hard.","No exactamente. La comparación es sobre lo que hace la clave, sostener a las demás, no sobre ser difícil."),
+  B:bi("Correct! The keystone holds the other stones in place; a keystone habit holds other habits in place.","¡Correcto! La piedra clave sostiene a las demás; un hábito clave sostiene a otros hábitos."),
+  C:bi("Not quite. The passage is about habits, not building. The arch is a comparison.","No exactamente. El texto es sobre hábitos, no sobre construcción. El arco es una comparación."),
+  D:bi("Not quite. The author never says habits are heavy. The point is that one piece supports the rest.","No exactamente. El autor nunca dice que los hábitos sean pesados. El punto es que una pieza sostiene al resto.")
+};
+const q4 = document.querySelector('[data-item="q4"]'), fb4 = document.querySelector('[data-fb="q4"]');
+q4.querySelectorAll('button').forEach(b => b.onclick = () => {
+  q4.querySelectorAll('button').forEach(x => x.classList.remove('correct','wrong'));
+  b.classList.add(b.dataset.ok ? 'correct' : 'wrong'); fb4.innerHTML = FB4[b.dataset.k];
+});
+
+/* Item 5: listening (paragraph 5, two plays) */
+let playsLeft = 2;
+document.getElementById('listenQ5').onclick = () => {
+  if(!synth) return;
+  if(playsLeft <= 0) return;
+  playsLeft--; document.getElementById('listenCount').innerHTML = bi(`Plays left: ${playsLeft} `, `Reproducciones restantes: ${playsLeft}`);
+  if(current>=0){ queue=[]; run++; synth.cancel(); finish(); }
+  const u = makeUtt(texts[5]); u.rate = Math.min(u.rate, 0.9); synth.speak(u);
+  if(playsLeft === 0) document.getElementById('listenQ5').disabled = true;
+};
+const FB5 = {
+  A:bi("Not quite. The speaker says to make it small, almost too easy to skip.","No exactamente. El hablante dice que sea pequeño, casi demasiado fácil para saltarlo."),
+  B:bi("Correct! The speaker says to look for a small action that gives a quick win and makes you feel capable.","¡Correcto! El hablante dice que busques una acción pequeña que dé un logro rápido y te haga sentir capaz."),
+  C:bi("Not quite. The speaker does not mention friends. The habit is about you.","No exactamente. El hablante no menciona amigos. El hábito es sobre ti."),
+  D:bi("Not quite. The speaker says to do it in the same place at the same time until it is automatic, so once a month is too rare.","No exactamente. El hablante dice que lo hagas en el mismo lugar y a la misma hora hasta que sea automático, así que una vez al mes es muy poco.")
+};
+const q5 = document.querySelector('[data-item="q5"]'), fb5 = document.querySelector('[data-fb="q5"]');
+q5.querySelectorAll('button').forEach(b => b.onclick = () => {
+  q5.querySelectorAll('button').forEach(x => x.classList.remove('correct','wrong'));
+  b.classList.add(b.dataset.ok ? 'correct' : 'wrong'); fb5.innerHTML = FB5[b.dataset.k];
+});
+
+/* Autograde */
+const results = {1:null, 2:null, 3:null, 4:null, 5:null};   // null = not answered, true/false = graded
+const q1 = document.getElementById('choices');
+const RATING = [
+  {min:5, name:"Level 5 · Advanced · Avanzado", desc:bi("You understood the central idea, word meanings, the author's purpose, and the spoken paragraph. You are ready for grade-level text with little support.","Entendiste la idea central, el significado de las palabras, el propósito del autor y el párrafo hablado. Estás listo para textos de tu grado con poco apoyo.")},
+  {min:4, name:"Level 4 · Early Advanced · Avanzado inicial", desc:bi("You understood most of the text and the listening. Reread the one you missed with its feedback; you are close to full proficiency on this task.","Entendiste la mayor parte del texto y del audio. Vuelve a leer la que fallaste con su explicación; estás cerca del dominio completo en esta tarea.")},
+  {min:3, name:"Level 3 · Intermediate · Intermedio", desc:bi("You understood the main points but missed some details or word meanings. Use the word cards and listen again to the paragraphs you found hard.","Entendiste las ideas principales pero fallaste algunos detalles o significados. Usa las tarjetas de palabras y vuelve a escuchar los párrafos difíciles.")},
+  {min:2, name:"Level 2 · Early Intermediate · Intermedio inicial", desc:bi("You are building understanding. Listen to each paragraph while reading, tap every blue word, and try the questions again.","Estás construyendo tu comprensión. Escucha cada párrafo mientras lees, toca todas las palabras azules y vuelve a intentar las preguntas.")},
+  {min:0, name:"Level 1 · Beginning · Principiante", desc:bi("Start with the word list and listen to one paragraph at a time. Ask your teacher or a partner to talk through the questions with you.","Empieza con las palabras y escucha un párrafo a la vez. Pide a tu maestro o a un compañero que repasen las preguntas contigo.")}
+];
+const GROUPS = {1:q1, 2:q2, 3:q3, 4:q4, 5:q5};
+function grade(){
+  // one attempt per question: lock the choices once answered
+  Object.keys(GROUPS).forEach(q => GROUPS[q].querySelectorAll('button').forEach(b => b.disabled = results[q] !== null));
+  document.getElementById('checkQ3').disabled = results[3] !== null;
+  const n = Object.values(results).filter(v => v === true).length;
+  document.getElementById('scoreNum').textContent = n;
+  const labels = {1:'Q1 Reading a graph', 2:'Q2 Word meaning', 3:'Q3 Supporting details', 4:"Q4 Author's purpose", 5:'Q5 Listening'};
+  document.querySelectorAll('#scoreList li').forEach(li => {
+    const q = li.dataset.q, r = results[q];
+    li.classList.toggle('ok', r === true); li.classList.toggle('no', r === false);
+    li.innerHTML = `<span class="dot"></span>${labels[q]} <em>${r === null ? (q==='3'?'not checked · sin revisar':'not answered · sin responder') : r ? 'correct · correcta' : 'incorrect · incorrecta'}</em>`;
+  });
+  const done = Object.values(results).every(v => v !== null);
+  const rating = document.getElementById('rating');
+  if(done){
+    const r = RATING.find(x => n >= x.min);
+    document.getElementById('ratingName').textContent = r.name;
+    document.getElementById('ratingDesc').innerHTML = r.desc;
+    rating.hidden = false;
+    document.getElementById('scoreMsg').innerHTML = n === 5 ? bi('All five correct. Excellent work!','Las cinco correctas. ¡Excelente trabajo!') : bi(`${n} of 5 correct. Read the feedback under each incorrect item to see why.`,`${n} de 5 correctas. Lee la explicación debajo de cada pregunta incorrecta para ver por qué.`);
+  } else {
+    rating.hidden = true;
+    const missing = Object.keys(results).filter(q => results[q] === null).map(q => 'Q' + q).join(', ');
+    document.getElementById('scoreMsg').innerHTML = bi(`${Object.values(results).filter(v => v !== null).length} of 5 questions answered. Still to do: ${missing}.`,`${Object.values(results).filter(v => v !== null).length} de 5 preguntas respondidas. Faltan: ${missing}.`);
+  }
+  updateSubmitLink();
+}
+q1.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { results[1] = !!b.dataset.ok; grade(); }));
+q2.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { results[2] = !!b.dataset.ok; grade(); }));
+q4.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { results[4] = !!b.dataset.ok; grade(); }));
+q5.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { results[5] = !!b.dataset.ok; grade(); }));
+/* Submit to Jotform: the link opens the form with results prefilled */
+const FORM_URL = 'https://form.jotform.com/262995533300054';
+/* Exit ticket meter */
+function exitStats(){
+  const t = document.getElementById('exitText').value.trim();
+  const sentences = t ? t.split(/[.!?]+(?:\s|$)/).filter(s => s.trim().split(/\s+/).length >= 3).length : 0;
+  const words = t ? t.split(/\s+/).filter(Boolean).length : 0;
+  const lower = ' ' + t.toLowerCase().replace(/[^a-z\s]/g, ' ') + ' ';
+  const used = Object.keys(VOCAB).filter(w => { const base = w.toLowerCase().replace(/(ing|ers|ed|s)$/, ''); return lower.includes(' ' + base); });
+  const allFive = typeof oreacIns !== 'undefined' && oreacIns.every(i => i.value.trim());
+  return { t, sentences, words, vocab: used.length, ok: allFive && used.length >= 3 };
+}
+function updateExit(){
+  const s = exitStats();
+  const set = (id, txt, ok) => { const el = document.getElementById(id); el.textContent = txt; el.classList.toggle('ok', ok); };
+  const filled = oreacIns.filter(i => i.value.trim()).length;
+  set('exitSent', `${filled} of 5 letters · letras`, filled === 5);
+  set('exitVocab', `${s.vocab} vocabulary word${s.vocab === 1 ? '' : 's'} · vocabulario`, s.vocab >= 3);
+  set('exitWords', `${s.words} words · palabras`, s.words > 0);
+  const missing = oreacIns.filter(i => !i.value.trim()).map(i => i.dataset.k);
+  document.getElementById('exitFb').innerHTML = missing.length
+    ? bi(`Still to write: ${missing.join(', ')}.`,`Falta escribir: ${missing.join(', ')}.`)
+    : s.vocab < 3 ? bi(`All five letters done. Use ${3 - s.vocab} more vocabulary word${3 - s.vocab === 1 ? '' : 's'} (tap the blue words in the passage for ideas).`,`Las cinco letras listas. Usa ${3 - s.vocab} palabra${3 - s.vocab === 1 ? '' : 's'} más de vocabulario (toca las palabras azules del texto para ideas).`)
+    : bi('Your O·R·E·A·C paragraph is ready. Check your name above, then press Submit.','Tu párrafo O·R·E·A·C está listo. Revisa tu nombre arriba y luego pulsa Enviar.');
+  updateSubmitLink();
+}
+/* O·R·E·A·C lines → one paragraph */
+const oreacIns = [...document.querySelectorAll('.oreac-in')];
+function buildExit(){
+  const parts = oreacIns.map(i => {
+    let t = i.value.trim(); i.closest('.oreac-row').classList.toggle('filled', t.length > 0);
+    if(t && !/[.!?]$/.test(t)) t += '.';
+    return t;
+  }).filter(Boolean);
+  document.getElementById('exitText').value = parts.join(' ');
+  const pv = document.getElementById('exitPreview');
+  if(parts.length) pv.textContent = parts.join(' ');
+  else pv.innerHTML = '<span class="ps-empty">Your five sentences will appear here as one paragraph.</span>';
+  updateExit();
+}
+oreacIns.forEach(i => i.addEventListener('input', buildExit));
+
+function updateSubmitLink(){
+  const link = document.getElementById('submitLink');
+  const answered = Object.values(results).every(v => v !== null);
+  const ex = exitStats();
+  const done = ex.ok;
+  const n = Object.values(results).filter(v => v === true).length;
+  const line = q => results[q] === null ? 'not answered' : results[q] ? 'correct' : 'incorrect';
+  const vals = {
+    name: document.getElementById('sname').value.trim(),
+    score: `${n} / 5`,
+    rating: answered ? RATING.find(x => n >= x.min).name : '',
+    q1: line(1), q2: line(2), q3: line(3), q4: line(4), q5: line(5),
+    exit: ex.t
+  };
+  // Jotform prefills by each field's "unique name". Send both the names we asked for
+  // and the names Jotform generates from the labels, so either set works.
+  const full = typeof buildReport === 'function' ? buildReport() : vals.exit;
+  const p = new URLSearchParams({ studentName: vals.name, exitTicket: full, exitTicketWho: vals.exit, videoScore: (document.getElementById('vidScore').textContent.match(/\d \/ 3/) || [''])[0], testScore: vals.score, rating: vals.rating, rubric: document.getElementById('rubTotal').textContent, progress: document.getElementById('progCount').textContent });
+  link.href = FORM_URL + '?' + p.toString();
+  link.setAttribute('aria-disabled', done ? 'false' : 'true');
+  document.getElementById('submitNote').innerHTML = done
+    ? bi('Press Submit. A short form opens with your exit ticket filled in; check your name, add your class period, then press Submit there.','Pulsa Enviar. Se abre un formulario corto con tu boleto de salida ya lleno; revisa tu nombre, agrega tu periodo de clase y luego pulsa Enviar ahí.')
+    : bi('Finish your O·R·E·A·C exit ticket (all five letters, 3 vocabulary words) to turn on Submit.','Termina tu boleto de salida O·R·E·A·C (las cinco letras, 3 palabras de vocabulario) para activar Enviar.');
+}
+document.getElementById('sname').addEventListener('input', updateSubmitLink);
+
+/* Writing rubric: autograded from the O·R·E·A·C inputs */
+function gradeRubric(){
+  const s = exitStats(); const t = s.t;
+  const filled = oreacIns.filter(i => i.value.trim()).length;
+  const sentences = oreacIns.map(i => i.value.trim()).filter(Boolean);
+  const lower = ' ' + t.toLowerCase().replace(/[^a-z0-9\s]/g, ' ') + ' ';
+  const subs = sentences.filter(x => /\bif\b/i.test(x) && /\b(will|won't|'ll)\b/i.test(x)).length;
+  const commaMiss = sentences.filter(x => /^if\b/i.test(x) && !x.includes(',')).length;
+  const loopPart = /\b(keystone|exercise|bed|dinner|momentum|identity|small win|domino)\b/.test(lower);
+  const paraNum = /paragraph\s*\d/.test(lower) || /párrafo\s*\d/.test(lower);
+  const shortSent = sentences.filter(x => x.split(/\s+/).length < 6).length;
+  const r = {
+    structure: filled >= 5 ? 2 : filled >= 3 ? 1 : 0,
+    vocab: s.vocab >= 3 ? 2 : s.vocab === 2 ? 1 : 0,
+    complex: subs >= 2 ? 2 : subs === 1 ? 1 : 0,
+    evidence: (loopPart && paraNum) ? 2 : (loopPart || paraNum) ? 1 : 0,
+    length: (s.words >= 50 && shortSent === 0 && filled === 5) ? 2 : s.words >= 30 ? 1 : 0
+  };
+  let total = 0;
+  Object.entries(r).forEach(([k, v]) => { total += v; const tr = document.querySelector(`.rub-t tr[data-r="${k}"]`); tr.className = 'r' + v; tr.querySelector('.rub-s').textContent = `${v} / 2`; });
+  document.getElementById('rubTotal').textContent = `${total} / 10`;
+  const lvl = total >= 9 ? bi('<b>Practice ELPA21 writing level 5 · Advanced.</b> Organized opinion, text evidence, varied sentences, academic words. Ready to share with the class.','<b>Nivel de práctica de escritura ELPA21 5 · Avanzado.</b> Opinión organizada, evidencia del texto, oraciones variadas, palabras académicas. Listo para compartir con la clase.')
+    : total >= 7 ? bi('<b>Practice ELPA21 writing level 4 · Early Advanced.</b> Strong paragraph. One tip below moves you to level 5.','<b>Nivel de práctica de escritura ELPA21 4 · Avanzado inicial.</b> Párrafo sólido. Un consejo abajo te lleva al nivel 5.')
+    : total >= 5 ? bi('<b>Practice ELPA21 writing level 3 · Intermediate.</b> Clear ideas; add text evidence and complex sentences.','<b>Nivel de práctica de escritura ELPA21 3 · Intermedio.</b> Ideas claras; agrega evidencia del texto y oraciones complejas.')
+    : total >= 3 ? bi('<b>Practice ELPA21 writing level 2 · Early Intermediate.</b> Keep building: use the frames and the vocabulary words.','<b>Nivel de práctica de escritura ELPA21 2 · Intermedio inicial.</b> Sigue construyendo: usa los marcos y las palabras de vocabulario.')
+    : bi('<b>Practice ELPA21 writing level 1 · Beginning.</b> Fill in each letter with the frame, then come back to the rubric.','<b>Nivel de práctica de escritura ELPA21 1 · Inicial.</b> Completa cada letra con el marco y vuelve a la rúbrica.');
+  document.getElementById('rubLevel').innerHTML = t ? lvl : '';
+  const tips = [];
+  if(r.structure < 2) tips.push(bi(`Write ${5 - filled} more letter${5 - filled === 1 ? '' : 's'} of O·R·E·A·C.`,`Escribe ${5 - filled} letra${5 - filled === 1 ? '' : 's'} más de O·R·E·A·C.`));
+  if(r.vocab < 2) tips.push(bi(`Use ${3 - s.vocab} more vocabulary word${3 - s.vocab === 1 ? '' : 's'}: keystone, momentum, ripple effect, identity, capable, protect…`,`Usa ${3 - s.vocab} palabra${3 - s.vocab === 1 ? '' : 's'} más de vocabulario: keystone, momentum, ripple effect, identity, capable, protect…`));
+  if(r.complex < 2) tips.push(bi(`Add ${2 - subs} <i>if / then</i> sentence${2 - subs === 1 ? '' : 's'} with <i>will</i>: “If I ___, then I will ___.”`,`Agrega ${2 - subs} oración${2 - subs === 1 ? '' : 'es'} con <i>if / then</i> y <i>will</i>: «If I ___, then I will ___».`));
+  if(commaMiss) tips.push(bi('A sentence starts with <i>If</i> but has no comma. Add the comma after the <i>if</i> part.','Una oración empieza con <i>If</i> pero no tiene coma. Agrega la coma después de la parte con <i>if</i>.'));
+  if(!paraNum) tips.push(bi('In E, name the paragraph: <i>“In paragraph 4, the author says…”</i>','En E, nombra el párrafo: «In paragraph 4, the author says…».'));
+  if(!loopPart) tips.push(bi('Name a keystone example from the text (exercise, making the bed, family dinner) or an idea like momentum or identity.','Nombra un ejemplo de hábito clave del texto (ejercicio, tender la cama, cena en familia) o una idea como impulso o identidad.'));
+  if(r.length < 2) tips.push(s.words < 50 ? bi(`Write ${50 - s.words} more words. Add a detail or an example.`,`Escribe ${50 - s.words} palabras más. Agrega un detalle o un ejemplo.`) : bi('Make every sentence at least 6 words.','Haz que cada oración tenga al menos 6 palabras.'));
+  document.getElementById('rubTips').innerHTML = t ? tips.map(x => `<li>${x}</li>`).join('') : '';
+}
+oreacIns.forEach(i => i.addEventListener('input', gradeRubric));
+
+/* ---- Jot self-check ---- */
+document.querySelectorAll('.jot').forEach(j => {
+  const ta = j.querySelector('.jot-text'), fb = j.querySelector('.jot-fb'), keys = j.dataset.keys.split(',');
+  ta.addEventListener('input', () => {
+    const t = ta.value.trim(), words = t ? t.split(/\s+/).length : 0;
+    const low = ' ' + t.toLowerCase().replace(/[^a-z\s]/g, ' ') + ' ';
+    const hit = keys.filter(k => low.includes(' ' + k)).length;
+    const ends = /[.!?]$/.test(t);
+    const ok = words >= 6 && hit >= 1 && ends;
+    j.classList.toggle('ok', ok);
+    fb.innerHTML = !t ? bi('Write at least 6 words using a word from the paragraphs.','Escribe al menos 6 palabras usando una palabra de los párrafos.')
+      : ok ? bi('✓ Good sentence: complete, with a key word from the text.','✓ Buena oración: completa y con una palabra clave del texto.')
+      : words < 6 ? bi(`${6 - words} more word${6 - words === 1 ? '' : 's'} to go.`,`Faltan ${6 - words} palabra${6 - words === 1 ? '' : 's'}.`)
+      : hit < 1 ? bi(`Use a word from the text, like <i>${keys.slice(0, 3).join(', ')}</i>.`,`Usa una palabra del texto, como <i>${keys.slice(0, 3).join(', ')}</i>.`)
+      : bi('End your sentence with a period.','Termina tu oración con un punto.');
+  });
+});
+
+/* ---- Audio for test prep (ELPA21-style) ---- */
+(function(){
+  const items = {1:document.getElementById('choices').closest('section'), 2:q2.closest('section'), 3:q3.closest('section'), 4:q4.closest('section'), 5:q5.closest('section')};
+  const clean = el => { const c = el.cloneNode(true); c.querySelectorAll('.es').forEach(x => x.remove()); return c.textContent.replace(/\s+/g, ' ').trim(); };
+  function say(text){ if(!synth) return; if(current >= 0){ queue = []; run++; synth.cancel(); finish(); } synth.cancel(); const u = makeUtt(text); u.rate = Math.min(u.rate, 0.9); synth.speak(u); }
+  document.querySelectorAll('.hear-q').forEach(b => b.onclick = () => {
+    const s = items[b.dataset.q]; let parts = [];
+    s.querySelectorAll('.item-dir, .quote, .item-q').forEach(el => parts.push(clean(el)));
+    const svg = s.querySelector('svg'); if(svg) parts.splice(1, 0, svg.getAttribute('aria-label'));
+    say(parts.join(' '));
+  });
+  document.querySelectorAll('.hear-c').forEach(b => b.onclick = () => {
+    const s = items[b.dataset.q];
+    say([...s.querySelectorAll('.choices button')].map(x => x.dataset.k + '. ' + x.textContent.replace(/^\s*[A-E]\s*/, '').trim()).join('. '));
+  });
+})();
+
+/* ---- Progress bar + full report ---- */
+const STEPS = [
+  ['Bell ringer', () => document.querySelectorAll('#bell .ad .on').length === 4],
+  ['Hook', () => !!document.querySelector('#poll .picked')],
+  ['Streak lab', () => !document.getElementById('feedResults').hidden],
+  ['Video', () => [...document.querySelectorAll('[data-vq]')].every(g => g.querySelector('button').disabled)],
+  ['Jots', () => document.querySelectorAll('.jot.ok').length === 3],
+  ['Vocabulary', () => window.__vmDone || /All eight|New set!/.test(document.getElementById('vmStatus').textContent) && (window.__vmDone = true)],
+  ['Keystone plan', () => document.getElementById('adStatus').textContent.startsWith('All 6')],
+  ['Grammar', () => document.querySelectorAll('.gm-row .picked').length === 3],
+  ['Test prep', () => Object.values(results).every(v => v !== null)],
+  ['Exit ticket', () => exitStats().ok]
+];
+const stepsEl = document.getElementById('progSteps');
+STEPS.forEach(([n]) => { const s = document.createElement('span'); s.textContent = n; stepsEl.appendChild(s); });
+function tickProgress(){
+  let done = 0, next = null;
+  const TIMERS = {0:['timerText','timer2Text'], 1:['timer3Text'], 2:['timer3Text'], 3:['timer7Text'], 4:['timer8Text'], 5:['timer9Text'], 6:['timer5Text'], 7:['timer10Text'], 8:['timer6Text'], 9:['timer11Text']};
+  const LINKS = {0:'#s-bell', 1:'#s-hook', 2:'#s-hook', 3:'#s-video', 4:'#s-read', 5:'#s-vocab', 6:'#s-plan', 7:'#grammar', 8:'#s-test', 9:'#s-exit'};
+  STEPS.forEach(([n, f], i) => {
+    let ok = false; try { ok = !!f(); } catch(e){}
+    const up = (TIMERS[i] || []).some(t => window.__timeUp && window.__timeUp[t]);
+    const chip = stepsEl.children[i];
+    chip.classList.toggle('on', ok); chip.classList.toggle('late', up && !ok); chip.title = ok ? 'Done' : up ? 'Time is up and this section is not finished' : '';
+    const link = document.querySelector(`.rail-links a[href="${LINKS[i]}"]`);
+    if(link){ link.classList.toggle('done', ok); link.classList.toggle('late', !ok && up); }
+    if(ok) done++; else if(!next) next = n;
+  });
+  document.getElementById('progPct').textContent = Math.round(done / STEPS.length * 100) + '%';
+  document.getElementById('progCount').textContent = `${done} / ${STEPS.length}`;
+  document.getElementById('progFill').style.width = (done / STEPS.length * 100) + '%';
+  document.getElementById('progNext').textContent = next ? 'Next: ' + next : 'All done 🎉';
+  buildReport();
+}
+function buildReport(){
+  const name = document.getElementById('sname').value.trim() || '(no name)';
+  const bellA = [...document.querySelectorAll('#bell li')].map((li, i) => { const on = li.querySelector('.ad .on'); return `${i + 1}:${on ? on.dataset.v : '-'}`; }).join(' ');
+  const hook = (document.querySelector('#poll .picked') || {}).dataset?.v || '-';
+  const lab = document.getElementById('feedResults').hidden ? 'not run' : [...document.querySelectorAll('#labCues, #labTaps, #labRewards')].map(x => x.textContent).join(', ') + ' · felt like: ' + ((document.querySelector('#trickPoll .picked') || {}).dataset?.v || '-');
+  const vid = document.getElementById('vidScore').textContent.match(/\d \/ 3/) || ['0 / 3'];
+  const jots = [...document.querySelectorAll('.jot')].map((j, i) => `J${i + 1}${j.classList.contains('ok') ? '✓' : ''}: ${j.querySelector('.jot-text').value.trim() || '-'}`).join(' | ');
+  const vocab = document.getElementById('vmBest').textContent;
+  const loop = ['adName','adCue','adOld','adReward','adNew'].map(id => document.getElementById(id).value.trim() || '-');
+  const gram = [...document.querySelectorAll('.gm-row .gm-out')].map(o => (o.textContent.split('(')[0] || '').trim() || '-').join(' | ');
+  const n = Object.values(results).filter(v => v === true).length, answered = Object.values(results).every(v => v !== null);
+  const line = q => results[q] === null ? '-' : results[q] ? '✓' : '✗';
+  const test = `${n} / 5 (Q1 ${line(1)} Q2 ${line(2)} Q3 ${line(3)} Q4 ${line(4)} Q5 ${line(5)})` + (answered ? ' · ' + RATING.find(x => n >= x.min).name : '');
+  const rub = document.getElementById('rubTotal').textContent + ' · ' + ((document.getElementById('rubLevel').textContent.match(/level \d · [A-Za-z ]+/) || ['-'])[0]);
+  const prog = document.getElementById('progCount').textContent;
+  const text = [`ONE SMALL CHANGE (KEYSTONE HABITS) · ${name} · ${new Date().toLocaleString()}`, `Progress: ${prog}`, `Bell ringer: ${bellA}`, `Hook: ${hook}`, `Habit lab: ${lab}`, `Video checks: ${vid[0]}`, `Stop and jots: ${jots}`, `Vocabulary match: ${vocab}`, `Keystone plan: habit=${loop[0]} · when=${loop[1]} · ripple1=${loop[2]} · ripple2=${loop[3]} · ripple3=${loop[4]}`, `Grammar: ${gram}`, `Test prep: ${test}`, `Writing rubric: ${rub}`, `Exit ticket: ${document.getElementById('exitText').value.trim() || '-'}`].join('\n');
+  document.getElementById('report').value = text;
+  return text;
+}
+document.getElementById('copyReport').onclick = async () => {
+  const t = buildReport(); const b = document.getElementById('copyReport');
+  try { await navigator.clipboard.writeText(t); b.textContent = '✓ Copied'; } catch(e){ document.getElementById('report').select(); b.textContent = 'Select and copy'; }
+  setTimeout(() => { b.innerHTML = '📋 Copy my report <span class="es">Copiar mi reporte</span>'; }, 1500);
+};
+setInterval(tickProgress, 1000); tickProgress();
+
+
+
+
+
+
+</script>
+
+<footer style="text-align:center;font-size:.8rem;color:#525a66;padding:2rem 1rem 6rem">Storm Studio · Habits · Lesson 2 · Laurel High School EL · EL Publishing · Richard A. Daniel, M.Ed.</footer>
+</body>
+</html>
